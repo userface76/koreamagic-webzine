@@ -1,0 +1,24 @@
+한국마술학회 AI 웹진 + 마술장터 (개발용 초기 프로젝트)
+
+1) 빠른 화면 확인:
+   '미리보기.html' 파일을 브라우저로 열면 기사·공연·마술장터 예시를 볼 수 있습니다.
+   이 화면의 기사/공연/거래 물품은 실제 정보가 아닌 샘플입니다.
+
+2) 소스코드:
+   public/index.html    웹진 화면
+   public/assets/       디자인과 인터랙션
+   src/                 Cloudflare Workers API, RSS 수집, 스팸 분류
+   migrations/          D1 데이터베이스 테이블과 샘플 데이터
+   docs/DEPLOY.md       GitHub / Cloudflare 배포 설명
+
+3) 정식 서비스로 운영하기 전:
+   - 학회 공식 승인
+   - GitHub 새 저장소 생성, 코드 푸시
+   - Cloudflare D1 생성과 UUID 입력
+   - npm install, npm run db:remote, npm run deploy
+   - ADMIN_API_TOKEN (Secret, 32자 이상), Turnstile 키 설정
+   - 공식 공연장 RSS 출처 승인 및 등록
+   - 샘플 게시물 삭제, 운영정책/개인정보/저작권 점검
+
+이 파일은 웹진 시안과 Cloudflare 배포용 코드의 묶음이며
+GitHub 저장소 생성과 실제 Cloudflare 서비스 배포는 아직 하지 않았습니다.
