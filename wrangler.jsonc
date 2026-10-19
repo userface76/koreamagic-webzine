@@ -7,18 +7,23 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": [
+      "/api/*"
+    ]
   },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "kms-magic-webzine-db",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "database_id": "77262834-f2f3-4ede-8ba7-0c15a9a15784",
       "migrations_dir": "migrations"
     }
   ],
   "triggers": {
-    "crons": ["0 */6 * * *", "0 0 1 * *"]
+    "crons": [
+      "0 */6 * * *",
+      "0 0 1 * *"
+    ]
   },
   "vars": {
     "TURNSTILE_SITE_KEY": "",
