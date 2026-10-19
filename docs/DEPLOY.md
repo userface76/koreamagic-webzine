@@ -4,8 +4,8 @@
 
 ## 1. 사전 준비
 
-- Cloudflare 계정, GitHub 계정, Node.js 20+
-- 학회 웹진 프로젝트용 새 GitHub 저장소(권장: `kms-magic-webzine`), 초기에는 private
+- Cloudflare 계정, GitHub 계정, Node.js 22+
+- 학회 웹진 프로젝트용 GitHub 저장소 `userface76/koreamagic-webzine` (현재 public; 공식 공개 전 시연 자료 확인)
 - 공개 도메인(선택) 및 학회 공식 명칭·브랜드 사용 승인
 
 ## 2. GitHub 저장소
@@ -18,11 +18,11 @@ git init
 git add .
 git commit -m "Initial KMS AI webzine and magic marketplace"
 git branch -M main
-git remote add origin https://github.com/YOUR-ACCOUNT/kms-magic-webzine.git
+git remote add origin https://github.com/userface76/koreamagic-webzine.git
 git push -u origin main
 ```
 
-`YOUR-ACCOUNT`는 실제 GitHub 계정명으로 교체. 비밀키나 `.dev.vars`는 커밋하지 않습니다.
+기존 GitHub 저장소를 사용합니다. 비밀키나 `.dev.vars`는 커밋하지 않습니다.
 
 ## 3. D1
 
@@ -89,7 +89,7 @@ npm run deploy
 GitHub push 자동 배포:
 
 1. Cloudflare Dashboard → Workers & Pages → Create application
-2. GitHub 저장소 연결 → `kms-magic-webzine` 선택
+2. GitHub 저장소 연결 → `koreamagic-webzine` 선택
 3. Worker의 저장소 루트를 프로젝트 루트로 지정하고 Wrangler 설정 사용
 4. 배포 명령 `npx wrangler deploy` (필요한 설치 명령은 플랫폼의 빌드 구성에 따라 `npm install`)
 5. Cloudflare Workers/Builds에서 D1 바인딩과 Worker Secret 확인

@@ -1,4 +1,6 @@
-# 한국마술학회 AI 웹진 · 초기 프로젝트 v0.1
+# 한국마술학회 AI 웹진 · 초기 프로젝트 v0.2
+
+GitHub 저장소: https://github.com/userface76/koreamagic-webzine
 
 **발행 형태:** 수시 기사 발행 + 지난달 기사 월간 통합본  
 **추가 서비스:** 공연/공연장 소식, 사이드 홍보 배너, 마술장터(중고 마술도구·공연장비 등), 편집진 검토, 스팸 자동 비공개  
@@ -60,7 +62,7 @@ kms-magic-webzine/
 ## 시작하기
 
 1. **미리보기**: `public/index.html`을 브라우저로 열어 화면을 확인합니다. 실제 DB/API 없이 샘플 콘텐츠를 보여줍니다.
-2. Node.js 20 이상 준비 → 프로젝트 폴더에서 `npm install`.
+2. Node.js 22 이상 준비 → 프로젝트 폴더에서 `npm install`.
 3. Cloudflare 로그인: `npx wrangler login`.
 4. D1 DB 만들기: `npx wrangler d1 create kms-magic-webzine-db`.
 5. 결과의 `database_id`를 `wrangler.jsonc`의 `REPLACE_WITH_D1_DATABASE_ID`와 교체.
