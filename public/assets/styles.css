@@ -286,3 +286,6 @@ body { background: radial-gradient(ellipse at 82% 0%,var(--magic-halo),transpare
 .study-generated{grid-column:1/-1;white-space:normal;line-height:1.85;color:#473449}
 .study-generated p{background:#faf3f8;border:1px solid #e7d7e5;padding:15px;border-radius:8px}
 @media(max-width:650px){.study-gentle-form{grid-template-columns:1fr}.promo-cover{height:170px}.admin-promo-row{align-items:flex-start;flex-direction:column}}
+
+.admin-promo-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.admin-promo-actions button:last-child{color:#93495f;border-color:#dcbbc5}
