@@ -1,0 +1,162 @@
+{
+  "version": "0.1",
+  "updated_at": "2026-10-20",
+  "status": "curated_seed",
+  "notice": "A–Z 전체 목록이 완성된 것은 아닙니다. 현재 출처 확인을 거친 일부 인물의 짧은 소개와 웹진 편집부의 독립적인 학습 제안을 제공합니다. '코칭 관점'은 해당 마술사의 실제 발언이나 인증된 강의가 아닙니다.",
+  "tags": {
+    "card": "카드 마술",
+    "closeup": "클로즈업",
+    "acting": "연기",
+    "stage": "무대",
+    "storytelling": "이야기·연출",
+    "physical": "신체 표현",
+    "illusion": "일루전",
+    "humor": "유머",
+    "psychology": "관객 심리",
+    "research": "역사·연구"
+  },
+  "profiles": [
+    {
+      "id": "dai-vernon",
+      "display_name": "Dai Vernon",
+      "name_ko": "다이 버논",
+      "initial": "D",
+      "years": "1894–1992",
+      "specialties": [
+        "card",
+        "closeup",
+        "acting"
+      ],
+      "summary": "캐나다 출신 마술사. 카드와 클로즈업 마술의 손기술, 다른 마술사들에게 준 영향으로 알려져 있습니다.",
+      "evidence": [
+        {
+          "title": "PBS American Masters — Ricky Jay의 선배 마술사",
+          "url": "https://www.pbs.org/wnet/americanmasters/ricky-jay-deceptive-practice-a-lineage-of-magicians-leading-to-ricky-jay/3622/"
+        },
+        {
+          "title": "Magic Library — The Dai Vernon Book of Magic 서지",
+          "url": "https://magiclibrary.org/title/the-dai-vernon-book-of-magic"
+        }
+      ],
+      "coaching_lens": [
+        "손동작의 자연스러움과 관객의 시선 흐름을 점검한다.",
+        "복잡한 효과일수록 관객에게 보이는 이야기와 효과를 명료하게 구성한다."
+      ],
+      "safety_note": "실제 비밀 기법·원문 강의 내용을 이 색인에 수록하지 않습니다."
+    },
+    {
+      "id": "harry-houdini",
+      "display_name": "Harry Houdini",
+      "name_ko": "해리 후디니",
+      "initial": "H",
+      "years": "1874–1926",
+      "specialties": [
+        "stage",
+        "storytelling",
+        "physical"
+      ],
+      "summary": "탈출 묘기와 공연 홍보로 널리 알려진 마술사·탈출 공연자입니다.",
+      "evidence": [
+        {
+          "title": "University of Texas Harry Ransom Center — Houdini Collection",
+          "url": "https://research.hrc.utexas.edu/fasearch/findingAid.cfm?eadID=01276"
+        },
+        {
+          "title": "Smithsonian Magazine — Houdini와 Copperfield",
+          "url": "https://www.smithsonianmag.com/smart-news/jewish-museum-honors-magicians-houdini-and-copperfield-180976129/"
+        }
+      ],
+      "coaching_lens": [
+        "어려움에 직면하는 이야기와 긴장 완화의 리듬을 연구한다.",
+        "공연 홍보에서 작품의 핵심 이미지를 명확하게 전달한다."
+      ],
+      "safety_note": "후디니의 위험한 탈출·물속 묘기·구속 장치 등을 따라 하는 실습은 제안하지 않습니다."
+    },
+    {
+      "id": "david-copperfield",
+      "display_name": "David Copperfield",
+      "name_ko": "데이비드 카퍼필드",
+      "initial": "D",
+      "years": "1956–",
+      "specialties": [
+        "stage",
+        "illusion",
+        "storytelling"
+      ],
+      "summary": "대형 일루전과 극적인 이야기 구조를 결합한 공연으로 알려진 미국 마술사입니다.",
+      "evidence": [
+        {
+          "title": "David Copperfield — 공식 약력",
+          "url": "https://davidcopperfield.com/iphone/bio"
+        },
+        {
+          "title": "Smithsonian Magazine — 인물 소개",
+          "url": "https://www.smithsonianmag.com/smart-news/jewish-museum-honors-magicians-houdini-and-copperfield-180976129/"
+        }
+      ],
+      "coaching_lens": [
+        "마술적 효과를 보여주기 전 장면의 이유와 감정 목표를 먼저 정의한다.",
+        "조명·음악·시야를 장면의 의미와 일치시키는 공연 협의를 해 본다."
+      ],
+      "safety_note": "대형 장치와 위험 동작은 전문 기술 인력과 관련 안전 규정이 필요합니다."
+    },
+    {
+      "id": "penn-and-teller",
+      "display_name": "Penn & Teller",
+      "name_ko": "펜 앤 텔러",
+      "initial": "P",
+      "years": "1975–",
+      "specialties": [
+        "humor",
+        "acting",
+        "stage",
+        "psychology"
+      ],
+      "summary": "코미디와 마술, 대조적인 무대 캐릭터를 결합하는 공연으로 알려진 듀오입니다.",
+      "evidence": [
+        {
+          "title": "Penn & Teller — 공식 소개",
+          "url": "https://pennandteller.com/bio/"
+        },
+        {
+          "title": "Magic Museum — 인물 목록",
+          "url": "https://magic.museum/magicians"
+        }
+      ],
+      "coaching_lens": [
+        "말하는 캐릭터와 몸짓으로 표현하는 캐릭터의 대비를 살펴본다.",
+        "개그가 관객을 조롱하지 않으면서 작품 메시지에 기여하는지 점검한다."
+      ],
+      "safety_note": "관객 동의와 표현의 맥락을 고려하며 모욕·위험 연출은 권하지 않습니다."
+    },
+    {
+      "id": "ricky-jay",
+      "display_name": "Ricky Jay",
+      "name_ko": "리키 제이",
+      "initial": "R",
+      "years": "1946–2018",
+      "specialties": [
+        "card",
+        "closeup",
+        "storytelling",
+        "research"
+      ],
+      "summary": "손기술, 공연예술과 마술 역사에 관한 깊은 관심으로 알려진 마술사·배우·수집가입니다.",
+      "evidence": [
+        {
+          "title": "PBS American Masters — Ricky Jay와 마술사들의 계보",
+          "url": "https://www.pbs.org/wnet/americanmasters/ricky-jay-deceptive-practice-a-lineage-of-magicians-leading-to-ricky-jay/3622/"
+        },
+        {
+          "title": "The Upchurch Collection of Magic — 인물 색인",
+          "url": "https://magic.museum/magicians"
+        }
+      ],
+      "coaching_lens": [
+        "마술의 역사·출처를 확인하고 작품에 어떤 맥락을 담을지 고민한다.",
+        "관객에게 설명하는 언어와 공연자의 태도가 효과를 지지하는지 살펴본다."
+      ],
+      "safety_note": "저작권·공연권이 확인되지 않은 원고와 비밀 기법을 복제하지 않습니다."
+    }
+  ]
+}
