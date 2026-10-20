@@ -106,7 +106,7 @@
  function adminPromoPanel(){
  if(!state.queue)return '';
  return `<div class="study-panel admin-promo-section"><h3>공연 홍보 담당자 연락처 · 관리자 전용</h3><p class="compact">담당자가 제공한 전화번호는 공개 게시글과 공개 API에 포함되지 않습니다. 업무상 필요한 경우에만 조회하세요.</p>
- ${(state.adminPromotions||[]).slice(0,30).map(p=>`<div class="admin-promo-row"><span><b>${E(p.title)}</b><small>${E(p.status)} · ${fmtDate(p.event_date)}</small></span><button type="button" data-admin-phone="${E(p.id)}">전화번호 확인</button></div>`).join('')||'<p class="compact">행사 내역이 없거나 아직 불러오지 않았습니다.</p>'}<p id="adminPhoneStatus" role="status" class="compact"></p></div>`;
+ ${(state.adminPromotions||[]).slice(0,30).map(p=>`<div class="admin-promo-row"><span><b>${E(p.title)}</b><small>${E(p.status)} · ${fmtDate(p.event_date)}</small></span><div class="admin-promo-actions"><button type="button" data-admin-phone="${E(p.id)}">전화번호 확인</button><button type="button" data-admin-deletephone="${E(p.id)}">연락처 삭제</button></div></div>`).join('')||'<p class="compact">행사 내역이 없거나 아직 불러오지 않았습니다.</p>'}<p id="adminPhoneStatus" role="status" class="compact"></p></div>`;
  }
  function privacy(){return `${titlebar('PRIVACY','개인정보 수집·이용 안내','공연·행사 등록 담당자 연락처에 관한 운영 준비 안내입니다.')}<div class="form-panel privacy-panel">
  <h2>공연 담당자 전화번호는 비공개로 취급합니다.</h2><p>행사명·소개·장소·일정·이미지 및 공개 영상 링크는 승인 후 일반 방문자에게 표시됩니다. 담당자 전화번호는 별도 선택항목이며 공개 화면이나 공개 API에 포함하지 않습니다.</p>
@@ -161,6 +161,8 @@
    const open=e.target.closest('[data-open-issue]');if(open){try{const id=open.dataset.openIssue;if(isDemo(id)){const issue=(state.data?.issues||[]).find(x=>x.id===id);if(!issue)throw Error('시안 발행호를 찾을 수 없습니다');state.issue={issue,items:(window.KMS_DEMO?.articles||[]).slice(0,6)};}else{const r=await fetch('/api/issues/'+encodeURIComponent(id));if(!r.ok)throw Error('발행호를 불러올 수 없습니다');state.issue=await r.json();}render();window.scrollTo(0,0);}catch(err){alert(err.message)}return;}
    if(e.target.id==='printIssue'){window.print();return;}
    if(e.target.id==='loadQueue'){state.adminToken=$('#adminToken').value.trim();await refreshQueue();return;}
+   const deletePhone=e.target.closest('[data-admin-deletephone]');
+   if(deletePhone){if(!confirm('이 행사의 담당자 전화번호를 삭제할까요? 삭제된 연락처는 복구할 수 없습니다.'))return;const el=$('#adminPhoneStatus');try{await adminPost('/api/admin/promotion-contact/delete',{id:deletePhone.dataset.adminDeletephone});if(el)el.textContent='선택한 행사의 비공개 전화번호를 삭제했습니다.';}catch(err){if(el)el.textContent='삭제 실패: '+err.message;}return;}
    const reveal=e.target.closest('[data-admin-phone]');
    if(reveal){const el=$('#adminPhoneStatus');if(el)el.textContent='비공개 연락처 확인 중…';
     try{const r=await fetch('/api/admin/promotion-contact?id='+encodeURIComponent(reveal.dataset.adminPhone),{headers:{authorization:'Bearer '+state.adminToken},cache:'no-store'});const json=await r.json();if(!r.ok)throw Error(json.error||'조회 불가');if(el)el.textContent=json.contact_phone?'담당자 연락처: '+json.contact_phone:'등록된 비공개 전화번호가 없습니다.';}catch(err){if(el)el.textContent=err.message;}return;
