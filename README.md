@@ -10,6 +10,15 @@ GitHub 저장소: https://github.com/userface76/koreamagic-webzine
 >
 > 초기 제공물은 **운영 전 MVP 소스코드**입니다. GitHub 또는 Cloudflare 계정에 이미 게시된 서비스가 아니며, D1 ID·Turnstile·비밀키·승인된 피드 출처가 설정되기 전에는 실제 접수/수집을 사용할 수 없습니다.
 
+
+## 디자인 시스템 — Magic Scenes v1
+
+- 디자인 원칙, 채택한 기술 및 업데이트 절차: [WEBZINE_DESIGN_SKILL.md](WEBZINE_DESIGN_SKILL.md)
+- 디자인 변경 이력: [docs/DESIGN_CHANGELOG.md](docs/DESIGN_CHANGELOG.md)
+- 메인 화면 배경: 자체 제작 4개 SVG, 방문 시 랜덤, 홈 화면에서 20초마다 자동 변경
+- 관람자가 **다른 배경 / 자동 변경 멈춤** 버튼으로 제어할 수 있으며, 운영체제에서 움직임 줄이기를 켜면 자동 변경하지 않습니다.
+- 장식 디자인은 API·D1·관리자 인증에 의존하지 않습니다. JS가 꺼져 있으면 기본 극장 배경이 표시됩니다.
+
 ## 구현된 기능
 
 - 학회 웹진 반응형 메인, 연구·학회·교육·칼럼 분류, 검색, 기사 본문 보기
