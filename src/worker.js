@@ -5,6 +5,20 @@ function json(data,status=200){return new Response(JSON.stringify(data),{status,
 function err(message,status=400){return json({error:message},status);}
 function safeString(v,max=500){return String(v??'').trim().slice(0,max);}
 function safeUrl(v){if(!v)return null;try{const u=new URL(v);if(u.protocol!=='https:'||u.username||u.password) return null;return u.toString().slice(0,700);}catch{return null;}}
+function studyYoutubeUrl(raw){
+ try {
+  const u=new URL(String(raw||'').trim());
+  if(u.protocol!=='https:'||u.username||u.password) return null;
+  const host=u.hostname.toLowerCase();
+  let id='';
+  if(host==='youtu.be') id=u.pathname.split('/')[1]||'';
+  else if(['youtube.com','www.youtube.com','m.youtube.com'].includes(host)){
+   if(u.pathname==='/watch') id=u.searchParams.get('v')||'';
+   else if(/^\/(shorts|live|embed)\//.test(u.pathname)) id=u.pathname.split('/')[2]||'';
+  }
+  return /^[a-zA-Z0-9_-]{11}$/.test(id)?'https://www.youtube.com/watch?v='+id:null;
+ }catch{return null;}
+}
 function goodSecret(provided,expected){ if(!provided||!expected||expected.length<32)return false;let n=provided.length^expected.length;const len=Math.max(provided.length,expected.length);for(let i=0;i<len;i++)n|=(provided.charCodeAt(i)||0)^(expected.charCodeAt(i)||0);return n===0; }
 function requireAdmin(request,env){const header=request.headers.get('authorization')||'';return goodSecret(header.startsWith('Bearer ')?header.slice(7):'',env.ADMIN_API_TOKEN);}
 function hasSameOrigin(request){const origin=request.headers.get('origin'); if(!origin)return false;try{return new URL(origin).origin===new URL(request.url).origin;}catch{return false;}}
@@ -33,6 +47,18 @@ async function publicApi(url,db){
    page(db,'SELECT id,title,image_url,link_url,position FROM banners WHERE active=1 ORDER BY sort_order LIMIT 8'),
    page(db,'SELECT id,title,start_at,end_at,created_at FROM issues ORDER BY id DESC LIMIT 6')]);
   return json({articles,promotions,marketplace,banners,issues});
+ }
+ if(p==='/api/study-resources'){
+  const lesson=safeString(url.searchParams.get('lesson_id'),50);
+  if(lesson && !/^(acting|humor|psychology|circus|improv|technical|business|peer)-[1-9][0-9]?$/.test(lesson))return err('학습 자료 ID를 확인해 주세요');
+  try{
+   const items=await page(db,"SELECT id,lesson_id,kind,title,url,content,created_at FROM study_resources WHERE status='published' AND (?='' OR lesson_id=?) ORDER BY created_at DESC LIMIT 80",[lesson,lesson]);
+   return json({items});
+  }catch(e){
+   // The new D1 migration may not yet have been applied. Do not break other routes.
+   if(String(e).includes('no such table: study_resources'))return json({items:[],setupRequired:true});
+   throw e;
+  }
  }
  if(p==='/api/articles'){
   const category=safeString(url.searchParams.get('category'),30);
@@ -84,6 +110,35 @@ async function adminApi(request,url,db,env){
    page(db,"SELECT id,title,description,status,created_at,category,price_krw FROM marketplace WHERE status IN ('pending','quarantined') ORDER BY created_at DESC LIMIT 40"),
    page(db,'SELECT item_type,item_id,action,reason,created_at FROM moderation_logs ORDER BY created_at DESC LIMIT 20')]);
   return json({articles,promotions,marketplace,logs});
+ }
+ if(request.method==='POST'&&p==='/api/admin/study-resources'){
+  if(!hasSameOrigin(request))return err('동일 출처 요청만 허용',403);
+  const d=await parseJson(request);
+  const lesson=safeString(d.lesson_id,50), kind=safeString(d.kind,12),title=safeString(d.title,150);
+  if(!/^(acting|humor|psychology|circus|improv|technical|business|peer)-[1-9][0-9]?$/.test(lesson))return err('등록할 스터디를 선택해 주세요');
+  if(!['youtube','note'].includes(kind)||title.length<4)return err('자료 유형과 제목을 확인해 주세요');
+  if(d.rights_confirmed!==true)return err('사용 권한·출처 확인이 필요합니다');
+  const link=kind==='youtube'?studyYoutubeUrl(d.url):null;
+  const content=kind==='note'?safeString(d.content,4000):'';
+  if(kind==='youtube'&&!link)return err('지원되는 HTTPS 유튜브 링크를 입력해 주세요');
+  if(kind==='note'&&content.length<20)return err('웹진 교육자료 본문을 20자 이상 작성해 주세요');
+  const id=crypto.randomUUID();
+  try{
+   await db.prepare("INSERT INTO study_resources(id,lesson_id,kind,title,url,content,status) VALUES(?,?,?,?,?,?,'published')")
+      .bind(id,lesson,kind,title,link,content).run();
+  }catch(e){if(String(e).includes('no such table: study_resources'))return err('스터디 자료 DB 마이그레이션이 필요합니다',503);throw e;}
+  await log(db,'study_resource',id,'published','편집자 학습자료 등록');
+  return json({ok:true,id,status:'published'},201);
+ }
+ if(request.method==='POST'&&p==='/api/admin/study-resources/hide'){
+  if(!hasSameOrigin(request))return err('동일 출처 요청만 허용',403);
+  const d=await parseJson(request);
+  if(!/^[a-f0-9-]{36}$/i.test(String(d.id||'')))return err('잘못된 자료 ID');
+  const status=d.status==='published'?'published':'hidden';
+  const result=await db.prepare('UPDATE study_resources SET status=? WHERE id=?').bind(status,d.id).run();
+  if(!result.meta.changes)return err('스터디 자료를 찾을 수 없습니다',404);
+  await log(db,'study_resource',d.id,status,'편집자 학습자료 노출 변경');
+  return json({ok:true,status});
  }
  if(request.method==='POST'&&p==='/api/admin/articles'){
   if(!hasSameOrigin(request))return err('동일 출처 요청만 허용',403);
