@@ -2,7 +2,7 @@
  'use strict';
  const $ = s => document.querySelector(s);
  const app=$('#app');
- const state={view:'home',data:null,preview:false,config:null,query:'',category:'',formType:'marketplace',demoCount:0,adminToken:'',queue:null,detail:null,issue:null};
+ const state={view:'home',data:null,preview:false,config:null,query:'',category:'',formType:'marketplace',demoCount:0,adminToken:'',queue:null,adminPromotions:[],detail:null,issue:null};
  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const fmtPrice=p=>Number(p??0).toLocaleString('ko-KR')+'원';
  const fmtDate=d=>d?String(d).slice(0,10).replaceAll('-','.'):'날짜 미정';
@@ -10,10 +10,11 @@
  const catLabels={props:'마술도구',stage:'공연장비',costume:'의상·소품',books:'마술 서적',other:'기타'};
  const icons={research:'✦',column:'♠',education:'✳',news:'✧',show:'✦',props:'♠',stage:'✣',books:'▤',costume:'♛',other:'✳'};
  const isDemo=id=>String(id||'').startsWith('demo-')||String(id||'').startsWith('sample')||/^[mp]\d+$/.test(String(id||''));
+ const safeYoutube=v=>{try{const u=new URL(v);return u.protocol==='https:'&&u.hostname==='www.youtube.com'&&u.pathname==='/watch'&&/^[a-zA-Z0-9_-]{11}$/.test(u.searchParams.get('v')||'')?u.toString():''}catch{return ''}};
  const safeLink=v=>{try{let u=new URL(v);return u.protocol==='https:'?u.toString():'';}catch{return '';}};
  const articleCard=(a,i=0)=>`<article class="article-card" tabindex="0" role="button" data-detail-article="${E(a.id)}"><div class="art-visual art-${E(a.category||'news')}">${icons[a.category]||'✦'}${isDemo(a.id)?'<span class="sample-ribbon">샘플</span>':''}</div><div class="art-pad"><div class="label-pill">${E(artLabels[a.category]||'MAGIC NEWS')} ${isDemo(a.id)?'· 샘플':''}</div><h3>${E(a.title)}</h3><p>${E(a.summary)}</p><div class="smallmeta">${E(a.publisher||'편집부')} · ${fmtDate(a.published_at)}</div></div></article>`;
  const marketCard=(m,i=0)=>`<article class="market-card"><div class="market-art market-${E(m.category||'props')}">${icons[m.category]||'✦'}${isDemo(m.id)?'<span class="sample-ribbon">샘플</span>':''}</div><div class="market-pad"><div class="market-meta">${E(catLabels[m.category]||'마술장터')} · ${m.item_condition==='new'?'새상품':'중고'}${isDemo(m.id)?' · 거래 불가':''}</div><h3>${E(m.title)}</h3><div class="price">${fmtPrice(m.price_krw)}</div><div class="market-footer"><span>⌖ ${E(m.region||'지역 미표기')} · ${E(m.seller_alias||'판매자')}</span>${!isDemo(m.id)&&safeLink(m.contact_url)?`<a href="${E(safeLink(m.contact_url))}" target="_blank" rel="noopener noreferrer">판매자 문의 ↗</a>`:`<button data-detail-market="${E(m.id)}">${isDemo(m.id)?'샘플 보기':'자세히 보기'} ↗</button>`}</div></div></article>`;
- const promoCard=p=>`<article class="promo-card"><div class="promo-date">${E((p.event_date||'').slice(5,7)||'—')}<b>${E((p.event_date||'').slice(8,10)||'--')}</b></div><div><div class="label-pill">${E(p.type==='education'?'MAGIC CLASS':p.type==='venue'?'VENUE':'SHOW & EVENT')} ${isDemo(p.id)?'· 샘플 행사':''}</div><h3>${E(p.title)}</h3><p>${E(p.description)}</p><small class="smallmeta">⌖ ${E(p.venue||'장소 미정')} · ${fmtDate(p.event_date)}</small>${safeLink(p.link_url)?`<p><a href="${E(safeLink(p.link_url))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a></p>`:''}</div></article>`;
+ const promoCard=p=>`<article class="promo-card">${safeLink(p.image_url)?`<img class="promo-cover" loading="lazy" src="${E(safeLink(p.image_url))}" alt="${E(p.title)} 행사 이미지"/>`:''}<div class="promo-date">${E((p.event_date||'').slice(5,7)||'—')}<b>${E((p.event_date||'').slice(8,10)||'--')}</b></div><div><div class="label-pill">${E(p.type==='education'?'MAGIC CLASS':p.type==='venue'?'VENUE':'SHOW & EVENT')} ${isDemo(p.id)?'· 샘플 행사':''}</div><h3>${E(p.title)}</h3><p>${E(p.description)}</p><small class="smallmeta">⌖ ${E(p.venue||'장소 미정')} · ${fmtDate(p.event_date)}</small>${safeLink(p.link_url)?`<p><a href="${E(safeLink(p.link_url))}" target="_blank" rel="noopener noreferrer">공연 안내 ↗</a></p>`:''}${safeYoutube(p.video_url)?`<p><a href="${E(safeYoutube(p.video_url))}" target="_blank" rel="noopener noreferrer">▶ 공연 영상 보기 (YouTube) ↗</a></p>`:''}</div></article>`;
  const titlebar=(tag,title,desc)=>`<div class="page-hero"><div class="eyebrow">${tag}</div><h1>${title}</h1><p>${desc}</p></div>`;
  const empty=msg=>`<div class="empty">✳<br>${msg}</div>`;
 
@@ -95,19 +96,33 @@
  <div class="form-field"><label for="type">홍보 종류</label><select id="type" name="type"><option value="show">마술 공연</option><option value="venue">공연장 소식</option><option value="education">마술 교육</option><option value="contest">경연·대회</option></select></div>
  <div class="form-field"><label for="venue">공연장·장소</label><input id="venue" name="venue" maxlength="100" placeholder="공연장명과 지역"/></div>
  <div class="form-field"><label for="event_date">행사 일자</label><input id="event_date" name="event_date" type="date"/></div>
- <div class="form-field"><label for="link_url">공식 안내 링크 (HTTPS)</label><input id="link_url" name="link_url" type="url" placeholder="https://..."/></div>`}
+ <div class="form-field"><label for="link_url">공식 안내 링크 (HTTPS)</label><input id="link_url" name="link_url" type="url" placeholder="https://..."/></div>
+ <div class="form-field full"><label for="video_url">공연 영상 (유튜브 링크)</label><input id="video_url" name="video_url" type="url" placeholder="https://www.youtube.com/watch?v=..." /><small>자신의 영상이거나 공유 권한이 있는 공개 영상만 연결하세요.</small></div>
+ <div class="form-field full"><label for="contact_phone">담당자 전화번호 (선택 · 관리자 전용)</label><input id="contact_phone" name="contact_phone" type="tel" autocomplete="off" inputmode="tel" maxlength="20" placeholder="010-1234-5678" /><small>일반 게시글·검색·공개 API에는 표시되지 않으며 인증된 편집자만 별도로 열람합니다.</small></div>
+ <div class="form-field full privacy-consent"><label><input id="contact_consent" name="contact_consent" type="checkbox" value="yes" /> 선택 입력한 전화번호를 공연 안내 확인 목적으로 수집·이용하는 데 동의합니다.</label><small>선택 항목. 수집 목적: 공연 정보 확인·관리자 연락 / 열람: 승인된 관리자 / 보관: 행사 종료 후 최대 90일(일정 미정은 접수 후 최대 180일) / 동의 거부 시 전화번호 없이 제출 가능. 운영자 개인정보처리방침 확정 및 관련 설정 후 전화번호 접수를 활성화합니다. <button type="button" class="privacy-open" data-view="privacy">개인정보 안내 보기 ↗</button></small></div>`}
  <div class="form-field full"><label for="image_url">이미지 링크 (선택 · HTTPS)</label><input id="image_url" name="image_url" type="url" placeholder="https://... (업로드는 후속 버전에서 지원)"/></div>
  <div class="form-field full"><div id="turnstileWidget"></div></div>
  <div class="form-field full"><div class="form-note">제보자는 게시 내용과 이미지의 이용 권한을 보유해야 합니다. 개인정보·전화번호·계좌번호를 본문에 작성하지 마세요. 실제 접수는 Cloudflare Turnstile 설정 후 활성화됩니다.</div><button type="submit" class="primary-btn" id="sendPost">${market?'판매글 접수':'홍보 정보 접수'} →</button><div id="formResult" role="status" aria-live="polite"></div></div></form></div>`;}
+ function adminPromoPanel(){
+ if(!state.queue)return '';
+ return `<div class="study-panel admin-promo-section"><h3>공연 홍보 담당자 연락처 · 관리자 전용</h3><p class="compact">담당자가 제공한 전화번호는 공개 게시글과 공개 API에 포함되지 않습니다. 업무상 필요한 경우에만 조회하세요.</p>
+ ${(state.adminPromotions||[]).slice(0,30).map(p=>`<div class="admin-promo-row"><span><b>${E(p.title)}</b><small>${E(p.status)} · ${fmtDate(p.event_date)}</small></span><button type="button" data-admin-phone="${E(p.id)}">전화번호 확인</button></div>`).join('')||'<p class="compact">행사 내역이 없거나 아직 불러오지 않았습니다.</p>'}<p id="adminPhoneStatus" role="status" class="compact"></p></div>`;
+ }
+ function privacy(){return `${titlebar('PRIVACY','개인정보 수집·이용 안내','공연·행사 등록 담당자 연락처에 관한 운영 준비 안내입니다.')}<div class="form-panel privacy-panel">
+ <h2>공연 담당자 전화번호는 비공개로 취급합니다.</h2><p>행사명·소개·장소·일정·이미지 및 공개 영상 링크는 승인 후 일반 방문자에게 표시됩니다. 담당자 전화번호는 별도 선택항목이며 공개 화면이나 공개 API에 포함하지 않습니다.</p>
+ <h3>수집 목적과 보관</h3><p>목적: 제출된 공연 정보를 확인하거나 행사 운영 담당자에게 연락하기 위함. 전화번호 미제공 시에도 행사 제보는 가능합니다. 행사 종료 후 최대 90일 이내, 행사일 미정이면 접수일로부터 최대 180일 이내 삭제하도록 구현합니다. 실제 삭제 실행·백업 정책은 운영 검증이 필요합니다.</p>
+ <h3>접근 권한·제3자·이용자 권리</h3><p>승인된 웹진 관리자만 인증 후 연락처를 요청하여 확인할 수 있습니다. 신청인은 운영자에게 열람·정정·삭제·처리정지를 요청할 수 있어야 하며, 영상과 사진은 게시 전 이용 권한을 확인해야 합니다. 영상 링크를 클릭하면 해당 외부 서비스의 개인정보 정책이 적용될 수 있습니다.</p>
+ <h3>정식 운영 전에 확정할 사항</h3><p><b>개인정보처리자 명칭, 개인정보 보호책임자·문의처, 처리위탁 및 국외 이전 현황, 이용자 권리 행사 방법, 안전조치, 방침 시행일</b>은 현재 확정되지 않았습니다. 이 페이지는 최종 법적 개인정보처리방침이 아니라 준비 안내입니다. 운영자 승인과 정식 방침 공지 전에는 전화번호 수집이 비활성화됩니다.</p>
+ </div>`; }
  function admin(){const q=state.queue;return `${titlebar('EDITORIAL DESK','웹진 편집·관리자','기사 · 공연 홍보 · 마술장터 승인함 (관리자 인증 필요)')}<div class="form-panel" style="max-width:100%;margin-bottom:22px"><h3>관리자 인증</h3><p class="compact">Cloudflare Worker Secret으로 등록한 ADMIN_API_TOKEN을 입력하세요. 토큰은 브라우저 저장소에 보관하지 않습니다.</p><div class="admin-auth"><input id="adminToken" type="password" autocomplete="off" placeholder="관리자 API 토큰 (최소 32자)"/><button class="primary-btn" id="loadQueue">승인함 열기</button></div><button class="outline-btn" id="importFeeds">승인된 RSS 출처 지금 수집</button> <button class="outline-btn" id="createIssue">지난달 통합본 생성</button><div id="adminMsg" class="compact" style="margin-top:14px"></div></div>
  <div class="admin-double">
   <form id="adminArticleForm" class="form-panel"><h3>✳ 학회 기사 작성</h3><div class="form-field"><label>제목</label><input name="title" required minLength="5" placeholder="마술 연구·학회 소식"/></div><div class="form-field"><label>분류</label><select name="category"><option value="news">학회 뉴스</option><option value="research">연구 동향</option><option value="column">전문가 칼럼</option><option value="education">교육</option></select></div><div class="form-field"><label>요약</label><input name="summary" placeholder="기사 한 줄 요약"/></div><div class="form-field"><label>본문</label><textarea name="body" minLength="25" required placeholder="학회 기사 본문 작성"></textarea></div><div class="form-field"><label>게시자</label><input name="publisher" placeholder="학회 편집부"/></div><label class="compact"><input name="publish" type="checkbox"/> 즉시 게시 (미선택 시 대기함)</label><button class="primary-btn" type="submit">기사 저장</button><p id="adminArticleMsg" class="compact"></p></form>
   <form id="adminBannerForm" class="form-panel"><h3>✦ 사이드 홍보 배너 등록</h3><div class="form-field"><label>배너 제목</label><input name="title" required placeholder="공연 배너 홍보"/></div><div class="form-field"><label>이미지 HTTPS 주소</label><input name="image_url" required type="url" placeholder="https://.../poster.jpg"/></div><div class="form-field"><label>클릭 이동 HTTPS 링크</label><input name="link_url" required type="url" placeholder="https://..."/></div><button class="primary-btn" type="submit">홍보 배너 추가</button><p id="adminBannerMsg" class="compact"></p><div class="form-note">이미지 업로드·기존 배너 비활성화는 후속 작업입니다. 우선 사용 권한이 있는 이미지 URL을 등록합니다.</div></form>
- </div>${q?`<div class="section-heading"><h2>승인 대기 / 검토함</h2><span class="compact">명백한 스팸은 비공개 처리 · 나머지는 사람 검토</span></div>${[['article','기사',q.articles],['promotion','공연·행사',q.promotions],['marketplace','마술장터',q.marketplace]].map(([type,label,items])=>`<h3>${label} (${items.length})</h3>${items.map(item=>`<div class="queue-item"><div><strong>${E(item.title)}</strong><p>${E(item.description||'')}</p><small>${E(item.status)} · ${fmtDate(item.created_at)}</small></div><div class="queue-actions"><button data-review="${E(type)}|${E(item.id)}|published">승인·게시</button><button data-review="${E(type)}|${E(item.id)}|quarantined">검토함</button><button data-review="${E(type)}|${E(item.id)}|rejected">반려</button></div></div>`).join('')||'<p class="compact">대기 중인 게시물이 없습니다.</p>'}`).join('')}`:''}`;}
+ </div>${adminPromoPanel()}${q?`<div class="section-heading"><h2>승인 대기 / 검토함</h2><span class="compact">명백한 스팸은 비공개 처리 · 나머지는 사람 검토</span></div>${[['article','기사',q.articles],['promotion','공연·행사',q.promotions],['marketplace','마술장터',q.marketplace]].map(([type,label,items])=>`<h3>${label} (${items.length})</h3>${items.map(item=>`<div class="queue-item"><div><strong>${E(item.title)}</strong><p>${E(item.description||'')}</p><small>${E(item.status)} · ${fmtDate(item.created_at)}</small></div><div class="queue-actions"><button data-review="${E(type)}|${E(item.id)}|published">승인·게시</button><button data-review="${E(type)}|${E(item.id)}|quarantined">검토함</button><button data-review="${E(type)}|${E(item.id)}|rejected">반려</button></div></div>`).join('')||'<p class="compact">대기 중인 게시물이 없습니다.</p>'}`).join('')}`:''}`;}
  function chooseView(view,formType=null){state.view=view;state.query='';state.category='';state.detail=null;if(view!=='issues')state.issue=null;if(formType)state.formType=formType;history.replaceState(null,'','#'+view);render();window.scrollTo({top:0,behavior:'instant'});}
  function render(){
    document.querySelectorAll('.nav-link').forEach(x=>x.classList.toggle('selected',x.dataset.view===state.view));
-   app.innerHTML=({home,articles,promotions,marketplace,issues,study,submit,admin}[state.view]||home)();
+   app.innerHTML=({home,articles,promotions,marketplace,issues,study,submit,admin,privacy}[state.view]||home)();
    updateExampleNotice();
    if(state.view==='submit')installTurnstile();
  }
@@ -118,7 +133,7 @@
    catch(e){state.data=blendWithExamples({});state.preview=true;state.error='데이터 API에 연결하지 못해 미리보기 샘플을 표시하고 있습니다. D1 마이그레이션 및 배포 설정을 확인하세요.';}
   }
   updateExampleNotice();
-  state.view=['home','articles','promotions','marketplace','issues','study','submit','admin'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
+  state.view=['home','articles','promotions','marketplace','issues','study','submit','admin','privacy'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
   render();
  }
  async function updateData(){if(state.preview)return;const r=await fetch('/api/home');if(r.ok){state.data=blendWithExamples(await r.json());updateExampleNotice();}}
@@ -137,6 +152,10 @@
    const open=e.target.closest('[data-open-issue]');if(open){try{const id=open.dataset.openIssue;if(isDemo(id)){const issue=(state.data?.issues||[]).find(x=>x.id===id);if(!issue)throw Error('시안 발행호를 찾을 수 없습니다');state.issue={issue,items:(window.KMS_DEMO?.articles||[]).slice(0,6)};}else{const r=await fetch('/api/issues/'+encodeURIComponent(id));if(!r.ok)throw Error('발행호를 불러올 수 없습니다');state.issue=await r.json();}render();window.scrollTo(0,0);}catch(err){alert(err.message)}return;}
    if(e.target.id==='printIssue'){window.print();return;}
    if(e.target.id==='loadQueue'){state.adminToken=$('#adminToken').value.trim();await refreshQueue();return;}
+   const reveal=e.target.closest('[data-admin-phone]');
+   if(reveal){const el=$('#adminPhoneStatus');if(el)el.textContent='비공개 연락처 확인 중…';
+    try{const r=await fetch('/api/admin/promotion-contact?id='+encodeURIComponent(reveal.dataset.adminPhone),{headers:{authorization:'Bearer '+state.adminToken},cache:'no-store'});const json=await r.json();if(!r.ok)throw Error(json.error||'조회 불가');if(el)el.textContent=json.contact_phone?'담당자 연락처: '+json.contact_phone:'등록된 비공개 전화번호가 없습니다.';}catch(err){if(el)el.textContent=err.message;}return;
+   }
    const review=e.target.closest('[data-review]');if(review){const [type,id,status]=review.dataset.review.split('|');if(!confirm(`이 항목을 '${status}' 상태로 변경할까요?`))return;try{await adminPost('/api/admin/review',{type,id,status});await refreshQueue();await updateData();}catch(err){alert(err.message);}return;}
    if(e.target.id==='importFeeds'){try{const r=await adminPost('/api/admin/import',{});$('#adminMsg').textContent='수집 결과: '+JSON.stringify(r.sources);await refreshQueue();}catch(err){$('#adminMsg').textContent=err.message;}return;}
    if(e.target.id==='createIssue'){try{const r=await adminPost('/api/admin/create-issue',{});$('#adminMsg').textContent='월간 통합본 생성: '+r.id;await updateData();}catch(err){$('#adminMsg').textContent=err.message;}return;}
@@ -152,11 +171,13 @@
     catch(err){out.textContent='오류: '+err.message;}return;
   }
   if(e.target.id!=='submitForm')return;e.preventDefault();const r=$('#formResult');if(state.preview){r.innerHTML='<span class="error">현재 시안에서는 서버 접수가 불가능합니다. 실제 배포 후 D1·Turnstile 설정이 필요합니다.</span>';return;}
-  const data=Object.fromEntries(new FormData(e.target).entries());data.turnstile_token=window.__kmsTurnstile||'';const btn=$('#sendPost');btn.disabled=true;
+  const data=Object.fromEntries(new FormData(e.target).entries());data.turnstile_token=window.__kmsTurnstile||'';
+  if(state.formType==='promotion'){data.contact_consent=e.target.querySelector('#contact_consent')?.checked===true;if(data.contact_phone&&!data.contact_consent){r.textContent='전화번호 입력 시 개인정보 수집·이용 동의가 필요합니다.';return;}if(data.contact_phone&&!state.config?.privacyPolicyReady){r.textContent='개인정보처리방침 운영 승인 후 전화번호 접수가 가능합니다. 번호를 비워도 행사 제보는 할 수 있습니다.';return;}}
+const btn=$('#sendPost');btn.disabled=true;
   try{const res=await fetch('/api/submissions/'+state.formType,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const body=await res.json();if(!res.ok)throw Error(body.error||'접수 실패');r.innerHTML='<span class="success">'+E(body.message)+'</span>';e.target.reset();if(window.turnstile)window.turnstile.reset();}
   catch(err){r.innerHTML='<span class="error">'+E(err.message)+'</span>';}finally{btn.disabled=false;}
  });
  async function adminPost(path,data){const res=await fetch(path,{method:'POST',headers:{authorization:'Bearer '+state.adminToken,'content-type':'application/json'},body:JSON.stringify(data)});const body=await res.json();if(!res.ok)throw Error(body.error||'요청 실패');return body;}
- async function refreshQueue(){try{const r=await fetch('/api/admin/queue',{headers:{authorization:'Bearer '+state.adminToken}});const body=await r.json();if(!r.ok)throw Error(body.error||'관리자 인증 실패');state.queue=body;render();}catch(err){state.queue=null;const msg=$('#adminMsg');if(msg)msg.textContent=err.message;}}
+ async function refreshQueue(){try{const r=await fetch('/api/admin/queue',{headers:{authorization:'Bearer '+state.adminToken}});const body=await r.json();if(!r.ok)throw Error(body.error||'관리자 인증 실패');state.queue=body;try{const p=await fetch('/api/admin/promotions',{headers:{authorization:'Bearer '+state.adminToken},cache:'no-store'});state.adminPromotions=p.ok?(await p.json()).items:[];}catch{state.adminPromotions=[];}render();}catch(err){state.queue=null;const msg=$('#adminMsg');if(msg)msg.textContent=err.message;}}
  load();
 })();
