@@ -77,3 +77,30 @@ body { background: radial-gradient(ellipse at 82% 0%,var(--magic-halo),transpare
 @media(prefers-reduced-motion:reduce) {
   .hero-button:hover,.article-card:hover,.market-card:hover { transform:none;transition:none; }
 }
+
+/* Footer display option (mobile devices only; script reveals the control).
+   Desktop mode uses a 1200 CSS-pixel viewport, not a separate site. */
+.footer-view-mode {
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid rgba(247,231,209,.18);
+  display:flex;
+  justify-content:center;
+}
+.footer-view-mode[hidden] {display:none!important;}
+.footer-view-button {
+  border:1px solid rgba(227,186,125,.75);
+  background:rgba(255,255,255,.055);
+  color:#f4dfbb;
+  font-size:13px;
+  font-weight:800;
+  padding:11px 24px;
+  min-height:44px;
+  border-radius:9px;
+  transition:background-color .15s ease;
+}
+.footer-view-button:hover {background:rgba(227,186,125,.16);}
+.footer-view-button:focus-visible {outline:3px solid #f4d399;outline-offset:4px;}
+@media(prefers-reduced-motion:reduce) {
+  .footer-view-button{transition:none;}
+}
