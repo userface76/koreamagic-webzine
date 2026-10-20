@@ -2,7 +2,7 @@
  'use strict';
  const $ = s => document.querySelector(s);
  const app=$('#app');
- const state={view:'home',data:null,preview:false,config:null,query:'',category:'',formType:'marketplace',adminToken:'',queue:null,detail:null,issue:null};
+ const state={view:'home',data:null,preview:false,config:null,query:'',category:'',formType:'marketplace',demoCount:0,adminToken:'',queue:null,detail:null,issue:null};
  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const fmtPrice=p=>Number(p??0).toLocaleString('ko-KR')+'원';
  const fmtDate=d=>d?String(d).slice(0,10).replaceAll('-','.'):'날짜 미정';
@@ -16,6 +16,30 @@
  const promoCard=p=>`<article class="promo-card"><div class="promo-date">${E((p.event_date||'').slice(5,7)||'—')}<b>${E((p.event_date||'').slice(8,10)||'--')}</b></div><div><div class="label-pill">${E(p.type==='education'?'MAGIC CLASS':p.type==='venue'?'VENUE':'SHOW & EVENT')} ${isDemo(p.id)?'· 샘플':''}</div><h3>${E(p.title)}</h3><p>${E(p.description)}</p><small class="smallmeta">⌖ ${E(p.venue||'장소 미정')} · ${fmtDate(p.event_date)}</small>${safeLink(p.link_url)?`<p><a href="${E(safeLink(p.link_url))}" target="_blank" rel="noopener noreferrer">원문 보기 ↗</a></p>`:''}</div></article>`;
  const titlebar=(tag,title,desc)=>`<div class="page-hero"><div class="eyebrow">${tag}</div><h1>${title}</h1><p>${desc}</p></div>`;
  const empty=msg=>`<div class="empty">✳<br>${msg}</div>`;
+
+ const demoTargets={articles:12,promotions:8,marketplace:12,issues:2,banners:1};
+ function blendWithExamples(data){
+   const real=data||{},sample=window.KMS_DEMO||{},combined={...real};
+   let count=0;
+   for(const [key,target] of Object.entries(demoTargets)){
+     const existing=Array.isArray(real[key])?real[key]:[];
+     const mock=Array.isArray(sample[key])?sample[key]:[];
+     const needed=key==='banners'?(existing.length?0:mock.length):Math.max(0,target-existing.length);
+     const ids=new Set(existing.map(x=>String(x.id)));
+     const extras=mock.filter(x=>!ids.has(String(x.id))).slice(0,needed);
+     combined[key]=existing.concat(extras);
+     count+=extras.length;
+   }
+   state.demoCount=count;
+   return combined;
+ }
+ function updateExampleNotice(){
+   const bar=$('#demoBar');if(!bar)return;
+   bar.hidden=!state.preview&&!state.demoCount;
+   if(state.preview)bar.textContent=state.error||'디자인 시안입니다. 아래 콘텐츠는 실제 학회 소식·공연·판매글이 아닌 가상 예시입니다.';
+   else if(state.demoCount)bar.textContent='샘플 콘텐츠 안내: 일부 기사는 가상 예시이며, 공연 일정·상품 판매·월간 발행호는 실제가 아닙니다. 정식 자료 등록 시 해당 칸은 실제 데이터로 대체됩니다.';
+ }
+
 
  function adSidebar(){const a=(state.data.banners||[]).find(x=>x.position==='sidebar'&&safeLink(x.image_url)&&safeLink(x.link_url));return a?`<a class="ad-card" style="padding:0;overflow:hidden;border-style:solid" href="${E(safeLink(a.link_url))}" target="_blank" rel="noopener noreferrer" aria-label="${E(a.title)}"><img src="${E(safeLink(a.image_url))}" alt="${E(a.title)}" style="width:100%;height:235px;object-fit:cover"></a>`:`<div class="ad-card"><div class="ad-mark">✧</div><strong>당신의 무대를<br>소개하세요</strong><span>학회 공연·행사 홍보 배너 공간<br>300 × 250 권장</span></div>`;}
  function openDetail(type,id){
@@ -62,19 +86,20 @@
  function render(){
    document.querySelectorAll('.nav-link').forEach(x=>x.classList.toggle('selected',x.dataset.view===state.view));
    app.innerHTML=({home,articles,promotions,marketplace,issues,submit,admin}[state.view]||home)();
+   updateExampleNotice();
    if(state.view==='submit')installTurnstile();
  }
  async function load(){
-  if(location.protocol==='file:'){state.data=window.KMS_DEMO;state.preview=true;}
+  if(location.protocol==='file:'){state.preview=true;state.data=blendWithExamples({});}
   else{
-   try{const r=await fetch('/api/home');if(!r.ok)throw Error('HTTP '+r.status);state.data=await r.json();const cfg=await fetch('/api/config');state.config=cfg.ok?await cfg.json():null;}
-   catch(e){state.data=window.KMS_DEMO;state.preview=true;state.error='데이터 API에 연결하지 못해 미리보기 샘플을 표시하고 있습니다. D1 마이그레이션 및 배포 설정을 확인하세요.';}
+   try{const r=await fetch('/api/home');if(!r.ok)throw Error('HTTP '+r.status);state.data=blendWithExamples(await r.json());const cfg=await fetch('/api/config');state.config=cfg.ok?await cfg.json():null;}
+   catch(e){state.data=blendWithExamples({});state.preview=true;state.error='데이터 API에 연결하지 못해 미리보기 샘플을 표시하고 있습니다. D1 마이그레이션 및 배포 설정을 확인하세요.';}
   }
-  if(state.preview){$('#demoBar').hidden=false;if(state.error)$('#demoBar').textContent=state.error;}
+  updateExampleNotice();
   state.view=['home','articles','promotions','marketplace','issues','submit','admin'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
   render();
  }
- async function updateData(){if(state.preview)return;const r=await fetch('/api/home');if(r.ok)state.data=await r.json();}
+ async function updateData(){if(state.preview)return;const r=await fetch('/api/home');if(r.ok){state.data=blendWithExamples(await r.json());updateExampleNotice();}}
  async function installTurnstile(){
    if(state.preview||!state.config?.turnstileSiteKey){const el=$('#turnstileWidget');if(el)el.innerHTML='<p class="compact">실제 접수는 Cloudflare Turnstile 키 설정 후 가능합니다. 현재는 화면 시안입니다.</p>';return;}
    const el=$('#turnstileWidget');if(!el)return;
