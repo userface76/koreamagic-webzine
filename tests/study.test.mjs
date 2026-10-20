@@ -35,7 +35,9 @@ test('navigation includes study view without changing underlying data API',()=>{
  assert.match(ui,/data-study-check/);
  assert.match(ui,/data-study-copy/);
  assert.match(ui,/localStorage/);
- assert.doesNotMatch(ui,/fetch\s*\(|XMLHttpRequest/);
+ assert.match(ui,/fetch\('\/api\/study-resources\?/);
+ assert.doesNotMatch(ui,/fetch\([^)]*method\s*:\s*['\"]POST/);
+ assert.doesNotMatch(ui,/XMLHttpRequest/);
  assert.doesNotMatch(ui,/\/api\/admin/);
 });
 test('study UI syntax is parseable',()=>{
