@@ -143,6 +143,17 @@ async function adminApi(request,url,db,env){
    return json({contact_phone:matches[0].contact_phone||null});
   }catch(e){if(String(e).includes('no such column: contact_phone'))return err('개인정보 저장 DB 업데이트가 필요합니다',503);throw e;}
  }
+ if(request.method==='POST'&&p==='/api/admin/promotion-contact/delete'){
+  if(!hasSameOrigin(request))return err('동일 출처 요청만 허용',403);
+  const d=await parseJson(request),id=safeString(d.id,64);
+  if(!/^[a-f0-9-]{36}$/i.test(id))return err('행사 ID를 확인해 주세요');
+  try{
+   const result=await db.prepare('UPDATE promotions SET contact_phone=NULL,contact_deleted_at=CURRENT_TIMESTAMP WHERE id=?').bind(id).run();
+   if(!result.meta.changes)return err('해당 행사를 찾을 수 없습니다',404);
+  }catch(e){if(String(e).includes('no such column'))return err('개인정보 저장 DB 업데이트가 필요합니다',503);throw e;}
+  await log(db,'promotion',id,'contact_deleted','개인정보 최소화·관리자 요청');
+  return json({ok:true});
+ }
  if(request.method==='GET'&&p==='/api/admin/queue'){
   const [articles,promotions,marketplace,logs]=await Promise.all([
    page(db,"SELECT id,title,summary AS description,status,created_at,category FROM articles WHERE status IN ('pending','quarantined') ORDER BY created_at DESC LIMIT 40"),
@@ -206,6 +217,10 @@ async function adminApi(request,url,db,env){
   if(!tbl||!['published','rejected','deleted','quarantined'].includes(d.status)||!/^[-a-zA-Z0-9]{8,64}$/.test(String(d.id)))return err('잘못된 승인 요청');
   const r=await db.prepare(`UPDATE ${tbl} SET status=?,published_at=CASE WHEN ?='published' THEN CURRENT_TIMESTAMP ELSE published_at END WHERE id=?`).bind(d.status,d.status,d.id).run();
   if(!r.meta.changes)return err('게시물을 찾을 수 없습니다',404);
+  if(d.type==='promotion'&&['rejected','deleted'].includes(d.status)){
+   try{await db.prepare('UPDATE promotions SET contact_phone=NULL,contact_deleted_at=CURRENT_TIMESTAMP WHERE id=?').bind(d.id).run();}
+   catch(e){if(!String(e).includes('no such column'))throw e;}
+  }
   await log(db,d.type,d.id,d.status,'관리자 상태 변경');return json({ok:true});
  }
  if(request.method==='POST'&&p==='/api/admin/import'){
