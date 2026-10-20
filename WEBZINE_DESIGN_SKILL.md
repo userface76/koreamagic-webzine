@@ -1,5 +1,5 @@
 # WEBZINE DESIGN SKILL — 한국마술학회 AI 웹진
-> Version 1.2 · 2026-10-20 · GitHub: userface76/koreamagic-webzine
+> Version 2.0 · 2026-10-20 · GitHub: userface76/koreamagic-webzine
 
 ## 미션
 학술적 신뢰와 무대 마술의 상상력을 동시에 전한다. **내용은 정확하고, 경험은 환상적이며, 운영은 안전하게.**
@@ -67,3 +67,10 @@ https://web.dev/learn/design/responsive-images
 - [ ] 모바일에서 문구/버튼/배경 제어 겹치지 않음
 - [ ] API /api/home, 기사, 공연, 장터, 관리자 인증이 회귀하지 않음
 - [ ] Lighthouse 성능·접근성 검토 및 실제 데이터/예시 데이터 구분
+
+## Full-site Design v2.0 (2026-10-21)
+- 배경만이 아닌 사이트 전체 헤더, 메뉴, 히어로 레이아웃, 기사 카드, 마술장터, 스터디, 아카이브와 푸터가 함께 바뀌는 3가지 디자인.
+- `public/assets/design-themes.js` : 방문마다 랜덤(기본값) 또는 사용자가 선택한 디자인 로컬 유지.
+- `public/assets/site-themes.css` : theater / editorial / future 테마별 구조와 시각 언어; 모바일 반응형·가독성 우선.
+- `public/assets/archive-hub.js` : 월간 웹진 / 마술사 A–Z / 학술·연구 / 공연 기록 / 교육·실무 / 창작·권리 6개 분야. 기존 데이터·지식 자료를 재사용하며 가상의 공지·마술사 기록을 사실로 표시하지 않음.
+- 디자인 변경은 기사 DB, 관리자 인증, 개인정보, 자료 승인과 분리.

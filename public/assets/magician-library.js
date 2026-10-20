@@ -57,17 +57,17 @@
  ].join('');
  function paint(){const n=document.getElementById('magicianAZCatalog');if(n)n.innerHTML=library();}
  document.addEventListener('click',async e=>{
-   if(location.hash!=='#study')return;
+   if(location.hash!=='#study'&&location.hash!=='#issues')return;
    const x=e.target.closest('[data-magician-letter]');if(x){letter=x.dataset.magicianLetter;paint();return;}
    if(e.target.closest('[data-magician-copy]')){const n=document.querySelector('.magician-copy-status');try{await navigator.clipboard.writeText(lastAdvice);if(n)n.textContent='제안 내용을 복사했습니다.';}catch{if(n)n.textContent='클립보드를 사용할 수 없습니다.';}}
  });
  document.addEventListener('submit',e=>{
-   if(location.hash!=='#study')return;
+   if(location.hash!=='#study'&&location.hash!=='#issues')return;
    if(e.target.id==='magicianAZSearch'){e.preventDefault();query=e.target.querySelector('[name=q]').value.trim();paint();return;}
    if(e.target.id==='magicianCoachForm'){e.preventDefault();const n=document.getElementById('magicianCoachResult');if(n){n.innerHTML=advice(new FormData(e.target));n.hidden=false;}}
  });
  document.addEventListener('reset',e=>{if(e.target.id==='magicianCoachForm'){const n=document.getElementById('magicianCoachResult');if(n)n.hidden=true;lastAdvice='';}});
- window.KMS_MAGICIAN_AZ={render:()=>form,refresh:paint};
+ window.KMS_MAGICIAN_AZ={render:()=>form,renderCatalog:()=>'<div id="magicianAZCatalog">'+library()+'</div>',refresh:paint};
  document.addEventListener('DOMContentLoaded',()=>{
   fetch('./assets/magicians-az.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('load');return r.json();}).then(x=>{if(!Array.isArray(x.profiles))throw Error('invalid');db=x;paint();}).catch(()=>{const n=document.getElementById('magicianAZCatalog');if(n)n.textContent='A–Z 자료를 불러오지 못했습니다. 페이지 배포를 확인해 주세요.';});
  });
