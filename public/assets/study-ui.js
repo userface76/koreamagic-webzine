@@ -47,7 +47,7 @@
       '<section id="study-checklist"><div class="section-heading"><div><div class="eyebrow">VENUE READINESS</div><h2>공연 컨디션 체크리스트</h2></div><button type="button" class="study-clear" data-study-clear>점검 초기화</button></div>'+
       '<p class="study-caption">점검 상태는 이 기기에만 저장됩니다. 공연장 안전 규정과 기술 담당자의 점검이 우선입니다.</p>'+
       '<div class="study-checklist-grid">'+groups+'</div><p class="study-progress" role="status" id="studyProgress">'+Object.values(done).filter(Boolean).length+' / '+data.checklist.reduce((n,g)=>n+g.items.length,0)+'개 점검</p></section>'+
-      '<section id="study-friendly" class="study-feedback-block"><div class="section-heading"><div><div class="eyebrow">GENTLE IDEAS · VOLUNTARY FEEDBACK</div><h2>지적 대신, 공연을 살리는 아이디어</h2></div></div>
+      `<section id="study-friendly" class="study-feedback-block"><div class="section-heading"><div><div class="eyebrow">GENTLE IDEAS · VOLUNTARY FEEDBACK</div><h2>지적 대신, 공연을 살리는 아이디어</h2></div></div>
  <p class="study-caption">피드백은 공연자가 원할 때만 진행합니다. 점수·순위·공개 평가가 없으며, 입력 내용은 서버에 보내거나 저장하지 않습니다. 완성된 제안은 복사해서 직접 전달하세요.</p>
  <form id="studyGentleForm" class="study-panel study-gentle-form">
  <label>원하는 피드백 방향<select name="tone"><option value="idea">새로운 아이디어 하나</option><option value="light">좋은 장면을 더 살리기</option><option value="experiment">선택 가능한 무대 실험</option></select></label>
@@ -56,7 +56,7 @@
  <label>부담 없는 작은 실험<input name="experiment" maxlength="180" placeholder="예: 다음 리허설에서 두 가지 타이밍 비교"/></label>
  <button type="submit">부드러운 피드백 문장 만들기</button>
  <div class="study-generated" id="studyGentleResult" role="status" aria-live="polite"></div>
- </form></section>'+
+ </form></section>`+
       '<section id="study-cases"><div class="section-heading"><div><div class="eyebrow">PEER FEEDBACK · PRACTICE CASES</div><h2>공연 사례와 동료 피드백</h2></div></div>'+
       '<p class="study-caption">실제 제보가 아닌 가상 학습 사례입니다. 회원 사례 제출과 댓글·영상 공유는 개인정보·창작물 이용 동의 체계 마련 후 제공합니다.</p>'+
       '<div class="study-case-grid">'+data.cases.map(c=>'<article class="study-case"><span>가상 사례 · '+E(c.field)+'</span><h3>'+E(c.title)+'</h3><p><b>문제</b> '+E(c.problem)+'</p><p><b>피드백 예시</b> '+E(c.suggestion)+'</p></article>').join('')+'</div></section>';
