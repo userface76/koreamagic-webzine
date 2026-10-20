@@ -19,6 +19,21 @@ function studyYoutubeUrl(raw){
   return /^[a-zA-Z0-9_-]{11}$/.test(id)?'https://www.youtube.com/watch?v='+id:null;
  }catch{return null;}
 }
+function normalizePhone(input){
+ const raw=safeString(input,32);
+ if(!raw)return null;
+ if(!/^0[0-9]{1,2}-?[0-9]{3,4}-?[0-9]{4}$/.test(raw))return false;
+ return raw.replace(/[^0-9]/g,'');
+}
+const phonePattern=/(?:\b01[016789]|\b0[2-6][0-9]?)[- .]?[0-9]{3,4}[- .]?[0-9]{4}\b/;
+async function promotionPage(db,sqlWithVideo,sqlWithoutVideo,values=[]){
+ try{return await page(db,sqlWithVideo,values);}
+ catch(e){if(!String(e).includes('no such column: video_url'))throw e;return page(db,sqlWithoutVideo,values);}
+}
+async function expirePromotionContacts(db){
+ try{await db.prepare("UPDATE promotions SET contact_phone=NULL,contact_deleted_at=CURRENT_TIMESTAMP WHERE contact_phone IS NOT NULL AND ((event_date IS NOT NULL AND event_date <> '' AND date(event_date,'+90 days')<=date('now')) OR ((event_date IS NULL OR event_date='') AND datetime(created_at,'+180 days')<=datetime('now')))").run();}
+ catch(e){if(!String(e).includes('no such column: contact_phone'))throw e;}
+}
 function goodSecret(provided,expected){ if(!provided||!expected||expected.length<32)return false;let n=provided.length^expected.length;const len=Math.max(provided.length,expected.length);for(let i=0;i<len;i++)n|=(provided.charCodeAt(i)||0)^(expected.charCodeAt(i)||0);return n===0; }
 function requireAdmin(request,env){const header=request.headers.get('authorization')||'';return goodSecret(header.startsWith('Bearer ')?header.slice(7):'',env.ADMIN_API_TOKEN);}
 function hasSameOrigin(request){const origin=request.headers.get('origin'); if(!origin)return false;try{return new URL(origin).origin===new URL(request.url).origin;}catch{return false;}}
@@ -33,7 +48,8 @@ async function verifyTurnstile(token,request,env){
 async function page(db,sql,bindings=[]){return (await db.prepare(sql).bind(...bindings).all()).results;}
 async function log(db,item_type,item_id,action,reason){await db.prepare('INSERT INTO moderation_logs (id,item_type,item_id,action,reason) VALUES(?,?,?,?,?)').bind(crypto.randomUUID(),item_type,item_id,action,reason||'').run();}
 const articleCols='id,title,category,summary,body,image_url,source_url,publisher,venue,event_date,published_at,origin';
-const promotionCols='id,title,type,description,venue,event_date,link_url,image_url,published_at';
+const promotionCols='id,title,type,description,venue,event_date,link_url,image_url,video_url,published_at';
+const promotionColsLegacy='id,title,type,description,venue,event_date,link_url,image_url,NULL AS video_url,published_at';
 const marketCols='id,title,category,description,price_krw,item_condition,region,seller_alias,contact_url,image_url,published_at';
 
 async function publicApi(url,db){
@@ -42,7 +58,7 @@ async function publicApi(url,db){
  if(p==='/api/home'){
   const [articles,promotions,marketplace,banners,issues]=await Promise.all([
    page(db,`SELECT ${articleCols} FROM articles WHERE status='published' ORDER BY published_at DESC LIMIT 9`),
-   page(db,`SELECT ${promotionCols} FROM promotions WHERE status='published' ORDER BY event_date ASC LIMIT 5`),
+   promotionPage(db,`SELECT ${promotionCols} FROM promotions WHERE status='published' ORDER BY event_date ASC LIMIT 5`,`SELECT ${promotionColsLegacy} FROM promotions WHERE status='published' ORDER BY event_date ASC LIMIT 5`),
    page(db,`SELECT ${marketCols} FROM marketplace WHERE status='published' ORDER BY published_at DESC LIMIT 6`),
    page(db,'SELECT id,title,image_url,link_url,position FROM banners WHERE active=1 ORDER BY sort_order LIMIT 8'),
    page(db,'SELECT id,title,start_at,end_at,created_at FROM issues ORDER BY id DESC LIMIT 6')]);
@@ -65,7 +81,7 @@ async function publicApi(url,db){
   const q=safeString(url.searchParams.get('q'),80);
   return json({items:await page(db,`SELECT ${articleCols} FROM articles WHERE status='published' AND (?='' OR category=?) AND (?='' OR title LIKE ? OR summary LIKE ?) ORDER BY published_at DESC LIMIT ?`,[category,category,q,`%${q}%`,`%${q}%`,limit])});
  }
- if(p==='/api/promotions')return json({items:await page(db,`SELECT ${promotionCols} FROM promotions WHERE status='published' ORDER BY event_date ASC LIMIT ?`,[limit])});
+ if(p==='/api/promotions')return json({items:await promotionPage(db,`SELECT ${promotionCols} FROM promotions WHERE status='published' ORDER BY event_date ASC LIMIT ?`,`SELECT ${promotionColsLegacy} FROM promotions WHERE status='published' ORDER BY event_date ASC LIMIT ?`,[limit])});
  if(p==='/api/marketplace'){
   const category=safeString(url.searchParams.get('category'),30);
   const q=safeString(url.searchParams.get('q'),80);
@@ -79,7 +95,7 @@ async function publicApi(url,db){
  }
  return null;
 }
-async function acceptSubmission(type,payload,db){
+async function acceptSubmission(type,payload,db,env){
  const id=crypto.randomUUID(), title=safeString(payload.title,130), desc=safeString(payload.description,2000);
  if(title.length<5||desc.length<15)return err('제목 5자 이상, 설명 15자 이상 입력해 주세요');
  const c=classifyPost(type,title,desc);
@@ -92,10 +108,25 @@ async function acceptSubmission(type,payload,db){
   if(recent.length)return err('같은 제목의 최근 등록 글이 있습니다',409);
   await db.prepare(`INSERT INTO marketplace(id,title,category,description,price_krw,item_condition,region,seller_alias,contact_url,image_url,status) VALUES(?,?,?,?,?,?,?,?,?,?,?)`).bind(id,title,category,desc,price,condition,safeString(payload.region,45),seller,safeUrl(payload.contact_url),safeUrl(payload.image_url),c.status).run();
  }else if(type==='promotion'){
+  const phone=normalizePhone(payload.contact_phone);
+  if(phone===false)return err('전화번호 형식을 확인해 주세요 (예: 010-1234-5678)');
+  if(phone && payload.contact_consent!==true)return err('담당자 연락처의 수집·이용 동의가 필요합니다');
+  if(phone && env.PRIVACY_POLICY_READY!=='true')return err('개인정보처리방침 설정 완료 후 연락처 접수가 가능합니다',503);
+  if(phonePattern.test([title,desc,payload.venue].join(' ')))return err('공개 글에 전화번호를 적지 마세요. 별도 비공개 연락처 칸을 이용해 주세요');
+  const video=payload.video_url?studyYoutubeUrl(payload.video_url):null;
+  if(payload.video_url&&!video)return err('동영상은 지원되는 유튜브 HTTPS 링크를 입력해 주세요');
+  const image=payload.image_url?safeUrl(payload.image_url):null;
+  if(payload.image_url&&!image)return err('이미지 HTTPS 링크를 확인해 주세요');
   const kind=['show','venue','education','contest'].includes(payload.type)?payload.type:'show';
   const dt=safeString(payload.event_date,32);
   if(dt && !/^\d{4}-\d{2}-\d{2}$/.test(dt))return err('행사일을 YYYY-MM-DD로 입력해주세요');
-  await db.prepare(`INSERT INTO promotions(id,title,type,description,venue,event_date,link_url,image_url,source_name,status) VALUES(?,?,?,?,?,?,?,?,?,?)`).bind(id,title,kind,desc,safeString(payload.venue,100),dt||null,safeUrl(payload.link_url),safeUrl(payload.image_url),'사용자 제보',c.status).run();
+  try{
+   await db.prepare(`INSERT INTO promotions(id,title,type,description,venue,event_date,link_url,image_url,video_url,contact_phone,contact_consent_at,source_name,status) VALUES(?,?,?,?,?,?,?,?,?,?,CASE WHEN ? IS NOT NULL THEN CURRENT_TIMESTAMP ELSE NULL END,?,?)`)
+    .bind(id,title,kind,desc,safeString(payload.venue,100),dt||null,safeUrl(payload.link_url),image,video,phone,phone,'사용자 제보',c.status).run();
+  }catch(e){
+   if(String(e).includes('no such column')||String(e).includes('has no column named'))return err('공연 게시글 DB 업데이트가 필요합니다',503);
+   throw e;
+  }
  }else return err('지원하지 않는 접수 종류',404);
  await log(db,type,id,c.status,'신규 접수: '+c.reason);
  return json({ok:true,id,status:c.status,message:c.status==='deleted'?'스팸으로 자동 비공개 처리되었습니다':c.status==='quarantined'?'검토함으로 접수되었습니다':'승인 대기함으로 접수되었습니다'},201);
@@ -103,6 +134,15 @@ async function acceptSubmission(type,payload,db){
 async function adminApi(request,url,db,env){
  if(!requireAdmin(request,env))return err('관리자 인증 실패',401);
  const p=url.pathname;
+ if(request.method==='GET'&&p==='/api/admin/promotion-contact'){
+  const id=safeString(url.searchParams.get('id'),64);
+  if(!/^[a-f0-9-]{36}$/i.test(id))return err('잘못된 행사 ID');
+  try{
+   const matches=await page(db,'SELECT contact_phone FROM promotions WHERE id=?',[id]);
+   if(!matches.length)return err('행사를 찾을 수 없습니다',404);
+   return json({contact_phone:matches[0].contact_phone||null});
+  }catch(e){if(String(e).includes('no such column: contact_phone'))return err('개인정보 저장 DB 업데이트가 필요합니다',503);throw e;}
+ }
  if(request.method==='GET'&&p==='/api/admin/queue'){
   const [articles,promotions,marketplace,logs]=await Promise.all([
    page(db,"SELECT id,title,summary AS description,status,created_at,category FROM articles WHERE status IN ('pending','quarantined') ORDER BY created_at DESC LIMIT 40"),
@@ -110,6 +150,9 @@ async function adminApi(request,url,db,env){
    page(db,"SELECT id,title,description,status,created_at,category,price_krw FROM marketplace WHERE status IN ('pending','quarantined') ORDER BY created_at DESC LIMIT 40"),
    page(db,'SELECT item_type,item_id,action,reason,created_at FROM moderation_logs ORDER BY created_at DESC LIMIT 20')]);
   return json({articles,promotions,marketplace,logs});
+ }
+ if(request.method==='GET'&&p==='/api/admin/promotions'){
+   return json({items:await page(db,"SELECT id,title,status,event_date,venue,created_at FROM promotions ORDER BY created_at DESC LIMIT 50")});
  }
  if(request.method==='POST'&&p==='/api/admin/study-resources'){
   if(!hasSameOrigin(request))return err('동일 출처 요청만 허용',403);
@@ -180,7 +223,7 @@ export default {
   try{
    const url=new URL(request.url);if(!url.pathname.startsWith('/api/'))return env.ASSETS.fetch(request);
    if(request.method==='OPTIONS')return err('허용하지 않는 요청',405);
-   if(url.pathname==='/api/config'&&request.method==='GET')return json({siteTitle:env.SITE_TITLE||'한국마술학회 AI 웹진',turnstileSiteKey:env.TURNSTILE_SITE_KEY||'',submissionsEnabled:Boolean(env.TURNSTILE_SECRET&&env.TURNSTILE_SITE_KEY)});
+   if(url.pathname==='/api/config'&&request.method==='GET')return json({siteTitle:env.SITE_TITLE||'한국마술학회 AI 웹진',turnstileSiteKey:env.TURNSTILE_SITE_KEY||'',submissionsEnabled:Boolean(env.TURNSTILE_SECRET&&env.TURNSTILE_SITE_KEY),privacyPolicyReady:env.PRIVACY_POLICY_READY==='true'});
    if(!env.DB)return err('D1 데이터베이스 바인딩이 없습니다',503);
    if(url.pathname.startsWith('/api/admin/'))return adminApi(request,url,env.DB,env);
    if(request.method==='GET'){const r=await publicApi(url,env.DB);if(r)return r;}
@@ -189,14 +232,14 @@ export default {
     if(!env.TURNSTILE_SECRET||!env.TURNSTILE_SITE_KEY)return err('아직 게시물 접수 설정이 완료되지 않았습니다',503);
     const data=await parseJson(request);
     if(!await verifyTurnstile(data.turnstile_token,request,env))return err('스팸 방지 인증을 확인할 수 없습니다',403);
-    return acceptSubmission(url.pathname.split('/').pop(),data,env.DB);
+    return acceptSubmission(url.pathname.split('/').pop(),data,env.DB,env);
    }
    return err('경로를 찾을 수 없습니다',404);
   }catch(e){console.error('api error',String(e));return err('요청 처리 중 오류가 발생했습니다',500);}
  },
  async scheduled(event,env,ctx){
   if(!env.DB)return;
-  if(event.cron==='0 */6 * * *')ctx.waitUntil(importFeeds(env));
+  if(event.cron==='0 */6 * * *'){ctx.waitUntil(importFeeds(env));ctx.waitUntil(expirePromotionContacts(env.DB));}
   if(event.cron==='0 0 1 * *')ctx.waitUntil(createMonthlyIssue(env.DB));
  }
 };
