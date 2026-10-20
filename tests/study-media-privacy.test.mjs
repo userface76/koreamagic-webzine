@@ -74,3 +74,15 @@ test('front end includes opt-in soft suggestions and phone consent',()=>{
  assert.match(app,/data-admin-phone/);
  assert.match(app,/data-view="privacy"/);
 });
+
+test('authenticated admin can delete event contact without deleting event',async()=>{
+ const {sqlite,DB}=makeDb();
+ const id='123e4567-e89b-12d3-a456-426614174002';
+ sqlite.prepare("INSERT INTO promotions(id,title,description,status,contact_phone) VALUES(?,?,?,?,?)").run(id,'마술 행사 게시글','무대 이벤트','pending','01012345678');
+ let r=await worker.fetch(post('/api/admin/promotion-contact/delete',{id}),env(DB));
+ assert.equal(r.status,200);
+ const privateInfo=await (await worker.fetch(request('/api/admin/promotion-contact?id='+id,{authorization:'Bearer '+token}),env(DB))).json();
+ assert.equal(privateInfo.contact_phone,null);
+ assert.equal(sqlite.prepare("SELECT title FROM promotions WHERE id=?").get(id).title,'마술 행사 게시글');
+ sqlite.close();
+});
