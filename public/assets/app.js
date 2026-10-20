@@ -57,11 +57,18 @@
   document.body.appendChild(detail);detail.querySelector('#closeModal').focus();
   detail.addEventListener('click',e=>{if(e.target===detail||e.target.id==='closeModal')detail.remove()});
  }
+ function study(){return window.KMS_STUDY_UI?.render()||'<div class="empty">스터디 교육자료를 준비하고 있습니다.</div>';}
  function home(){const d=state.data;const promo=d.promotions||[];const articles=d.articles||[];const market=d.marketplace||[];return `
   <section class="hero-grid"><div class="hero-main"><div class="hero-content"><div class="hero-label">THE FUTURE OF MAGIC · VOL. 01</div><h1 class="hero-title">마술의 오늘을 기록하고<br><em>내일의 무대</em>를 열다</h1><p class="hero-desc">학회 연구에서 공연 현장, 마술인의 이야기까지.<br>마술의 모든 순간을 하나의 웹진에서 만납니다.</p><button class="hero-button" data-view="articles">웹진 소식 살펴보기 &nbsp; ↗</button></div><div class="magic-scene-controls" role="group" aria-label="마술 테마 배경 설정"><button type="button" data-magic-change aria-label="다른 마술 배경 보기">✦ 다른 배경</button><button type="button" data-magic-pause aria-pressed="false">⏸ 자동 변경 멈춤</button><span class="magic-scene-counter" data-magic-counter aria-live="off">01 / 04 · 별빛 마술극장</span></div></div>
   <aside class="hero-side"><div class="sidebar-top"><span class="eyebrow">ON STAGE</span><span>공연 · 행사</span></div><h3>지금 주목할<br>마술 무대</h3>${promo.slice(0,2).map(p=>`<div class="side-show"><div class="date">${fmtDate(p.event_date)}</div><strong>${E(p.title)}${isDemo(p.id)?' · 샘플':''}</strong><small>⌖ ${E(p.venue||'장소 미정')}</small></div>`).join('')||'<p>현재 등록된 공연소식이 없습니다.</p>'}<button class="side-link" data-view="promotions">공연 소식 전체보기 &nbsp; ↗</button></aside></section>
   <div class="two-col"><section><div class="section-heading"><div><div class="eyebrow">LATEST STORIES</div><h2>새로운 마술 이야기</h2></div><button class="more" data-view="articles">모두 보기 ↗</button></div><div class="article-grid">${articles.slice(0,4).map(articleCard).join('')||empty('등록된 기사가 없습니다.')}</div></section><aside><div class="section-heading"><div><div class="eyebrow">PROMOTION</div><h2>홍보 & 광고</h2></div></div>${adSidebar()}<div class="mini-info"><h3>공연소식 제보</h3><p>새로운 마술공연과 공연장 소식, 강좌 정보를 알려주세요. 확인 후 웹진에 소개합니다.</p><button data-view="submit" data-form="promotion">공연 홍보 등록 ↗</button></div></aside></div>
   <section class="market-intro"><div class="section-heading" style="margin-top:0"><div><div class="eyebrow">MAGIC MARKETPLACE</div><h2>마술장터 <span style="color:#bd8551;font-size:13px;vertical-align:middle">NEW</span></h2></div><button class="more" data-view="marketplace">장터 전체보기 ↗</button></div><div class="market-grid">${market.slice(0,3).map(marketCard).join('')||empty('아직 등록된 장터 상품이 없습니다.')}</div></section>
+
+  <section class="study-promo-home" aria-label="마술사 스터디 센터">
+    <div><span class="eyebrow">MAGICIAN CONTINUING STUDY</span><h2>20년 경력의 마술사도<br>계속 성장하는 공간</h2>
+    <p>조명·음향·공연장 컨디션부터 작품 만들기, 연기자 마인드, 유머·관객 심리·임기응변, 실질적 수익 만들기까지. 현장 노하우를 기록하고 동료와 배우는 스터디.</p>
+    <button type="button" data-view="study">스터디 자료 둘러보기 ↗</button></div><div class="study-promo-symbol" aria-hidden="true">✦</div>
+  </section>
   <section class="coming-platform" aria-label="학회 미래 서비스 시안">
     <div class="section-heading"><div><div class="eyebrow">KNOWLEDGE · EDUCATION · CREATION</div><h2>마술인을 위한 더 넓은 공간</h2></div><span class="coming-hint">아래 세 영역은 개발 예정인 서비스 시안입니다.</span></div>
     <div class="coming-grid">
@@ -100,7 +107,7 @@
  function chooseView(view,formType=null){state.view=view;state.query='';state.category='';state.detail=null;if(view!=='issues')state.issue=null;if(formType)state.formType=formType;history.replaceState(null,'','#'+view);render();window.scrollTo({top:0,behavior:'instant'});}
  function render(){
    document.querySelectorAll('.nav-link').forEach(x=>x.classList.toggle('selected',x.dataset.view===state.view));
-   app.innerHTML=({home,articles,promotions,marketplace,issues,submit,admin}[state.view]||home)();
+   app.innerHTML=({home,articles,promotions,marketplace,issues,study,submit,admin}[state.view]||home)();
    updateExampleNotice();
    if(state.view==='submit')installTurnstile();
  }
@@ -111,7 +118,7 @@
    catch(e){state.data=blendWithExamples({});state.preview=true;state.error='데이터 API에 연결하지 못해 미리보기 샘플을 표시하고 있습니다. D1 마이그레이션 및 배포 설정을 확인하세요.';}
   }
   updateExampleNotice();
-  state.view=['home','articles','promotions','marketplace','issues','submit','admin'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
+  state.view=['home','articles','promotions','marketplace','issues','study','submit','admin'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
   render();
  }
  async function updateData(){if(state.preview)return;const r=await fetch('/api/home');if(r.ok){state.data=blendWithExamples(await r.json());updateExampleNotice();}}
