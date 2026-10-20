@@ -29,3 +29,20 @@ test('all four original magic illustrations are local and script-free', () => {
     assert.match(css, new RegExp('magic-' + name + '\\.svg'));
   }
 });
+
+test('mobile visitors can switch between mobile and desktop layouts from the footer', () => {
+  const page = read('public/index.html');
+  const css = read('public/assets/styles.css');
+  const mode = read('public/assets/view-mode.js');
+  assert.match(page, /id="footerViewMode" hidden/);
+  assert.match(page, /id="desktopViewToggle"/);
+  assert.match(page, /<script src="\.\/assets\/view-mode\.js"><\/script>/);
+  assert.match(css, /\.footer-view-button/);
+  assert.match(css, /\.footer-view-mode\[hidden\]/);
+  assert.match(mode, /width=1200/);
+  assert.match(mode, /width=device-width, initial-scale=1/);
+  assert.match(mode, /localStorage\.setItem/);
+  assert.match(mode, /localStorage\.getItem/);
+  assert.match(mode, /aria-pressed/);
+  assert.match(mode, /window\.location\.reload\(\)/);
+});
