@@ -74,3 +74,9 @@ https://web.dev/learn/design/responsive-images
 - `public/assets/site-themes.css` : theater / editorial / future 테마별 구조와 시각 언어; 모바일 반응형·가독성 우선.
 - `public/assets/archive-hub.js` : 월간 웹진 / 마술사 A–Z / 학술·연구 / 공연 기록 / 교육·실무 / 창작·권리 6개 분야. 기존 데이터·지식 자료를 재사용하며 가상의 공지·마술사 기록을 사실로 표시하지 않음.
 - 디자인 변경은 기사 DB, 관리자 인증, 개인정보, 자료 승인과 분리.
+
+## v2.1 (2026-10-21)
+- 기본 디자인을 고급 학술 매거진(editorial)으로 지정. 기존 사용자가 선택한 스타일은 존중하며, 랜덤은 명시적으로 선택한 경우에만 작동.
+- 전체 밝은 화이트·스카이블루 테마(bright) 추가. 메인·메뉴·기사·장터·아카이브·푸터 전반에 반영.
+- 위키백과 List of magicians 인명 목록을 바탕으로 한글 음역·영문명·출처를 갖춘 마술사 색인 확장. 세부 약력 미검증 인물은 자료 확인 중 표시.
+- 본인 제공 영문 소개 Joseph Choi / Magic Therapist in Korea를 임상 의료 자격 오인 없이 구분해 기록.

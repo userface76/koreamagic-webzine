@@ -1,8 +1,8 @@
 {
-  "version": "0.1",
-  "updated_at": "2026-10-20",
-  "status": "curated_seed",
-  "notice": "A–Z 전체 목록이 완성된 것은 아닙니다. 현재 출처 확인을 거친 일부 인물의 짧은 소개와 웹진 편집부의 독립적인 학습 제안을 제공합니다. '코칭 관점'은 해당 마술사의 실제 발언이나 인증된 강의가 아닙니다.",
+  "version": "0.3",
+  "updated_at": "2026-10-21",
+  "status": "korean_wikipedia_index_expanded",
+  "notice": "위키백과의 List of magicians를 참고한 한글·영문 A–Z 색인입니다. 상세 프로필과 이름만 확인한 예비 인물을 구분합니다. 한글 표기는 일부 임시 음역이며 향후 검토가 필요합니다. 자기소개 기반 프로필은 외부 문헌으로 검증된 인물과 구분합니다. 비밀 기법·저작권 자료는 옮기지 않습니다.",
   "tags": {
     "card": "카드 마술",
     "closeup": "클로즈업",
@@ -16,6 +16,168 @@
     "research": "역사·연구"
   },
   "profiles": [
+    {
+      "id": "aldo-colombini",
+      "display_name": "Aldo Colombini",
+      "name_ko": "알도 콜롬비니",
+      "initial": "A",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — A",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#A"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "alex-elmsley",
+      "display_name": "Alex Elmsley",
+      "name_ko": "알렉스 엘름슬리",
+      "initial": "A",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — A",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#A"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "ali-bongo",
+      "display_name": "Ali Bongo",
+      "name_ko": "알리 봉고",
+      "initial": "A",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — A",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#A"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "andy-nyman",
+      "display_name": "Andy Nyman",
+      "name_ko": "앤디 나이먼",
+      "initial": "A",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — A",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#A"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "banachek",
+      "display_name": "Banachek",
+      "name_ko": "바나체크",
+      "initial": "B",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — B",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#B"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "br-john-hamman",
+      "display_name": "Br. John Hamman",
+      "name_ko": "브라더 존 해먼",
+      "initial": "B",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — B",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#B"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "cardini",
+      "display_name": "Cardini",
+      "name_ko": "카디니",
+      "initial": "C",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Cardini",
+          "url": "https://en.wikipedia.org/wiki/Cardini_(magician)"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "criss-angel",
+      "display_name": "Criss Angel",
+      "name_ko": "크리스 엔젤",
+      "initial": "C",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Criss Angel",
+          "url": "https://en.wikipedia.org/wiki/Criss_Angel"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "cyril-takayama",
+      "display_name": "Cyril Takayama",
+      "name_ko": "시릴 타카야마",
+      "initial": "C",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — C",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#C"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
     {
       "id": "dai-vernon",
       "display_name": "Dai Vernon",
@@ -43,6 +205,466 @@
         "복잡한 효과일수록 관객에게 보이는 이야기와 효과를 명료하게 구성한다."
       ],
       "safety_note": "실제 비밀 기법·원문 강의 내용을 이 색인에 수록하지 않습니다."
+    },
+    {
+      "id": "dante-the-magician",
+      "display_name": "Dante the Magician",
+      "name_ko": "단테 더 매지션",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "darwin-ortiz",
+      "display_name": "Darwin Ortiz",
+      "name_ko": "다윈 오티즈",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "daryl",
+      "display_name": "Daryl",
+      "name_ko": "대릴",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "david-acer",
+      "display_name": "David Acer",
+      "name_ko": "데이비드 에이서",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "david-berglas",
+      "display_name": "David Berglas",
+      "name_ko": "데이비드 버글라스",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "david-blaine",
+      "display_name": "David Blaine",
+      "name_ko": "데이비드 블레인",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — David Blaine",
+          "url": "https://en.wikipedia.org/wiki/David_Blaine"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "david-copperfield",
+      "display_name": "David Copperfield",
+      "name_ko": "데이비드 카퍼필드",
+      "initial": "D",
+      "years": "1956–",
+      "specialties": [
+        "stage",
+        "illusion",
+        "storytelling"
+      ],
+      "summary": "대형 일루전과 극적인 이야기 구조를 결합한 공연으로 알려진 미국 마술사입니다.",
+      "evidence": [
+        {
+          "title": "David Copperfield — 공식 약력",
+          "url": "https://davidcopperfield.com/iphone/bio"
+        },
+        {
+          "title": "Smithsonian Magazine — 인물 소개",
+          "url": "https://www.smithsonianmag.com/smart-news/jewish-museum-honors-magicians-houdini-and-copperfield-180976129/"
+        }
+      ],
+      "coaching_lens": [
+        "마술적 효과를 보여주기 전 장면의 이유와 감정 목표를 먼저 정의한다.",
+        "조명·음악·시야를 장면의 의미와 일치시키는 공연 협의를 해 본다."
+      ],
+      "safety_note": "대형 장치와 위험 동작은 전문 기술 인력과 관련 안전 규정이 필요합니다."
+    },
+    {
+      "id": "david-devant",
+      "display_name": "David Devant",
+      "name_ko": "데이비드 데반트",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "david-kwong",
+      "display_name": "David Kwong",
+      "name_ko": "데이비드 쾅",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "david-roth",
+      "display_name": "David Roth",
+      "name_ko": "데이비드 로스",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "david-stone",
+      "display_name": "David Stone",
+      "name_ko": "데이비드 스톤",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "derren-brown",
+      "display_name": "Derren Brown",
+      "name_ko": "데런 브라운",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Derren Brown",
+          "url": "https://en.wikipedia.org/wiki/Derren_Brown"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "dorothy-dietrich",
+      "display_name": "Dorothy Dietrich",
+      "name_ko": "도로시 디트리히",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — D",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#D"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "doug-henning",
+      "display_name": "Doug Henning",
+      "name_ko": "더그 헤닝",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Doug Henning",
+          "url": "https://en.wikipedia.org/wiki/Doug_Henning"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "dynamo",
+      "display_name": "Dynamo",
+      "name_ko": "다이너모",
+      "initial": "D",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Dynamo",
+          "url": "https://en.wikipedia.org/wiki/Dynamo_(magician)"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "ed-marlo",
+      "display_name": "Ed Marlo",
+      "name_ko": "에드 말로",
+      "initial": "E",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — E",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#E"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "eugene-burger",
+      "display_name": "Eugene Burger",
+      "name_ko": "유진 버거",
+      "initial": "E",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — E",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#E"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "florian-zimmer",
+      "display_name": "Florian Zimmer",
+      "name_ko": "플로리안 치머",
+      "initial": "F",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — F",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#F"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "franz-harary",
+      "display_name": "Franz Harary",
+      "name_ko": "프란츠 하라리",
+      "initial": "F",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — F",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#F"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "fred-kaps",
+      "display_name": "Fred Kaps",
+      "name_ko": "프레드 캅스",
+      "initial": "F",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — F",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#F"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "georges-melies",
+      "display_name": "Georges Méliès",
+      "name_ko": "조르주 멜리에스",
+      "initial": "G",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — G",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#G"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "hans-klok",
+      "display_name": "Hans Klok",
+      "name_ko": "한스 클록",
+      "initial": "H",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — H",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#H"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "harry-anderson",
+      "display_name": "Harry Anderson",
+      "name_ko": "해리 앤더슨",
+      "initial": "H",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — H",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#H"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "harry-blackstone-jr",
+      "display_name": "Harry Blackstone, Jr.",
+      "name_ko": "해리 블랙스톤 주니어",
+      "initial": "H",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — H",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#H"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "harry-blackstone-sr",
+      "display_name": "Harry Blackstone, Sr.",
+      "name_ko": "해리 블랙스톤 시니어",
+      "initial": "H",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — H",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#H"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
     },
     {
       "id": "harry-houdini",
@@ -73,32 +695,748 @@
       "safety_note": "후디니의 위험한 탈출·물속 묘기·구속 장치 등을 따라 하는 실습은 제안하지 않습니다."
     },
     {
-      "id": "david-copperfield",
-      "display_name": "David Copperfield",
-      "name_ko": "데이비드 카퍼필드",
-      "initial": "D",
-      "years": "1956–",
-      "specialties": [
-        "stage",
-        "illusion",
-        "storytelling"
-      ],
-      "summary": "대형 일루전과 극적인 이야기 구조를 결합한 공연으로 알려진 미국 마술사입니다.",
+      "id": "harry-kellar",
+      "display_name": "Harry Kellar",
+      "name_ko": "해리 켈러",
+      "initial": "H",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
       "evidence": [
         {
-          "title": "David Copperfield — 공식 약력",
-          "url": "https://davidcopperfield.com/iphone/bio"
-        },
-        {
-          "title": "Smithsonian Magazine — 인물 소개",
-          "url": "https://www.smithsonianmag.com/smart-news/jewish-museum-honors-magicians-houdini-and-copperfield-180976129/"
+          "title": "위키백과 마술사 A–Z 목록 — H",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#H"
         }
       ],
-      "coaching_lens": [
-        "마술적 효과를 보여주기 전 장면의 이유와 감정 목표를 먼저 정의한다.",
-        "조명·음악·시야를 장면의 의미와 일치시키는 공연 협의를 해 본다."
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "harry-lorayne",
+      "display_name": "Harry Lorayne",
+      "name_ko": "해리 로레인",
+      "initial": "H",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — H",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#H"
+        }
       ],
-      "safety_note": "대형 장치와 위험 동작은 전문 기술 인력과 관련 안전 규정이 필요합니다."
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "howard-thurston",
+      "display_name": "Howard Thurston",
+      "name_ko": "하워드 서스턴",
+      "initial": "H",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — H",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#H"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "j-b-bobo",
+      "display_name": "J.B. Bobo",
+      "name_ko": "J.B. 보보",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "james-randi",
+      "display_name": "James Randi",
+      "name_ko": "제임스 랜디",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — James Randi",
+          "url": "https://en.wikipedia.org/wiki/James_Randi"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "jason-latimer",
+      "display_name": "Jason Latimer",
+      "name_ko": "제이슨 라티머",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "jay-sankey",
+      "display_name": "Jay Sankey",
+      "name_ko": "제이 생키",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "jean-eugene-robert-houdin",
+      "display_name": "Jean Eugène Robert-Houdin",
+      "name_ko": "장 외젠 로베르우댕",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "jeff-mcbride",
+      "display_name": "Jeff McBride",
+      "name_ko": "제프 맥브라이드",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "jerry-andrus",
+      "display_name": "Jerry Andrus",
+      "name_ko": "제리 앤드러스",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "jim-steinmeyer",
+      "display_name": "Jim Steinmeyer",
+      "name_ko": "짐 스타인마이어",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "john-carney",
+      "display_name": "John Carney",
+      "name_ko": "존 카니",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — John Carney",
+          "url": "https://en.wikipedia.org/wiki/John_Carney_(magician)"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "john-mulholland",
+      "display_name": "John Mulholland",
+      "name_ko": "존 멀홀랜드",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "johnny-thompson",
+      "display_name": "Johnny Thompson",
+      "name_ko": "조니 톰슨",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "joseph-choi",
+      "display_name": "Joseph Choi",
+      "name_ko": "최정한",
+      "initial": "J",
+      "years": "활동 중",
+      "specialties": [
+        "stage",
+        "acting",
+        "storytelling"
+      ],
+      "summary": "대한민국 마술사·교육자. 공연, 교육, 소통과 치유 지향적 마술 활동에 관심을 두고 있습니다. 본 소개는 당사자의 자기소개 기반 초안입니다.",
+      "evidence": [
+        {
+          "title": "아티스트 영문 소개 — 본인 제공 자료(편집용)",
+          "url": "https://github.com/userface76/koreamagic-webzine/blob/main/docs/Joseph-Choi-English-Profile.md"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "artist_authored",
+      "name_ko_status": "확인된 본인 표기",
+      "english_title": "Magic Therapist in Korea",
+      "english_bio": "Joseph Choi is a South Korean magician and educator exploring stage performance, communication, education, and healing-oriented magic activities. 'Magic Therapist' describes his artistic focus, not a licensed clinical credential."
+    },
+    {
+      "id": "joshua-jay",
+      "display_name": "Joshua Jay",
+      "name_ko": "조슈아 제이",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "juan-tamariz",
+      "display_name": "Juan Tamariz",
+      "name_ko": "후안 타마리스",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Juan Tamariz",
+          "url": "https://en.wikipedia.org/wiki/Juan_Tamariz"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "juliana-chen",
+      "display_name": "Juliana Chen",
+      "name_ko": "줄리아나 첸",
+      "initial": "J",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — J",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#J"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "kevin-james",
+      "display_name": "Kevin James",
+      "name_ko": "케빈 제임스",
+      "initial": "K",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — K",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#K"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "lance-burton",
+      "display_name": "Lance Burton",
+      "name_ko": "랜스 버튼",
+      "initial": "L",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Lance Burton",
+          "url": "https://en.wikipedia.org/wiki/Lance_Burton"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "larry-jennings",
+      "display_name": "Larry Jennings",
+      "name_ko": "래리 제닝스",
+      "initial": "L",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — L",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#L"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "lennart-green",
+      "display_name": "Lennart Green",
+      "name_ko": "레나트 그린",
+      "initial": "L",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — L",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#L"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "mac-king",
+      "display_name": "Mac King",
+      "name_ko": "맥 킹",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Mac King",
+          "url": "https://en.wikipedia.org/wiki/Mac_King"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "mark-wilson",
+      "display_name": "Mark Wilson",
+      "name_ko": "마크 윌슨",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "martin-gardner",
+      "display_name": "Martin Gardner",
+      "name_ko": "마틴 가드너",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "mat-franco",
+      "display_name": "Mat Franco",
+      "name_ko": "맷 프랑코",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "max-malini",
+      "display_name": "Max Malini",
+      "name_ko": "맥스 말리니",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "max-maven",
+      "display_name": "Max Maven",
+      "name_ko": "맥스 메이븐",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "michael-ammar",
+      "display_name": "Michael Ammar",
+      "name_ko": "마이클 아마르",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "michael-carbonaro",
+      "display_name": "Michael Carbonaro",
+      "name_ko": "마이클 카보나로",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "michael-vincent",
+      "display_name": "Michael Vincent",
+      "name_ko": "마이클 빈센트",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "mike-caveney",
+      "display_name": "Mike Caveney",
+      "name_ko": "마이크 카베니",
+      "initial": "M",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — M",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#M"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "noel-qualter",
+      "display_name": "Noel Qualter",
+      "name_ko": "노엘 퀄터",
+      "initial": "N",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — N",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#N"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "norbert-ferre",
+      "display_name": "Norbert Ferré",
+      "name_ko": "노르베르 페레",
+      "initial": "N",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — N",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#N"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "orson-welles",
+      "display_name": "Orson Welles",
+      "name_ko": "오슨 웰스",
+      "initial": "O",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — O",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#O"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "oz-pearlman",
+      "display_name": "Oz Pearlman",
+      "name_ko": "오즈 펄먼",
+      "initial": "O",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — O",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#O"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "p-c-sorcar",
+      "display_name": "P. C. Sorcar",
+      "name_ko": "P. C. 소르카르",
+      "initial": "P",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — P",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#P"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "paul-daniels",
+      "display_name": "Paul Daniels",
+      "name_ko": "폴 대니얼스",
+      "initial": "P",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Paul Daniels",
+          "url": "https://en.wikipedia.org/wiki/Paul_Daniels"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "paul-gertner",
+      "display_name": "Paul Gertner",
+      "name_ko": "폴 거트너",
+      "initial": "P",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — P",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#P"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "paul-harris",
+      "display_name": "Paul Harris",
+      "name_ko": "폴 해리스",
+      "initial": "P",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — P",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#P"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "paul-zenon",
+      "display_name": "Paul Zenon",
+      "name_ko": "폴 제논",
+      "initial": "P",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — P",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#P"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
     },
     {
       "id": "penn-and-teller",
@@ -130,6 +1468,78 @@
       "safety_note": "관객 동의와 표현의 맥락을 고려하며 모욕·위험 연출은 권하지 않습니다."
     },
     {
+      "id": "piff-the-magic-dragon",
+      "display_name": "Piff the Magic Dragon",
+      "name_ko": "피프 더 매직 드래곤",
+      "initial": "P",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — P",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#P"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "princess-tenko",
+      "display_name": "Princess Tenko",
+      "name_ko": "프린세스 텐코",
+      "initial": "P",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — P",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#P"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "rene-lavand",
+      "display_name": "René Lavand",
+      "name_ko": "르네 라방",
+      "initial": "R",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — R",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#R"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "richard-osterlind",
+      "display_name": "Richard Osterlind",
+      "name_ko": "리처드 오스터린드",
+      "initial": "R",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — R",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#R"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
       "id": "ricky-jay",
       "display_name": "Ricky Jay",
       "name_ko": "리키 제이",
@@ -157,6 +1567,354 @@
         "관객에게 설명하는 언어와 공연자의 태도가 효과를 지지하는지 살펴본다."
       ],
       "safety_note": "저작권·공연권이 확인되지 않은 원고와 비밀 기법을 복제하지 않습니다."
+    },
+    {
+      "id": "rob-zabrecky",
+      "display_name": "Rob Zabrecky",
+      "name_ko": "롭 자브레키",
+      "initial": "R",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — R",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#R"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "robert-harbin",
+      "display_name": "Robert Harbin",
+      "name_ko": "로버트 하빈",
+      "initial": "R",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — R",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#R"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "roberto-giobbi",
+      "display_name": "Roberto Giobbi",
+      "name_ko": "로베르토 조비",
+      "initial": "R",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Roberto Giobbi",
+          "url": "https://en.wikipedia.org/wiki/Roberto_Giobbi"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "roy-walton",
+      "display_name": "Roy Walton",
+      "name_ko": "로이 월턴",
+      "initial": "R",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — R",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#R"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "scott-interrante",
+      "display_name": "Scott Interrante",
+      "name_ko": "스콧 인터란테",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "shawn-farquhar",
+      "display_name": "Shawn Farquhar",
+      "name_ko": "숀 파커",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "shin-lim",
+      "display_name": "Shin Lim",
+      "name_ko": "신 림",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Shin Lim",
+          "url": "https://en.wikipedia.org/wiki/Shin_Lim"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "shoot-ogawa",
+      "display_name": "Shoot Ogawa",
+      "name_ko": "슈트 오가와",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "siegfried-roy",
+      "display_name": "Siegfried & Roy",
+      "name_ko": "지크프리트와 로이",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "simo-aalto",
+      "display_name": "Simo Aalto",
+      "name_ko": "시모 알토",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "simon-aronson",
+      "display_name": "Simon Aronson",
+      "name_ko": "사이먼 애런슨",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "steve-cohen",
+      "display_name": "Steve Cohen",
+      "name_ko": "스티브 코언",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "sue-anne-webster",
+      "display_name": "Sue-Anne Webster",
+      "name_ko": "수앤 웹스터",
+      "initial": "S",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — S",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#S"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "the-amazing-kreskin",
+      "display_name": "The Amazing Kreskin",
+      "name_ko": "어메이징 크레스킨",
+      "initial": "T",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — T",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#T"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "theodore-annemann",
+      "display_name": "Theodore Annemann",
+      "name_ko": "시어도어 애너먼",
+      "initial": "T",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — T",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#T"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "tommy-cooper",
+      "display_name": "Tommy Cooper",
+      "name_ko": "토미 쿠퍼",
+      "initial": "T",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 인물 문서 — Tommy Cooper",
+          "url": "https://en.wikipedia.org/wiki/Tommy_Cooper"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "tommy-wonder",
+      "display_name": "Tommy Wonder",
+      "name_ko": "토미 원더",
+      "initial": "T",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — T",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#T"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "tony-slydini",
+      "display_name": "Tony Slydini",
+      "name_ko": "토니 슬라이디니",
+      "initial": "T",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — T",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#T"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "val-valentino",
+      "display_name": "Val Valentino",
+      "name_ko": "발 발렌티노",
+      "initial": "V",
+      "years": "미확인",
+      "specialties": [],
+      "summary": "위키백과 마술사 목록에 수록된 인물입니다. 상세 약력과 공연 분야는 추후 출처 확인 후 추가합니다.",
+      "evidence": [
+        {
+          "title": "위키백과 마술사 A–Z 목록 — V",
+          "url": "https://en.wikipedia.org/wiki/List_of_magicians#V"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "indexed",
+      "name_ko_status": "한글 음역 초안·검토 중"
     }
-  ]
+  ],
+  "source_list": {
+    "title": "List of magicians",
+    "url": "https://en.wikipedia.org/wiki/List_of_magicians",
+    "license": "Wikipedia CC BY-SA 4.0",
+    "notes": "기초 인물명 색인으로 사용. 상세 번역·약력은 독립적으로 작성하고 재검토."
+  }
 }

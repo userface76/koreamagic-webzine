@@ -16,17 +16,24 @@
  const focus={light:['stage','illusion'],sound:['stage','storytelling'],audience:['acting','storytelling'],humor:['humor'],setup:['stage','illusion'],income:['storytelling','research']};
  const safeUrl=x=>{try{const u=new URL(x);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}};
  function sourceCards(p){
-   return '<article class="magician-profile"><strong>'+E(p.name_ko)+' <small>'+E(p.display_name)+'</small></strong><p class="magician-profile-years">'+E(p.years)+' · '+p.specialties.map(t=>E(db.tags[t]||t)).join(' · ')+'</p><p>'+E(p.summary)+'</p><h4>학습에 적용할 관점 <small>웹진 편집부 제안</small></h4><ul>'+p.coaching_lens.map(x=>'<li>'+E(x)+'</li>').join('')+'</ul><div class="magician-profile-links">'+p.evidence.map(x=>safeUrl(x.url)?'<a target="_blank" rel="noopener noreferrer" href="'+E(safeUrl(x.url))+'">'+E(x.title)+' ↗</a>':'').join('')+'</div></article>';
+   const expanded=Array.isArray(p.coaching_lens)&&p.coaching_lens.length>0;
+   const status=p.profile_status==='artist_authored'?'본인 소개':expanded?'상세 프로필':'한글 색인·검토 중';
+   const sources=Array.isArray(p.evidence)?p.evidence:[];
+   const tags=Array.isArray(p.specialties)?p.specialties:[];
+   return '<article class="magician-profile"><div class="magician-profile-heading"><strong>'+E(p.name_ko)+'</strong><span class="magician-status">'+status+'</span></div>'+
+     '<p class="magician-name-en">'+E(p.display_name)+'</p><p class="magician-profile-years">'+(p.years==='미확인'?'':E(p.years)+' · ')+(tags.length?tags.map(t=>E(db.tags[t]||t)).join(' · '):'전문 분야 검토 중')+'</p>'+
+     '<p>'+E(p.summary)+'</p>'+(expanded?'<h4>공연 학습 관점 <small>웹진 편집부 제안</small></h4><ul>'+p.coaching_lens.map(t=>'<li>'+E(t)+'</li>').join('')+'</ul>':p.profile_status==='artist_authored'?'<p class="magician-status-detail">본인이 제공한 활동 소개입니다. 자격증이나 의료·심리치료 전문면허를 의미하지 않습니다.</p>':'<p class="magician-status-detail">인물명은 색인에 등재되었으며 상세 약력·한글 표기는 추가 확인 중입니다.</p>')+
+     '<div class="magician-profile-links">'+sources.map(x=>safeUrl(x.url)?'<a target="_blank" rel="noopener noreferrer" href="'+E(safeUrl(x.url))+'">'+E(x.title)+' ↗</a>':'').join('')+'</div></article>';
  }
  function library(){
    if(!db)return '<p class="study-caption">A–Z 지식 자료를 불러오는 중입니다…</p>';
    const list=db.profiles.filter(x=>(letter==='ALL'||x.initial===letter)&&(!query||[x.display_name,x.name_ko,x.summary,...x.specialties].join(' ').toLowerCase().includes(query.toLowerCase())));
-   return '<div class="magician-library-intro"><h3>출처 확인된 마술사 '+db.profiles.length+'명</h3><p>'+E(db.notice)+'</p></div><div class="magician-letters">'+['ALL',...ABC].map(x=>'<button data-magician-letter="'+x+'" aria-pressed="'+String(letter===x)+'" class="'+(letter===x?'selected':'')+'">'+(x==='ALL'?'전체':x)+'</button>').join('')+'</div><form id="magicianAZSearch" class="magician-search"><label for="magicianAZQuery">마술사 이름·분야 검색</label><input id="magicianAZQuery" name="q" value="'+E(query)+'" placeholder="예: Houdini, card, stage"/><button type="submit">찾기</button></form><div class="magician-profiles">'+(list.length?list.map(sourceCards).join(''):'<p class="study-caption">이 글자에는 아직 검증된 인물 정보가 등록되지 않았습니다. A~Z 자료를 단계적으로 확장합니다.</p>')+'</div>';
+   return '<div class="magician-library-intro"><h3>출처 확인된 마술사 '+db.profiles.length+'명</h3><p>'+E(db.notice)+'</p></div><div class="magician-letters">'+['ALL',...ABC].map(x=>'<button data-magician-letter="'+x+'" aria-pressed="'+String(letter===x)+'" class="'+(letter===x?'selected':'')+'">'+(x==='ALL'?'전체':x)+'</button>').join('')+'</div><form id="magicianAZSearch" class="magician-search"><label for="magicianAZQuery">마술사 이름·분야 검색</label><input id="magicianAZQuery" name="q" value="'+E(query)+'" placeholder="예: 후디니, Shin Lim, 카드"/><button type="submit">찾기</button></form><div class="magician-profiles">'+(list.length?list.map(sourceCards).join(''):'<p class="study-caption">이 글자에는 아직 검증된 인물 정보가 등록되지 않았습니다. A~Z 자료를 단계적으로 확장합니다.</p>')+'</div>';
  }
  function related(genre,challenge){
    const selectedTags=[...(categories[genre]||[]),...(focus[challenge]||[])];
    if(!db)return [];
-   return db.profiles.map(p=>({p,score:p.specialties.filter(t=>selectedTags.includes(t)).length})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,3).map(x=>x.p);
+   return db.profiles.map(p=>({p,score:p.specialties.filter(t=>selectedTags.includes(t)).length})).filter(x=>x.score>0&&x.p.coaching_lens?.length).sort((a,b)=>b.score-a.score).slice(0,3).map(x=>x.p);
  }
  function advice(fd){
    const act=String(fd.get('act')||'').trim().slice(0,1000);
