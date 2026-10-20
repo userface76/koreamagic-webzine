@@ -41,7 +41,14 @@
  }
 
 
- function adSidebar(){const a=(state.data.banners||[]).find(x=>x.position==='sidebar'&&safeLink(x.image_url)&&safeLink(x.link_url));return a?`<a class="ad-card" style="padding:0;overflow:hidden;border-style:solid" href="${E(safeLink(a.link_url))}" target="_blank" rel="noopener noreferrer" aria-label="${E(a.title)}"><img src="${E(safeLink(a.image_url))}" alt="${E(a.title)}" style="width:100%;height:235px;object-fit:cover"></a>`:`<div class="ad-card"><div class="ad-mark">✧</div><strong>당신의 무대를<br>소개하세요</strong><span>학회 공연·행사 홍보 배너 공간<br>300 × 250 권장</span></div>`;}
+ function adSidebar(){
+   const banners=state.data?.banners||[];
+   const real=banners.find(x=>!isDemo(x.id)&&x.position==='sidebar'&&safeLink(x.image_url)&&safeLink(x.link_url));
+   if(real)return `<a class="ad-card" style="padding:0;overflow:hidden;border-style:solid" href="${E(safeLink(real.link_url))}" target="_blank" rel="noopener noreferrer" aria-label="${E(real.title)}"><img src="${E(safeLink(real.image_url))}" alt="${E(real.title)}" style="width:100%;height:235px;object-fit:cover"></a>`;
+   const demo=banners.filter(x=>isDemo(x.id));
+   if(demo.length)return `<div class="demo-ads">${demo.map(a=>`<div class="demo-ad-card demo-ad-${E(a.art||'show')}" aria-label="${E(a.title)}: 실제 광고가 아닌 샘플"><span class="demo-ad-label">SAMPLE · 시안 광고</span><span class="demo-ad-icon" aria-hidden="true">${a.art==='class'?'✦':a.art==='create'?'♛':'♠'}</span><strong>${E(a.title)}</strong><small>${E(a.subtitle||'홍보 이미지 예시')}</small></div>`).join('')}</div>`;
+   return `<div class="ad-card"><div class="ad-mark">✧</div><strong>당신의 무대를<br>소개하세요</strong><span>공연·행사 홍보 배너 공간<br>300 × 250 권장</span></div>`;
+ }
  function openDetail(type,id){
   const row=(type==='article'?state.data.articles:state.data.marketplace).find(x=>x.id===id);
   if(!row)return;
