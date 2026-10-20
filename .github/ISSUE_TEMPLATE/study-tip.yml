@@ -1,7 +1,6 @@
 name: "마술사 스터디 팁·교육자료 제안"
 description: "공연실무·연기·유머·관객심리·임기응변·수익 사례와 교육자료를 제안합니다. 승인 전 공개 강좌로 게시하지 않습니다."
 title: "[스터디 제안] "
-labels: ["study-proposal"]
 body:
   - type: markdown
     attributes:
