@@ -9,6 +9,8 @@
 
 - `GET /api/home`, `GET /api/promotions`: 전화번호나 동의 시각을 SELECT하지 않습니다.
 - `GET /api/admin/promotion-contact?id=<uuid>`: ADMIN_API_TOKEN 인증 후, 필요할 때 별도 조회.
+- `POST /api/admin/promotion-contact/delete`: 담당자가 요청하거나 더 이상 필요하지 않은 비공개 전화번호를 인증 관리자가 조기 삭제.
+- 승인 검토에서 반려·삭제된 공연의 연락처는 즉시 비움.
 - `GET /api/admin/promotions`: 관리자 행사 관리 목록(전화번호 자체는 포함하지 않음).
 - `POST /api/submissions/promotion`: 공개 텍스트에 전화번호가 있으면 거부; 별도 연락처에만 입력. 연락처 제공은 선택사항이며 별도 동의 확인 필수.
 - 개인정보처리방침 운영 승인 표시 환경변수 `PRIVACY_POLICY_READY=true`가 없으면 **전화번호 포함 제출 거부**. 전화번호 없는 접수는 기존 Turnstile 활성화 후 가능.
