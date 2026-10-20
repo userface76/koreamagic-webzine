@@ -4,12 +4,23 @@
   const data=window.KMS_STUDY;if(!data)return;
   const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const state={category:'all',query:'',selected:null};
+  const resourceCache={};
   const entries=data.lessons.slice().sort((a,b)=>b.updated_at.localeCompare(a.updated_at));
   const featured=entries[Math.floor(Date.now()/604800000)%entries.length];
   const key='kms-study-checklist-v1';
   const done=(()=>{try{return JSON.parse(localStorage.getItem(key)||'{}')||{}}catch{return {}}})();
   const save=()=>{try{localStorage.setItem(key,JSON.stringify(done))}catch{}};
   const notice=()=>'<p class="study-notice">'+E(data.notice)+'<br>새 자료는 편집진 검토 후 추가합니다. 회원 글쓰기·영상 업로드·댓글은 아직 미개통입니다.</p>';
+  const videoId=v=>{try{const u=new URL(v);return u.protocol==='https:'&&u.hostname==='www.youtube.com'&&u.pathname==='/watch'&&/^[a-zA-Z0-9_-]{11}$/.test(u.searchParams.get('v')||'')?u.searchParams.get('v'):null;}catch{return null;}};
+  const mediaPanel=x=>{
+    const media=resourceCache[x.id];
+    if(!media)return '<section class="study-panel study-resources"><h3>교육영상 · 추가 학습자료</h3><p>학회 편집진이 승인한 자료가 있으면 이곳에서 연결됩니다. 현재는 자료를 확인하는 중이거나 등록 전입니다.</p></section>';
+    return '<section class="study-panel study-resources"><h3>교육영상 · 추가 학습자료 ('+media.length+')</h3>'+
+    (media.length?media.map(m=>m.kind==='youtube'&&videoId(m.url)?
+      '<article class="study-resource"><span>▶ YouTube 교육 영상</span><h4>'+E(m.title)+'</h4><a href="'+E(m.url)+'" target="_blank" rel="noopener noreferrer">유튜브에서 보기 ↗</a> <button type="button" data-study-video="'+E(videoId(m.url))+'">웹진 안에서 영상 재생</button><div class="study-video-slot"></div><small>재생 버튼을 누르면 유튜브로 연결되며 서비스 정책이 적용됩니다.</small></article>':
+      '<article class="study-resource"><span>▤ 웹진 학습자료</span><h4>'+E(m.title)+'</h4><p class="study-resource-content">'+E(m.content)+'</p></article>').join(''):'<p>이 스터디에 등록된 영상·부가자료가 없습니다. 편집실에서 유튜브 링크나 교육 노트를 추가할 수 있습니다.</p>')+
+    '</section>';
+  };
   const lesson=x=>'<article class="study-lesson-card"><div class="study-card-meta"><span>'+E(x.section)+' · '+E(x.level)+'</span><time datetime="'+E(x.updated_at)+'">갱신 '+E(x.updated_at)+'</time></div><h3>'+E(x.title)+'</h3><p>'+E(x.summary)+'</p><div class="study-card-footer"><span>'+E(x.tag)+'</span><button type="button" data-study-open="'+E(x.id)+'">학습하기 ↗</button></div></article>';
   function detail(x){
     return '<div class="study-lesson-detail"><button type="button" class="study-back" data-study-back>← 목록으로</button>'+
@@ -17,6 +28,7 @@
       '<div class="study-detail-grid"><section class="study-panel"><h3>학습 포인트</h3><ol>'+x.steps.map(a=>'<li>'+E(a)+'</li>').join('')+'</ol></section>'+
       '<section class="study-panel study-action"><h3>이번 주 실습</h3><p>'+E(x.practice)+'</p><h3>동료 피드백 질문</h3><p>'+E(x.reflection)+'</p>'+
       '<button type="button" data-study-copy="'+E(x.id)+'">피드백 질문지 복사</button><p class="study-copy-status" role="status"></p></section></div>'+
+      mediaPanel(x)+
       '<p class="study-caption">최근 갱신 '+E(x.updated_at)+' · 학회 심사·인증을 받은 강좌가 아닌 초기 교육자료입니다.</p></div>'+notice();
   }
   function library(){
@@ -35,6 +47,16 @@
       '<section id="study-checklist"><div class="section-heading"><div><div class="eyebrow">VENUE READINESS</div><h2>공연 컨디션 체크리스트</h2></div><button type="button" class="study-clear" data-study-clear>점검 초기화</button></div>'+
       '<p class="study-caption">점검 상태는 이 기기에만 저장됩니다. 공연장 안전 규정과 기술 담당자의 점검이 우선입니다.</p>'+
       '<div class="study-checklist-grid">'+groups+'</div><p class="study-progress" role="status" id="studyProgress">'+Object.values(done).filter(Boolean).length+' / '+data.checklist.reduce((n,g)=>n+g.items.length,0)+'개 점검</p></section>'+
+      '<section id="study-friendly" class="study-feedback-block"><div class="section-heading"><div><div class="eyebrow">GENTLE IDEAS · VOLUNTARY FEEDBACK</div><h2>지적 대신, 공연을 살리는 아이디어</h2></div></div>
+ <p class="study-caption">피드백은 공연자가 원할 때만 진행합니다. 점수·순위·공개 평가가 없으며, 입력 내용은 서버에 보내거나 저장하지 않습니다. 완성된 제안은 복사해서 직접 전달하세요.</p>
+ <form id="studyGentleForm" class="study-panel study-gentle-form">
+ <label>원하는 피드백 방향<select name="tone"><option value="idea">새로운 아이디어 하나</option><option value="light">좋은 장면을 더 살리기</option><option value="experiment">선택 가능한 무대 실험</option></select></label>
+ <label>인상 깊었던 장점<input name="strength" maxlength="150" required placeholder="예: 관객과 눈을 맞추는 순간이 좋았어요"/></label>
+ <label>조심스럽게 제안하고 싶은 방향<input name="suggestion" maxlength="180" required placeholder="예: 음악이 조금 늦게 시작되면 반전이 더 살아날지도요"/></label>
+ <label>부담 없는 작은 실험<input name="experiment" maxlength="180" placeholder="예: 다음 리허설에서 두 가지 타이밍 비교"/></label>
+ <button type="submit">부드러운 피드백 문장 만들기</button>
+ <div class="study-generated" id="studyGentleResult" role="status" aria-live="polite"></div>
+ </form></section>'+
       '<section id="study-cases"><div class="section-heading"><div><div class="eyebrow">PEER FEEDBACK · PRACTICE CASES</div><h2>공연 사례와 동료 피드백</h2></div></div>'+
       '<p class="study-caption">실제 제보가 아닌 가상 학습 사례입니다. 회원 사례 제출과 댓글·영상 공유는 개인정보·창작물 이용 동의 체계 마련 후 제공합니다.</p>'+
       '<div class="study-case-grid">'+data.cases.map(c=>'<article class="study-case"><span>가상 사례 · '+E(c.field)+'</span><h3>'+E(c.title)+'</h3><p><b>문제</b> '+E(c.problem)+'</p><p><b>피드백 예시</b> '+E(c.suggestion)+'</p></article>').join('')+'</div></section>';
@@ -49,8 +71,10 @@
     if(location.hash!=='#study')return;
     const c=e.target.closest('[data-study-cat]'),o=e.target.closest('[data-study-open]'),b=e.target.closest('[data-study-back]');
     const clear=e.target.closest('[data-study-clear]'),jump=e.target.closest('[data-study-jump]'),copy=e.target.closest('[data-study-copy]');
+    const v=e.target.closest('[data-study-video]');if(v){const id=v.dataset.studyVideo;if(!/^[a-zA-Z0-9_-]{11}$/.test(id))return;const slot=v.parentElement.querySelector('.study-video-slot');if(slot){slot.innerHTML='<iframe title="학습 영상" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="https://www.youtube-nocookie.com/embed/'+id+'"></iframe>';v.disabled=true;}return;}
+    const gc=e.target.closest('[data-study-copy-gentle]');if(gc){const p=document.getElementById('studyGentleResult');try{await navigator.clipboard.writeText(p?.dataset.copyText||'');gc.textContent='복사 완료';}catch{gc.textContent='복사할 수 없습니다';}return;}
     if(c){state.category=c.dataset.studyCat;state.query='';state.selected=null;redraw(false);document.getElementById('study-learning')?.scrollIntoView({block:'start'});}
-    else if(o){state.selected=o.dataset.studyOpen;redraw(true);}
+    else if(o){state.selected=o.dataset.studyOpen;redraw(true);try{const resp=await fetch('/api/study-resources?lesson_id='+encodeURIComponent(state.selected),{cache:'no-store'});const result=resp.ok?await resp.json():{items:[]};resourceCache[state.selected]=result.items||[];redraw(false);}catch{resourceCache[state.selected]=[];redraw(false);}}
     else if(b){state.selected=null;redraw(true);}
     else if(clear){for(const k of Object.keys(done))delete done[k];save();redraw(false);}
     else if(jump){document.getElementById(jump.dataset.studyJump)?.scrollIntoView({block:'start'});}
@@ -68,7 +92,18 @@
     if(p)p.textContent=Object.values(done).filter(Boolean).length+' / '+data.checklist.reduce((n,g)=>n+g.items.length,0)+'개 점검';
   });
   document.addEventListener('submit',e=>{
-    if(location.hash!=='#study'||e.target.id!=='studySearch')return;
+    if(location.hash!=='#study')return;
+    if(e.target.id==='studyGentleForm'){
+      e.preventDefault();const form=e.target, fd=new FormData(form);
+      const strength=String(fd.get('strength')||'').trim().slice(0,150);
+      const suggestion=String(fd.get('suggestion')||'').trim().slice(0,180);
+      const experiment=String(fd.get('experiment')||'').trim().slice(0,180);
+      const tone=String(fd.get('tone')||'idea');
+      const lead=tone==='light'?'이 장점이 특히 인상적이었어요.':tone==='experiment'?'다음에 작은 실험 하나 해보셔도 재미있을 것 같아요.':'제 개인적인 아이디어 하나만 나눠도 될까요?';
+      const msg=lead+'\n좋았던 장면: '+strength+'\n혹시 이런 방향도 어울릴까요? '+suggestion+(experiment?'\n원하시면 이런 방식으로 한번 시험해 볼 수 있겠네요: '+experiment:'')+'\n물론 작품 방향은 공연자님이 가장 잘 아시니 편하게 참고만 해주세요.';
+      const el=document.getElementById('studyGentleResult');if(el){el.innerHTML='<p>'+E(msg).replaceAll('\n','<br>')+'</p><button type="button" data-study-copy-gentle>제안문 복사</button>';el.dataset.copyText=msg;}return;
+    }
+    if(e.target.id!=='studySearch')return;
     e.preventDefault();state.query=e.target.querySelector('[name=q]')?.value.trim()||'';redraw(false);
   });
   window.KMS_STUDY_UI=api;
