@@ -1,0 +1,64 @@
+name: "마술사 스터디 팁·교육자료 제안"
+description: "공연실무·연기·유머·관객심리·임기응변·수익 사례와 교육자료를 제안합니다. 승인 전 공개 강좌로 게시하지 않습니다."
+title: "[스터디 제안] "
+labels: ["study-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 새 스터디 자료 제안
+        개인정보, 공연장 내부 문서, 타인의 비공개 마술 원리, 허락받지 않은 영상이나 원고를 올리지 마세요.
+        제안은 바로 학회 웹진에 게재되지 않으며, 검토 및 승인 후 반영합니다.
+  - type: dropdown
+    id: category
+    attributes:
+      label: 학습 분야
+      options:
+        - 연기자 마인드
+        - 개그·유머
+        - 관객 심리
+        - 서커스 기초·신체 표현
+        - 임기응변
+        - 조명·음향·공연 컨디션
+        - 수익 설계
+        - 동료 피드백
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: 문제와 핵심 학습 내용
+      description: 어떤 문제를 해결하며 무엇을 배우게 되나요?
+      placeholder: 관찰한 공연 상황을 개인 식별 정보 없이 요약해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 검증 가능한 팁·실습 단계
+      description: 초보자도 이해할 수 있도록 안전한 단계와 조건을 설명해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: exercise
+    attributes:
+      label: 연습 과제와 피드백 질문
+      description: 실습 과제 1개와 동료에게 받고 싶은 피드백 질문 1개를 제안해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: 출처·저작권·안전 참고사항
+      placeholder: 본인 창작 여부, 공개 자료 링크, 전문가 지도 필요성, 사용 권한 등
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: 필수 확인
+      options:
+        - label: 권한 없는 타인의 영상·마술 비밀·저작물을 포함하지 않았습니다.
+          required: true
+        - label: 이 제안은 검토 대기용이며 학회 공식 교육자료가 아닙니다.
+          required: true
