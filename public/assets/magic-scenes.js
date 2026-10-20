@@ -50,6 +50,8 @@
   };
   if (motion.addEventListener) motion.addEventListener('change', onMotionChange);
   else if (motion.addListener) motion.addListener(onMotionChange);
+  const app = document.querySelector('#app');
+  if (app) new MutationObserver(update).observe(app, { childList: true });
   window.addEventListener('hashchange', update);
   document.addEventListener('DOMContentLoaded', update);
 })();
