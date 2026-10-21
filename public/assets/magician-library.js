@@ -17,12 +17,12 @@
  const safeUrl=x=>{try{const u=new URL(x);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}};
  function sourceCards(p){
    const expanded=Array.isArray(p.coaching_lens)&&p.coaching_lens.length>0;
-   const status=p.profile_status==='artist_authored'?'본인 소개':expanded?'상세 프로필':'한글 색인·검토 중';
+   const status=p.profile_status==='artist_authored'?'본인 소개':p.profile_status==='user_submitted'?'제공 자료 기반':expanded?'상세 프로필':'한글 색인·검토 중';
    const sources=Array.isArray(p.evidence)?p.evidence:[];
    const tags=Array.isArray(p.specialties)?p.specialties:[];
    return '<article class="magician-profile"><div class="magician-profile-heading"><strong>'+E(p.name_ko)+'</strong><span class="magician-status">'+status+'</span></div>'+
      '<p class="magician-name-en">'+E(p.display_name)+'</p><p class="magician-profile-years">'+(p.years==='미확인'?'':E(p.years)+' · ')+(tags.length?tags.map(t=>E(db.tags[t]||t)).join(' · '):'전문 분야 검토 중')+'</p>'+
-     '<p>'+E(p.summary)+'</p>'+(expanded?'<h4>공연 학습 관점 <small>웹진 편집부 제안</small></h4><ul>'+p.coaching_lens.map(t=>'<li>'+E(t)+'</li>').join('')+'</ul>':p.profile_status==='artist_authored'?'<p class="magician-status-detail">본인이 제공한 활동 소개입니다. 자격증이나 의료·심리치료 전문면허를 의미하지 않습니다.</p>':'<p class="magician-status-detail">인물명은 색인에 등재되었으며 상세 약력·한글 표기는 추가 확인 중입니다.</p>')+
+     '<p>'+E(p.summary)+'</p>'+(expanded?'<h4>공연 학습 관점 <small>웹진 편집부 제안</small></h4><ul>'+p.coaching_lens.map(t=>'<li>'+E(t)+'</li>').join('')+'</ul>':p.profile_status==='artist_authored'?'<p class="magician-status-detail">본인이 제공한 활동 소개입니다. 자격증이나 의료·심리치료 전문면허를 의미하지 않습니다.</p>':p.profile_status==='user_submitted'?'<p class="magician-status-detail">제공된 프로필을 참고한 초안입니다. 소속·학력·경력은 외부 검증 전이며 영문명은 임시 로마자 표기입니다.</p>':'<p class="magician-status-detail">인물명은 색인에 등재되었으며 상세 약력·한글 표기는 추가 확인 중입니다.</p>')+
      '<div class="magician-profile-links">'+sources.map(x=>safeUrl(x.url)?'<a target="_blank" rel="noopener noreferrer" href="'+E(safeUrl(x.url))+'">'+E(x.title)+' ↗</a>':'').join('')+'</div></article>';
  }
  function library(){

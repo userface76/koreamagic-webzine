@@ -749,6 +749,28 @@
       "name_ko_status": "한글 음역 초안·검토 중"
     },
     {
+      "id": "hwang-hwi",
+      "display_name": "Hwang Hwi",
+      "name_ko": "황휘",
+      "initial": "H",
+      "years": "활동 이력 미확인",
+      "specialties": [
+        "stage"
+      ],
+      "summary": "제공된 프로필 자료에 '황 휘 교수'로 표기된 마술사입니다. 자료 2페이지 오른쪽에 무대 공연 사진이 수록되어 있습니다. 소속 기관과 세부 경력은 추가 확인이 필요합니다.",
+      "evidence": [
+        {
+          "title": "황휘·최정한 프로필 자료 — 제공된 발표자료 2페이지(자료 정리본)",
+          "url": "https://github.com/userface76/koreamagic-webzine/blob/main/docs/Hwang-Hwi-Profile.md"
+        }
+      ],
+      "coaching_lens": [],
+      "profile_status": "user_submitted",
+      "name_ko_status": "첨부 프로필 자료에 '황 휘 교수'로 표기",
+      "english_name_status": "Hwang Hwi는 로마자 임시 표기",
+      "source_detail": "사용자 제공 PPTX의 2페이지 우측 '황 휘 교수' 표기 및 무대 공연 사진"
+    },
+    {
       "id": "j-b-bobo",
       "display_name": "J.B. Bobo",
       "name_ko": "J.B. 보보",

@@ -144,3 +144,5 @@ node --check public/assets/app.js
 - 기본 방문 테마는 **고급 학술 매거진**이며 밝은 화이트 스튜디오 선택지도 추가했습니다.
 - 마술사 A–Z는 영어 위키백과 인명 목록에서 이름을 확인하고 한국어 음역을 병기. 별도 검토 전 인물 정보와 상세 연구자료를 구분합니다.
 - 본인 제공 영문 소개: [Joseph Choi](docs/Joseph-Choi-English-Profile.md) — 활동 소개이며 의료 자격을 주장하지 않습니다.
+
+- 황휘(Hwang Hwi) 마술사를 사용자가 제공한 프로필 PPTX 2페이지를 출처로 A–Z에 추가했습니다. 직함·영문명은 검증 상태를 표시하며 [개별 프로필](docs/Hwang-Hwi-Profile.md)을 확인할 수 있습니다.
