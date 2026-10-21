@@ -3,4 +3,19 @@ test('expanded bilingual A–Z index is unique, attributable and provisional ent
 test('editorial defaults, bright site-wide design is selectable',()=>{const js=read('public/assets/design-themes.js'),html=read('public/index.html'),css=read('public/assets/site-themes.css');assert.match(js,/let choice='editorial'/);assert.match(js,/['\"]bright['\"]/);assert.match(html,/value="bright"/);assert.match(css,/data-site-theme="bright"/);for(const selector of ['.hero-grid','.article-grid','.market-grid','.nav','.footer','.archive-tabs'])assert.ok(css.includes('data-site-theme="bright"] '+selector));assert.doesNotThrow(()=>new Function(js));});
 test('incomplete biographies are shown as provisional and excluded from named coaching advice',()=>{const js=read('public/assets/magician-library.js');assert.match(js,/한글 색인·검토 중/);assert.match(js,/coaching_lens\?\.length/);assert.doesNotThrow(()=>new Function(js));});
 
-test('submitted Hwang Hwi profile is sourced and does not invent academic or performance claims',()=>{const d=JSON.parse(read('public/assets/magicians-az.json'));const p=d.profiles.find(x=>x.id==='hwang-hwi');assert.ok(p);assert.equal(p.name_ko,'황휘');assert.equal(p.display_name,'Hwang Hwi');assert.equal(p.initial,'H');assert.equal(p.profile_status,'user_submitted');assert.deepEqual(p.coaching_lens,[]);assert.ok(p.evidence[0].url.endsWith('docs/Hwang-Hwi-Profile.md'));const bio=read('docs/Hwang-Hwi-Profile.md');assert.match(bio,/황 휘 교수/);assert.match(bio,/PPTX 2페이지/);assert.match(bio,/확인 전/);});
+test('submitted Hwang Hwi profile is sourced and does not invent academic or performance claims',()=>{const d=JSON.parse(read('public/assets/magicians-az.json'));const p=d.profiles.find(x=>x.id==='hwang-hwi');assert.ok(p);assert.equal(p.name_ko,'황휘');assert.equal(p.display_name,'Hwang Hwi');assert.equal(p.initial,'H');assert.equal(p.profile_status,'user_submitted');assert.deepEqual(p.coaching_lens,[]);assert.ok(p.evidence[0].url.endsWith('docs/Hwang-Hwi-Profile.md'));const bio=read('docs/Hwang-Hwi-Profile.md');assert.match(bio,/황 휘 교수/);assert.match(bio,/2021년 작성 프로필/);assert.match(bio,/마술삼남매/);assert.match(bio,/한국마술학회 회장/);assert.match(bio,/확인 전/);});
+
+test('historical Hwang Hwi details cite year and exclude published personal contact data',()=>{
+ const d=JSON.parse(read('public/assets/magicians-az.json'));
+ const p=d.profiles.find(x=>x.id==='hwang-hwi');
+ assert.equal(p.profile_as_of,'2021년 제공된 이력서 기준 — 현재 직위는 확인 필요');
+ assert.ok(p.education.length>=3);
+ assert.ok(p.historical_positions.some(x=>x.includes('한국마술학회 회장')));
+ assert.ok(p.selected_works.length>=5);
+ assert.deepEqual(p.coaching_lens,[]);
+ const md=read('docs/Hwang-Hwi-Profile.md');
+ assert.ok(md.includes('2021년'));
+ assert.ok(md.includes('English Profile'));
+ assert.doesNotMatch(md,/hhui1@|010-8732|031-442/);
+ assert.doesNotMatch(JSON.stringify(p),/hhui1@|010-8732|031-442/);
+});
