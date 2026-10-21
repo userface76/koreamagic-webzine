@@ -23,11 +23,22 @@
    return '<article class="magician-profile"><div class="magician-profile-heading"><strong>'+E(p.name_ko)+'</strong><span class="magician-status">'+status+'</span></div>'+
      '<p class="magician-name-en">'+E(p.display_name)+'</p><p class="magician-profile-years">'+(p.years==='미확인'?'':E(p.years)+' · ')+(tags.length?tags.map(t=>E(db.tags[t]||t)).join(' · '):'전문 분야 검토 중')+'</p>'+
      '<p>'+E(p.summary)+'</p>'+(p.profile_status==='user_submitted'&&Array.isArray(p.selected_works)?'<div class="magician-history-note"><strong>자료 기준: '+E(p.profile_as_of||'제공 자료')+'</strong><p>주요 공연·연출 이력</p><ul>'+p.selected_works.slice(0,3).map(x=>'<li>'+E(x)+'</li>').join('')+'</ul></div>':'')+(expanded?'<h4>공연 학습 관점 <small>웹진 편집부 제안</small></h4><ul>'+p.coaching_lens.map(t=>'<li>'+E(t)+'</li>').join('')+'</ul>':p.profile_status==='artist_authored'?'<p class="magician-status-detail">본인이 제공한 활동 소개입니다. 자격증이나 의료·심리치료 전문면허를 의미하지 않습니다.</p>':p.profile_status==='user_submitted'?'<p class="magician-status-detail">제공된 2021년 프로필에 적힌 학력·공연·직책을 요약했습니다. 현재 소속·직위는 검증 전이며 영문명은 임시 로마자 표기입니다.</p>':'<p class="magician-status-detail">인물명은 색인에 등재되었으며 상세 약력·한글 표기는 추가 확인 중입니다.</p>')+
-     '<div class="magician-profile-links">'+sources.map(x=>safeUrl(x.url)?'<a target="_blank" rel="noopener noreferrer" href="'+E(safeUrl(x.url))+'">'+E(x.title)+' ↗</a>':'').join('')+'</div></article>';
+     structuredProfile(p)+'<div class="magician-profile-links">'+sources.map(x=>safeUrl(x.url)?'<a target="_blank" rel="noopener noreferrer" href="'+E(safeUrl(x.url))+'">'+E(x.title)+' ↗</a>':'').join('')+'</div></article>';
+ }
+ function structuredProfile(p){
+   if(!p.source_year || !Array.isArray(p.education))return '';
+   const group=(title,items)=>!Array.isArray(items)||!items.length?'':'<section class="magician-details-section"><h5>'+E(title)+'</h5><ul>'+items.map(t=>'<li>'+E(t)+'</li>').join('')+'</ul></section>';
+   const works=Array.isArray(p.selected_performances)&&p.selected_performances.length?
+      '<section class="magician-details-section"><h5>공연·무대 활동</h5><ul>'+p.selected_performances.map(x=>'<li><b>'+E(x.year)+'</b> · '+E(x.title)+' — '+E(x.role)+'</li>').join('')+'</ul></section>':'';
+   return '<details class="magician-details"><summary>학력·공연·방송 이력 자세히 보기 (2021년 자료 기준)</summary>'+
+       '<p class="magician-history-note">이 정보는 '+E(p.source_year)+'년에 작성된 제공 프로필을 기반으로 합니다. 당시 직책을 현재 직책으로 표시하지 않습니다.</p>'+
+       group('전공·사사',p.education)+group('당시 직책·활동',p.roles_2021)+
+       works+group('축제·교육 프로젝트',p.selected_projects)+group('방송 및 언론',p.selected_media)+
+       '</details>';
  }
  function library(){
    if(!db)return '<p class="study-caption">A–Z 지식 자료를 불러오는 중입니다…</p>';
-   const list=db.profiles.filter(x=>(letter==='ALL'||x.initial===letter)&&(!query||[x.display_name,x.name_ko,x.summary,...x.specialties].join(' ').toLowerCase().includes(query.toLowerCase())));
+   const list=db.profiles.filter(x=>(letter==='ALL'||x.initial===letter)&&(!query||[x.display_name,x.name_ko,x.summary,...x.specialties,...(x.fields_of_work||[]),...(x.selected_performances||[]).map(z=>z.title)].join(' ').toLowerCase().includes(query.toLowerCase())));
    return '<div class="magician-library-intro"><h3>출처 확인된 마술사 '+db.profiles.length+'명</h3><p>'+E(db.notice)+'</p></div><div class="magician-letters">'+['ALL',...ABC].map(x=>'<button data-magician-letter="'+x+'" aria-pressed="'+String(letter===x)+'" class="'+(letter===x?'selected':'')+'">'+(x==='ALL'?'전체':x)+'</button>').join('')+'</div><form id="magicianAZSearch" class="magician-search"><label for="magicianAZQuery">마술사 이름·분야 검색</label><input id="magicianAZQuery" name="q" value="'+E(query)+'" placeholder="예: 후디니, Shin Lim, 카드"/><button type="submit">찾기</button></form><div class="magician-profiles">'+(list.length?list.map(sourceCards).join(''):'<p class="study-caption">이 글자에는 아직 검증된 인물 정보가 등록되지 않았습니다. A~Z 자료를 단계적으로 확장합니다.</p>')+'</div>';
  }
  function related(genre,challenge){

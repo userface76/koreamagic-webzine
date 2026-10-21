@@ -19,3 +19,23 @@ test('historical Hwang Hwi details cite year and exclude published personal cont
  assert.doesNotMatch(md,/hhui1@|010-8732|031-442/);
  assert.doesNotMatch(JSON.stringify(p),/hhui1@|010-8732|031-442/);
 });
+
+test('2021 supplied Hwang Hwi PDF is fully represented with dated claims and no private contacts',()=>{
+ const db=JSON.parse(read('public/assets/magicians-az.json'));
+ const p=db.profiles.find(x=>x.id==='hwang-hwi');
+ assert.ok(p);
+ assert.equal(p.source_year,2021);
+ assert.ok(p.education.some(x=>x.includes('한국예술종합학교')));
+ assert.ok(p.roles_2021.some(x=>x.includes('한국마술학회 회장')));
+ assert.ok(p.selected_performances.some(x=>x.title==='모자속의 나비'));
+ assert.ok(p.selected_media.some(x=>x.startsWith('KBS')));
+ assert.ok(p.selected_projects.some(x=>x.includes('철 이야기 꽃 피우기')));
+ assert.equal(p.profile_status,'user_submitted');
+ assert.equal(p.coaching_lens.length,0);
+ const published=JSON.stringify(p)+read('docs/Hwang-Hwi-Profile.md');
+ assert.doesNotMatch(published,/hhui1@|010-8732-4523|031-442-3702/);
+ const ui=read('public/assets/magician-library.js');
+ assert.match(ui,/magician-details/);
+ assert.match(ui,/structuredProfile\(p\)/);
+ assert.doesNotThrow(()=>new Function(ui));
+});

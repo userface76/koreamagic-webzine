@@ -214,3 +214,14 @@ html[data-site-theme="bright"] .study-promo-home{background:linear-gradient(100d
 .magician-profile-links a{font-size:11px;color:var(--purple);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:750px){.magician-profiles{grid-template-columns:1fr}}
 @media(max-width:420px){.magician-search{flex-wrap:wrap}.magician-search label{width:100%}}
+
+/* Source-dated full magician profiles and accessible expansion panels. */
+.magician-details{border:1px solid var(--line);border-radius:11px;margin:15px 0;background:var(--paper)}
+.magician-details>summary{cursor:pointer;padding:13px 15px;font-size:12px;font-weight:800;color:var(--purple);line-height:1.7}
+.magician-details[open]>summary{border-bottom:1px solid var(--line)}
+.magician-history-note{background:var(--rose);border-radius:8px;font-size:11px!important;padding:10px 12px;margin:13px;color:var(--ink)!important}
+.magician-details-section{padding:6px 16px}
+.magician-details-section h5{font-size:13px;margin:12px 0 8px;color:var(--ink)}
+.magician-details-section ul{padding-left:17px;margin:6px 0 11px}
+.magician-details-section li{font-size:12px;line-height:1.75;margin:5px 0;color:var(--ink)}
+.magician-details-section b{color:var(--purple)}

@@ -146,3 +146,5 @@ node --check public/assets/app.js
 - 본인 제공 영문 소개: [Joseph Choi](docs/Joseph-Choi-English-Profile.md) — 활동 소개이며 의료 자격을 주장하지 않습니다.
 
 - 황휘(Hwang Hwi) 마술사를 사용자가 제공한 프로필 PPTX 2페이지를 출처로 A–Z에 추가했습니다. 직함·영문명은 검증 상태를 표시하며 [개별 프로필](docs/Hwang-Hwi-Profile.md)을 확인할 수 있습니다.
+
+- 2021년 황휘 마술사 상세 프로필 PDF(3페이지)를 기준으로 학력, 당시 직책, 공연·축제·방송 이력을 업데이트했습니다. 활동 정보는 자료의 **작성 시점(2021년)**을 함께 표시하며, 연락처는 공개하지 않습니다.
