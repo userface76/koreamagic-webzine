@@ -50,7 +50,7 @@
       <div class="section-heading activity-heading"><div><div class="eyebrow">SOCIETY IN PICTURES</div><h2 id="activity-home-title">학회 활동 갤러리</h2><p>연구·공연·교육·교류의 순간을 사진으로 기록하는 공간</p></div>
       <button type="button" class="more" data-view="activities">활동 사진 전체보기 ↗</button></div>
       ${grid('all')}
-      <p class="activity-disclaimer">현재 표시된 삽화는 갤러리 구성 예시입니다. 실제 활동 사진은 사용 동의와 게시 승인을 받은 뒤 등록됩니다.</p>
+      <p class="activity-disclaimer">‘예시 이미지’ 표시가 있는 카드는 구성용 삽화입니다. 실제 사진은 사용자가 제공한 자료이며, 촬영자·상세 행사 정보는 확인 후 보완합니다.</p>
     </section>`;
   }
   function page() {

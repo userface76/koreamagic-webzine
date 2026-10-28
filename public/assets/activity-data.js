@@ -1,8 +1,45 @@
-/* 사진 공개는 행사 정보·촬영자 출처·인물 동의·저작권·관리자 승인을 확인한 뒤 진행하세요.
-   실제 사진은 approved 배열에 {id,title,category,description,date,location,image_url,alt,credit,approved:true,rights_confirmed:true} 형식으로 추가합니다.
-   approved 항목이 4개 이상이면 예시 삽화는 자동으로 사라집니다. 현재 approved는 비어 있습니다. */
+/* 사용자가 웹진 공개 등록을 요청하며 직접 제공한 사진 3장을 approved에 등록했습니다.
+   게시된 사진의 촬영자·초상권 등 세부 정보는 추후 보완할 수 있습니다.
+   추가 사진은 출처·인물 동의·저작권·관리자 승인을 확인한 뒤 등록하세요.
+   approved 항목이 4개 이상이면 예시 삽화는 자동으로 사라집니다. */
 window.KMS_ACTIVITY_DATA = {
-  "approved": [],
+  "approved": [
+    {
+      "id": "provided-stage-props-01",
+      "title": "무대 마술 공연 — 소품 연출",
+      "category": "performance",
+      "description": "푸른 조명 무대에서 원통형 소품을 활용한 마술 공연 장면입니다. 공연명·공연일·장소는 확인 후 보완합니다.",
+      "image_url": "./assets/activity/stage-performance-props.jpg",
+      "alt": "푸른 조명의 무대에서 붉은 재킷을 입은 공연자가 원통형 소품 두 개를 앞에 두고 마술을 선보이는 모습",
+      "credit": "사용자 제공 · 촬영자 미기재",
+      "approved": true,
+      "rights_confirmed": true
+    },
+    {
+      "id": "provided-stage-routine-02",
+      "title": "무대 마술 공연 — 퍼포먼스",
+      "category": "performance",
+      "description": "분홍색과 보라색 무대 영상 앞에서 소품을 이용한 마술 공연 장면입니다. 공연명·공연일·장소는 확인 후 보완합니다.",
+      "image_url": "./assets/activity/stage-performance-routine.jpg",
+      "alt": "밝은 분홍색 무대 배경 앞에서 연미복 차림의 공연자가 소품을 선보이는 모습",
+      "credit": "사용자 제공 · 촬영자 미기재",
+      "approved": true,
+      "rights_confirmed": true
+    },
+    {
+      "id": "provided-ifho-2026-09-18",
+      "title": "국제미래유산기구 창립총회 현장",
+      "category": "community",
+      "description": "2026년 9월 18일 제주호텔 더엠에서 열린 국제미래유산기구(IFHO) 창립총회 기념사진입니다. 행사명·일시·장소는 사진 속 현수막에 표기된 정보를 기준으로 기록했습니다.",
+      "date": "2026-09-18",
+      "location": "제주호텔 더엠",
+      "image_url": "./assets/activity/ifho-founding-2026-09-18.jpg",
+      "alt": "국제미래유산기구 창립총회 현수막 아래 네 사람이 함께 서 있는 기념사진",
+      "credit": "사용자 제공 · 촬영자 미기재",
+      "approved": true,
+      "rights_confirmed": true
+    }
+  ],
   "examples": [
     {
       "id": "sample-research",

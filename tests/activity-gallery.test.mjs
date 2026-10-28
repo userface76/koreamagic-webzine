@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import vm from 'node:vm';
 
 const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8');
@@ -38,4 +38,21 @@ test('gallery is linked from the homepage and scripts load before the applicatio
   assert.ok(index.indexOf('activity-gallery.js') < index.indexOf('app.js'));
   assert.match(app, /KMS_ACTIVITY_GALLERY\?\.home/);
   assert.match(app, /activities,submit/);
+});
+
+test('all three user-provided photos have local image assets and required approval fields', () => {
+  const context={window:{}};
+  vm.runInNewContext(dataCode,context);
+  const items=context.window.KMS_ACTIVITY_DATA.approved;
+  assert.equal(items.length,3);
+  for(const item of items){
+    assert.equal(item.approved,true);
+    assert.equal(item.rights_confirmed,true);
+    assert.match(item.image_url,/^\.\/assets\/activity\/[a-z0-9-]+\.jpg$/);
+    const imagePath=new URL('../public/'+item.image_url.replace(/^\.\//,''),import.meta.url);
+    assert.ok(statSync(imagePath).size>10000);
+    const bytes=readFileSync(imagePath);
+    assert.equal(bytes[0],0xff);
+    assert.equal(bytes[1],0xd8);
+  }
 });
