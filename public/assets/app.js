@@ -59,6 +59,7 @@
   detail.addEventListener('click',e=>{if(e.target===detail||e.target.id==='closeModal')detail.remove()});
  }
  function study(){return window.KMS_STUDY_UI?.render()||'<div class="empty">스터디 교육자료를 준비하고 있습니다.</div>';}
+ function activities(){return window.KMS_ACTIVITY_GALLERY?.page()||empty('활동 사진 게시판을 준비하고 있습니다.');}
  function home(){const d=state.data;const promo=d.promotions||[];const articles=d.articles||[];const market=d.marketplace||[];return `
   <section class="hero-grid"><div class="hero-main"><div class="hero-content"><div class="hero-label">THE FUTURE OF MAGIC · VOL. 01</div><h1 class="hero-title">마술의 오늘을 기록하고<br><em>내일의 무대</em>를 열다</h1><p class="hero-desc">학회 연구에서 공연 현장, 마술인의 이야기까지.<br>마술의 모든 순간을 하나의 웹진에서 만납니다.</p><button class="hero-button" data-view="articles">웹진 소식 살펴보기 &nbsp; ↗</button></div><div class="magic-scene-controls" role="group" aria-label="마술 테마 배경 설정"><button type="button" data-magic-change aria-label="다른 마술 배경 보기">✦ 다른 배경</button><button type="button" data-magic-pause aria-pressed="false">⏸ 자동 변경 멈춤</button><span class="magic-scene-counter" data-magic-counter aria-live="off">01 / 04 · 별빛 마술극장</span></div></div>
   <aside class="hero-side"><div class="sidebar-top"><span class="eyebrow">ON STAGE</span><span>공연 · 행사</span></div><h3>지금 주목할<br>마술 무대</h3>${promo.slice(0,2).map(p=>`<div class="side-show"><div class="date">${fmtDate(p.event_date)}</div><strong>${E(p.title)}${isDemo(p.id)?' · 샘플':''}</strong><small>⌖ ${E(p.venue||'장소 미정')}</small></div>`).join('')||'<p>현재 등록된 공연소식이 없습니다.</p>'}<button class="side-link" data-view="promotions">공연 소식 전체보기 &nbsp; ↗</button></aside></section>
@@ -78,6 +79,7 @@
       <article class="coming-card copyright-space"><span class="coming-label">창작 기록 · 개발 예정</span><div class="coming-icon" aria-hidden="true">♛</div><h3>창작권리센터</h3><p>창작물 원본 기록과 이용허락 관리 기능을 구상합니다. 법적 등록을 대신하지 않습니다.</p></article>
     </div>
   </section>
+  ${window.KMS_ACTIVITY_GALLERY?.home()||''}
   <div class="bannerstrip"><div><div class="eyebrow">OPEN FOR EVERY MAGICIAN</div><h3>마술의 무대가 연결되는 곳, 한국마술학회 웹진</h3><p>공연 소식 제보 · 장터 판매글 등록 · 학회 홍보 문의</p></div><button data-view="submit">지금 소식 등록하기 ↗</button></div>`;}
  function articles(){const a=(state.data?.articles||[]).filter(x=>(!state.category||x.category===state.category)&&(!state.query||(`${x.title} ${x.summary}`).includes(state.query)));
  return `${titlebar('NEWS & RESEARCH','학회·연구 소식','마술 연구, 전문가 칼럼, 교육과 학회 소식을 모았습니다.')}<div class="tool-row"><div class="chip-row">${[['','전체'],['research','연구 동향'],['news','학회 소식'],['column','칼럼'],['education','교육']].map(([v,t])=>`<button class="filter-chip ${state.category===v?'active':''}" data-filter="${v}">${t}</button>`).join('')}</div><input aria-label="기사 검색" id="search" placeholder="기사 검색" value="${E(state.query)}"/></div><div class="list-articles">${a.map(articleCard).join('')||empty('검색 결과가 없습니다.')}</div>`;}
@@ -131,7 +133,7 @@
  function chooseView(view,formType=null){state.view=view;state.query='';state.category='';state.detail=null;if(view!=='issues')state.issue=null;if(formType)state.formType=formType;history.replaceState(null,'','#'+view);render();window.scrollTo({top:0,behavior:'instant'});}
  function render(){
    document.querySelectorAll('.nav-link').forEach(x=>x.classList.toggle('selected',x.dataset.view===state.view));
-   app.innerHTML=({home,articles,promotions,marketplace,issues,study,submit,admin,privacy}[state.view]||home)();
+   app.innerHTML=({home,articles,promotions,marketplace,issues,study,activities,submit,admin,privacy}[state.view]||home)();
    updateExampleNotice();
    if(state.view==='submit')installTurnstile();
  }
@@ -142,7 +144,7 @@
    catch(e){state.data=blendWithExamples({});state.preview=true;state.error='데이터 API에 연결하지 못해 미리보기 샘플을 표시하고 있습니다. D1 마이그레이션 및 배포 설정을 확인하세요.';}
   }
   updateExampleNotice();
-  state.view=['home','articles','promotions','marketplace','issues','study','submit','admin','privacy'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
+  state.view=['home','articles','promotions','marketplace','issues','study','activities','submit','admin','privacy'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
   render();
  }
  async function updateData(){if(state.preview)return;const r=await fetch('/api/home');if(r.ok){state.data=blendWithExamples(await r.json());updateExampleNotice();}}
