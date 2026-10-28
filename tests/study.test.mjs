@@ -30,7 +30,7 @@ test('navigation includes study view without changing underlying data API',()=>{
  assert.match(page,/assets\/study-data\.js/);
  assert.match(page,/assets\/study-ui\.js/);
  assert.match(app,/function study\(\)/);
- assert.match(app,/issues,study,submit,admin/);
+ assert.match(app,/issues,study,activities,submit,admin/);
  assert.match(ui,/data-study-cat/);
  assert.match(ui,/data-study-check/);
  assert.match(ui,/data-study-copy/);
