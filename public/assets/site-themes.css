@@ -225,3 +225,13 @@ html[data-site-theme="bright"] .study-promo-home{background:linear-gradient(100d
 .magician-details-section ul{padding-left:17px;margin:6px 0 11px}
 .magician-details-section li{font-size:12px;line-height:1.75;margin:5px 0;color:var(--ink)}
 .magician-details-section b{color:var(--purple)}
+
+/* 편집부 등록 공연 상세 정보 */
+.promo-card:has(.promo-detail) .promo-cover{height:168px;width:118px;min-width:118px;object-fit:cover;border-radius:9px;border:1px solid var(--line)}
+.promo-detail{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:9px;margin:12px 0 0}
+.promo-detail summary{cursor:pointer;padding:11px;font-size:12px;font-weight:800;line-height:1.5;color:var(--purple)}
+.promo-detail[open] summary{border-bottom:1px solid var(--line)}
+.promo-detail-body{padding:12px}.promo-detail-body p,.promo-detail-body li{font-size:12px!important;line-height:1.7;color:var(--ink)!important}.promo-detail-body ul{margin:5px 0 11px;padding-left:20px}.promo-detail-body .promo-source{font-size:11px!important;color:var(--muted)!important}
+@media(max-width:1200px){.promo-card:has(.promo-detail){flex-wrap:wrap}}
+@media(max-width:750px){.promo-card:has(.promo-detail){flex-wrap:nowrap}}
+@media(max-width:470px){.promo-card:has(.promo-detail){flex-wrap:wrap}.promo-card:has(.promo-detail) .promo-cover{width:100%;height:210px;max-width:165px}}

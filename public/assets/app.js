@@ -12,9 +12,23 @@
  const isDemo=id=>String(id||'').startsWith('demo-')||String(id||'').startsWith('sample')||/^[mp]\d+$/.test(String(id||''));
  const safeYoutube=v=>{try{const u=new URL(v);return u.protocol==='https:'&&u.hostname==='www.youtube.com'&&u.pathname==='/watch'&&/^[a-zA-Z0-9_-]{11}$/.test(u.searchParams.get('v')||'')?u.toString():''}catch{return ''}};
  const safeLink=v=>{try{let u=new URL(v);return u.protocol==='https:'?u.toString():'';}catch{return '';}};
+ const safePromoImage=v=>{const a=String(v||'');return /^\.\/assets\/[a-zA-Z0-9/_-]+\.(?:svg|webp|png|jpe?g|avif)$/.test(a)?a:safeLink(a);};
  const articleCard=(a,i=0)=>`<article class="article-card" tabindex="0" role="button" data-detail-article="${E(a.id)}"><div class="art-visual art-${E(a.category||'news')}">${icons[a.category]||'✦'}${isDemo(a.id)?'<span class="sample-ribbon">샘플</span>':''}</div><div class="art-pad"><div class="label-pill">${E(artLabels[a.category]||'MAGIC NEWS')} ${isDemo(a.id)?'· 샘플':''}</div><h3>${E(a.title)}</h3><p>${E(a.summary)}</p><div class="smallmeta">${E(a.publisher||'편집부')} · ${fmtDate(a.published_at)}</div></div></article>`;
  const marketCard=(m,i=0)=>`<article class="market-card"><div class="market-art market-${E(m.category||'props')}">${icons[m.category]||'✦'}${isDemo(m.id)?'<span class="sample-ribbon">샘플</span>':''}</div><div class="market-pad"><div class="market-meta">${E(catLabels[m.category]||'마술장터')} · ${m.item_condition==='new'?'새상품':'중고'}${isDemo(m.id)?' · 거래 불가':''}</div><h3>${E(m.title)}</h3><div class="price">${fmtPrice(m.price_krw)}</div><div class="market-footer"><span>⌖ ${E(m.region||'지역 미표기')} · ${E(m.seller_alias||'판매자')}</span>${!isDemo(m.id)&&safeLink(m.contact_url)?`<a href="${E(safeLink(m.contact_url))}" target="_blank" rel="noopener noreferrer">판매자 문의 ↗</a>`:`<button data-detail-market="${E(m.id)}">${isDemo(m.id)?'샘플 보기':'자세히 보기'} ↗</button>`}</div></div></article>`;
- const promoCard=p=>`<article class="promo-card">${safeLink(p.image_url)?`<img class="promo-cover" loading="lazy" src="${E(safeLink(p.image_url))}" alt="${E(p.title)} 행사 이미지"/>`:''}<div class="promo-date">${E((p.event_date||'').slice(5,7)||'—')}<b>${E((p.event_date||'').slice(8,10)||'--')}</b></div><div><div class="label-pill">${E(p.type==='education'?'MAGIC CLASS':p.type==='venue'?'VENUE':'SHOW & EVENT')} ${isDemo(p.id)?'· 샘플 행사':''}</div><h3>${E(p.title)}</h3><p>${E(p.description)}</p><small class="smallmeta">⌖ ${E(p.venue||'장소 미정')} · ${fmtDate(p.event_date)}</small>${safeLink(p.link_url)?`<p><a href="${E(safeLink(p.link_url))}" target="_blank" rel="noopener noreferrer">공연 안내 ↗</a></p>`:''}${safeYoutube(p.video_url)?`<p><a href="${E(safeYoutube(p.video_url))}" target="_blank" rel="noopener noreferrer">▶ 공연 영상 보기 (YouTube) ↗</a></p>`:''}</div></article>`;
+ const promoExtra=p=>{
+   const d=p.detail;
+   if(!d)return '';
+   const li=arr=>'<ul>'+arr.map(x=>'<li>'+E(x)+'</li>').join('')+'</ul>';
+   return '<details class="promo-detail"><summary>공연 회차·출연진·티켓 안내 보기</summary><div class="promo-detail-body">'+
+     '<strong>공연 일정</strong>'+li(d.dates||[])+
+     '<p><b>공연시간</b> '+E(d.duration||'')+' · <b>관람등급</b> '+E(d.audience||'')+'</p>'+
+     '<p><b>출연진</b> '+E((d.cast||[]).join(' · '))+'</p>'+
+     '<strong>티켓가격</strong>'+li(d.prices||[])+
+     '<p class="promo-source">자료: '+E(d.source||'')+'</p>'+
+     (safeLink(p.source_url)?'<p><a href="'+E(safeLink(p.source_url))+'" target="_blank" rel="noopener noreferrer">공연 정보 확인 ↗</a></p>':'')+
+     '<p class="promo-source">'+E(d.image_notice||'')+'</p></div></details>';
+ };
+ const promoCard=p=>`<article class="promo-card">${safePromoImage(p.image_url)?`<img class="promo-cover" loading="lazy" src="${E(safePromoImage(p.image_url))}" alt="${E(p.title)} 행사 이미지"/>`:''}<div class="promo-date">${E((p.event_date||'').slice(5,7)||'—')}<b>${E((p.event_date||'').slice(8,10)||'--')}</b></div><div><div class="label-pill">${E(p.type==='education'?'MAGIC CLASS':p.type==='venue'?'VENUE':'SHOW & EVENT')} ${isDemo(p.id)?'· 샘플 행사':''}</div><h3>${E(p.title)}</h3><p>${E(p.description)}</p><small class="smallmeta">⌖ ${E(p.venue||'장소 미정')} · ${fmtDate(p.event_date)}</small>${safeLink(p.link_url)?`<p><a href="${E(safeLink(p.link_url))}" target="_blank" rel="noopener noreferrer">공연 안내 ↗</a></p>`:''}${safeYoutube(p.video_url)?`<p><a href="${E(safeYoutube(p.video_url))}" target="_blank" rel="noopener noreferrer">▶ 공연 영상 보기 (YouTube) ↗</a></p>`:''}${promoExtra(p)}</div></article>`;
  const titlebar=(tag,title,desc)=>`<div class="page-hero"><div class="eyebrow">${tag}</div><h1>${title}</h1><p>${desc}</p></div>`;
  const empty=msg=>`<div class="empty">✳<br>${msg}</div>`;
 
@@ -23,7 +37,9 @@
    const real=data||{},sample=window.KMS_DEMO||{},combined={...real};
    let count=0;
    for(const [key,target] of Object.entries(demoTargets)){
-     const existing=Array.isArray(real[key])?real[key]:[];
+     const entries=Array.isArray(real[key])?real[key]:[];
+     const curated=key==='promotions'&&Array.isArray(window.KMS_CURATED_PROMOTIONS)?window.KMS_CURATED_PROMOTIONS:[];
+     const existing=key==='promotions'?entries.concat(curated.filter(c=>!entries.some(x=>String(x.id)===String(c.id)||(x.title===c.title&&x.event_date===c.event_date)))):entries;
      const mock=Array.isArray(sample[key])?sample[key]:[];
      const needed=key==='banners'?(existing.length?0:mock.length):Math.max(0,target-existing.length);
      const ids=new Set(existing.map(x=>String(x.id)));
