@@ -148,7 +148,8 @@
  </form></section>${adminPromoPanel()}${q?`<div class="section-heading"><h2>승인 대기 / 검토함</h2><span class="compact">명백한 스팸은 비공개 처리 · 나머지는 사람 검토</span></div>${[['article','기사',q.articles],['promotion','공연·행사',q.promotions],['marketplace','마술장터',q.marketplace]].map(([type,label,items])=>`<h3>${label} (${items.length})</h3>${items.map(item=>`<div class="queue-item"><div><strong>${E(item.title)}</strong><p>${E(item.description||'')}</p><small>${E(item.status)} · ${fmtDate(item.created_at)}</small></div><div class="queue-actions"><button data-review="${E(type)}|${E(item.id)}|published">승인·게시</button><button data-review="${E(type)}|${E(item.id)}|quarantined">검토함</button><button data-review="${E(type)}|${E(item.id)}|rejected">반려</button></div></div>`).join('')||'<p class="compact">대기 중인 게시물이 없습니다.</p>'}`).join('')}`:''}`;}
  function chooseView(view,formType=null){state.view=view;state.query='';state.category='';state.detail=null;if(view!=='issues')state.issue=null;if(formType)state.formType=formType;history.replaceState(null,'','#'+view);render();window.scrollTo({top:0,behavior:'instant'});}
  function render(){
-   document.querySelectorAll('.nav-link').forEach(x=>x.classList.toggle('selected',x.dataset.view===state.view));
+   document.querySelectorAll('.nav-link').forEach(x=>{const active=x.dataset.view===state.view;x.classList.toggle('selected',active);if(active)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current');});
+   window.KMS_MOBILE_NAV?.setActive(state.view);
    app.innerHTML=({home,articles,promotions,marketplace,issues,study,activities,submit,admin,privacy}[state.view]||home)();
    updateExampleNotice();
    if(state.view==='submit')installTurnstile();
