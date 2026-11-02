@@ -268,3 +268,8 @@ html[data-site-theme="bright"] .study-promo-home{background:linear-gradient(100d
 .promotion-entry-bottom{border-top:1px solid var(--line);margin-top:25px;padding-top:12px}
 .promotion-entry-example{font-size:11px!important;color:var(--muted)!important}
 @media(max-width:760px){.promotion-entry-layout{grid-template-columns:1fr}.promotion-entry-poster{max-width:370px;margin:auto}.promotion-entry{padding:16px}.promotion-board-row{padding:12px;gap:12px}.promotion-board-thumb,.promotion-board-placeholder{flex-basis:70px;width:70px;height:80px}.promotion-board-info h2{font-size:14px}.promotion-board-read{display:none}}
+
+.promotion-board-thumb{padding:0;border:0;cursor:zoom-in}
+.promotion-entry-poster button{padding:0;background:none;color:var(--purple);border:0;width:100%;cursor:zoom-in}
+.promotion-entry-poster button span{display:block;text-align:center;font-size:12px;font-weight:800;margin-top:10px}
+.promotion-board-thumb:focus-visible,.promotion-entry-poster button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}

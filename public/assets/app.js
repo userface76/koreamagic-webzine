@@ -110,7 +110,7 @@
    const tag=isDemo(p.id)?'샘플 공연':ended?'지난 공연·기록':'공연·행사';
    const link='#promotions/'+encodeURIComponent(p.id);
    return '<article class="promotion-board-row">'+
-     (poster?'<a class="promotion-board-thumb" href="'+E(link)+'" aria-label="'+E(p.title)+' 상세 보기"><img src="'+E(poster)+'" alt="" loading="lazy"/></a>':'<span class="promotion-board-placeholder">✦</span>')+
+     (poster?'<button type="button" class="promotion-board-thumb" data-zoom-image="'+E(poster)+'" data-zoom-title="'+E(p.title)+'" aria-label="'+E(p.title)+' 포스터 크게 보기"><img src="'+E(poster)+'" alt="" loading="lazy"/></button>':'<span class="promotion-board-placeholder">✦</span>')+
      '<div class="promotion-board-info"><span class="promotion-board-type">'+E(tag)+'</span>'+
      '<h2><a href="'+E(link)+'">'+E(p.title)+'</a></h2>'+
      '<small>'+fmtDate(p.event_date)+(p.end_date&&p.end_date!==p.event_date?' ~ '+fmtDate(p.end_date):'')+' · '+E(p.venue||'장소 확인 중')+'</small></div>'+
@@ -125,7 +125,7 @@
      '<div class="promotion-entry-header"><div class="eyebrow">MAGIC PERFORMANCE · 공연 상세</div>'+
      '<h1>'+E(p.title)+'</h1><p>'+fmtDate(p.event_date)+(p.end_date&&p.end_date!==p.event_date?' ~ '+fmtDate(p.end_date):'')+
      ' · '+E(p.venue||'장소 확인 중')+end+'</p></div>'+
-     '<div class="promotion-entry-layout">'+(poster?'<div class="promotion-entry-poster"><img src="'+E(poster)+'" alt="'+E(p.title)+' 공연 포스터"/></div>':'')+
+     '<div class="promotion-entry-layout">'+(poster?'<div class="promotion-entry-poster"><button type="button" data-zoom-image="'+E(poster)+'" data-zoom-title="'+E(p.title)+'" aria-label="'+E(p.title)+' 포스터 크게 보기"><img src="'+E(poster)+'" alt="'+E(p.title)+' 공연 포스터"/><span>포스터를 누르면 확대됩니다 ⤢</span></button></div>':'')+
      '<div class="promotion-entry-body"><h2>공연 소개</h2><p>'+E(p.description||'')+'</p>'+
      promoExtra(p)+
      (safeLink(p.link_url)?'<p><a target="_blank" rel="noopener noreferrer" href="'+E(safeLink(p.link_url))+'">공연 안내 바로가기 ↗</a></p>':'')+

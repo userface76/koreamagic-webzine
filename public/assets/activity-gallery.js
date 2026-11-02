@@ -33,11 +33,11 @@
   const card = item => {
     const src=imageUrl(item.image_url);
     const subtitle=[dateLabel(item.date),item.location].filter(Boolean).join(' · ');
-    return '<a class="activity-card" href="'+esc(itemLink(item))+'" aria-label="'+esc(item.title)+' 상세 페이지 열기">'+
-      '<span class="activity-card-image"><img src="'+esc(src)+'" alt="'+esc(item.alt||item.title)+'" loading="lazy" decoding="async"/>'+
+    return '<article class="activity-card">'+
+      '<button type="button" class="activity-card-image" data-zoom-image="'+esc(src)+'" data-zoom-title="'+esc(item.title)+'" aria-label="'+esc(item.title)+' 사진 크게 보기"><img src="'+esc(src)+'" alt="'+esc(item.alt||item.title)+'" loading="lazy" decoding="async"/>'+
       (item.sample?'<span class="activity-sample">예시 이미지 · 실제 활동 사진 아님</span>':'')+'</span>'+
       '<span class="activity-card-body"><span class="activity-category">'+esc(categoryLabel(item.category))+'</span>'+
-      '<strong>'+esc(item.title)+'</strong><small>'+esc(subtitle||(item.sample?'사진 등록 준비 중':'학회 활동 기록'))+'</small></span></a>';
+      '<strong><a href="'+esc(itemLink(item))+'">'+esc(item.title)+'</a></strong><small>'+esc(subtitle||(item.sample?'사진 등록 준비 중':'학회 활동 기록'))+'</small></span></article>';
   };
   const list = category => {
     const items=available().filter(x=>category==='all'||x.category===category);
@@ -47,7 +47,7 @@
       const info=[dateLabel(item.date),item.location].filter(Boolean).join(' · ')||'날짜·장소 확인 중';
       return '<article class="activity-board-row" role="listitem">'+
         '<span class="activity-row-number">'+(items.length-index)+'</span>'+
-        '<a class="activity-row-thumbnail" href="'+esc(itemLink(item))+'" aria-label="'+esc(item.title)+' 상세 보기"><img src="'+esc(imageUrl(item.image_url))+'" alt="" loading="lazy"/></a>'+
+        '<button class="activity-row-thumbnail" type="button" data-zoom-image="'+esc(imageUrl(item.image_url))+'" data-zoom-title="'+esc(item.title)+'" aria-label="'+esc(item.title)+' 사진 크게 보기"><img src="'+esc(imageUrl(item.image_url))+'" alt="" loading="lazy"/></button>'+
         '<div class="activity-row-main"><small>'+esc(categoryLabel(item.category))+' · '+esc(label)+'</small>'+
         '<h3><a href="'+esc(itemLink(item))+'">'+esc(item.title)+'</a></h3>'+
         '<p>'+esc(item.description||'')+'</p></div>'+
@@ -71,8 +71,7 @@
       '<div class="activity-entry-header"><span class="activity-category">'+esc(categoryLabel(item.category))+'</span>'+
       '<h1>'+esc(item.title)+'</h1>'+
       '<p>'+esc([dateLabel(item.date),item.location].filter(Boolean).join(' · ')||'행사 일시·장소 확인 중')+'</p></div>'+
-      '<div class="activity-entry-photo"><img src="'+esc(src)+'" alt="'+esc(item.alt||item.title)+'" decoding="async"/>'+
-      '<button type="button" data-activity-open="'+esc(item.id)+'" class="activity-photo-enlarge">사진 크게 보기 ⤢</button></div>'+
+      '<div class="activity-entry-photo"><button type="button" class="activity-entry-zoom" data-zoom-image="'+esc(src)+'" data-zoom-title="'+esc(item.title)+'" aria-label="'+esc(item.title)+' 사진 크게 보기"><img src="'+esc(src)+'" alt="'+esc(item.alt||item.title)+'" decoding="async"/><span>사진을 누르면 확대됩니다 ⤢</span></button></div>'+
       '<div class="activity-entry-body"><h2>활동 내용</h2><p>'+esc(item.description||'활동 설명을 준비 중입니다.')+'</p>'+
       (item.sample?'<p class="activity-disclaimer">이 이미지는 화면 구성용 예시이며 실제 학회 활동 사진이 아닙니다.</p>':'')+
       '<p class="activity-entry-credit">사진 자료: '+esc(item.credit||'출처 확인 중')+'</p></div>'+
