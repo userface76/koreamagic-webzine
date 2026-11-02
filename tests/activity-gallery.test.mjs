@@ -12,14 +12,15 @@ const makeContext = approved => {
   return context.window.KMS_ACTIVITY_GALLERY;
 };
 
-test('home includes accessible activity entry point and clearly labelled sample images', () => {
+test('home includes accessible activity entry point and shows approved images before samples', () => {
   const context = {window: {}, document: {addEventListener() {}}, URL};
   vm.runInNewContext(dataCode, context);
   vm.runInNewContext(moduleCode, context);
   const home=context.window.KMS_ACTIVITY_GALLERY.home();
   assert.match(home, /학회 활동 갤러리/);
   assert.match(home, /data-view="activities"/);
-  assert.match(home, /예시 이미지 · 실제 활동 사진 아님/);
+  assert.match(home, /복화술사 신석근 소개/);
+  assert.doesNotMatch(home, /예시 이미지 · 실제 활동 사진 아님/);
   assert.match(context.window.KMS_ACTIVITY_GALLERY.page(), /학회 활동 사진 게시판/);
 });
 
