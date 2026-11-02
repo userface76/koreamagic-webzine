@@ -1,7 +1,7 @@
-/* 사용자가 웹진 공개 등록을 요청하며 직접 제공한 사진 3장을 approved에 등록했습니다.
-   게시된 사진의 촬영자·초상권 등 세부 정보는 추후 보완할 수 있습니다.
-   추가 사진은 출처·인물 동의·저작권·관리자 승인을 확인한 뒤 등록하세요.
-   approved 항목이 4개 이상이면 예시 삽화는 자동으로 사라집니다. */
+/* 사용자 제공 사진과 교육자 소개 이미지. 행사 개최·소속·수상 문구 등은 이미지에 기재된 내용이며 외부 검증 전입니다.
+   파일은 제공받은 이미지의 내용·구도를 유지하여 웹에서 사용 가능한 이미지 형식으로 최적화했습니다.
+   사용자가 웹진 공개를 요청한 항목을 등록했고, 촬영자·초상권 등 추가 정보는 확인 후 보완합니다.
+   승인된 실제 등록 자료가 4개 이상이면 구성용 샘플은 자동으로 사라집니다. */
 window.KMS_ACTIVITY_DATA = {
   "approved": [
     {
@@ -38,6 +38,32 @@ window.KMS_ACTIVITY_DATA = {
       "credit": "사용자 제공 · 촬영자 미기재",
       "approved": true,
       "rights_confirmed": true
+    },
+    {
+      "id": "education-ventriloquism-shin-seokgeun-2026",
+      "title": "복화술사 신석근 소개 — 쉽게 배우는 복화술",
+      "category": "education",
+      "description": "복화술사 신석근을 소개하는 교육용 이미지입니다. 이미지에는 '국내 최초 복화술 교습서', '쉽게 배우는 복화술 저자'라는 소개 문구가 실려 있습니다. 출판·교육 활동과 관련한 소개자료이며 실제 워크숍 개최 일시·장소는 확인되지 않았습니다.",
+      "image_url": "./assets/activity/education-shin-seokgeun-2026.webp",
+      "alt": "푸른 무대 배경에서 복화술사와 인형이 함께 있는 사진, 복화술사 신석근 소개 및 쉽게 배우는 복화술 저자 문구",
+      "credit": "사용자 제공 · 디자인 및 촬영 출처 미기재",
+      "approved": true,
+      "rights_confirmed": true,
+      "asset_kind": "speaker-poster",
+      "event_confirmed": false
+    },
+    {
+      "id": "education-magic-recipe-educator-2026",
+      "title": "마법의 레시피 — 마술 교육자 소개",
+      "category": "education",
+      "description": "마술 교육자 소개 이미지입니다. 포스터에는 '2005 제1회 전국학생마술경연대전 1위', '현 매직퍼플마술학원 원장'이라는 문구가 포함되어 있습니다. 이미지에 표기된 경력은 별도로 검증하지 않았으며 실제 교육·워크숍 개최 이력이나 일시는 확인되지 않았습니다.",
+      "image_url": "./assets/activity/education-magic-recipe-2026.webp",
+      "alt": "버건디색 배경의 마법의 레시피 마술 교육자 홍보 이미지. 흰 셔츠를 입은 인물과 금색 제목, 경력 소개문",
+      "credit": "사용자 제공 · 디자인 및 촬영 출처 미기재",
+      "approved": true,
+      "rights_confirmed": true,
+      "asset_kind": "speaker-poster",
+      "event_confirmed": false
     }
   ],
   "examples": [

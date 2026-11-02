@@ -44,15 +44,16 @@ test('all three user-provided photos have local image assets and required approv
   const context={window:{}};
   vm.runInNewContext(dataCode,context);
   const items=context.window.KMS_ACTIVITY_DATA.approved;
-  assert.equal(items.length,3);
+  assert.equal(items.length,5);
   for(const item of items){
     assert.equal(item.approved,true);
     assert.equal(item.rights_confirmed,true);
-    assert.match(item.image_url,/^\.\/assets\/activity\/[a-z0-9-]+\.jpg$/);
+    assert.match(item.image_url,/^\.\/assets\/activity\/[a-z0-9-]+\.(?:jpg|webp)$/);
     const imagePath=new URL('../public/'+item.image_url.replace(/^\.\//,''),import.meta.url);
     assert.ok(statSync(imagePath).size>10000);
     const bytes=readFileSync(imagePath);
-    assert.equal(bytes[0],0xff);
-    assert.equal(bytes[1],0xd8);
+    if(item.image_url.endsWith('.jpg')){assert.equal(bytes[0],0xff);assert.equal(bytes[1],0xd8);}else{assert.equal(bytes.subarray(0,4).toString(),'RIFF');assert.equal(bytes.subarray(8,12).toString(),'WEBP');}
   }
 });
+
+test('education gallery includes two user-provided speaker portraits, not invented seminar attendance',()=>{const ctx={window:{},document:{addEventListener(){}},URL};vm.runInNewContext(dataCode,ctx);vm.runInNewContext(moduleCode,ctx);const page=ctx.window.KMS_ACTIVITY_GALLERY.page();assert.match(page,/education-ventriloquism-shin-seokgeun-2026/);assert.match(page,/education-magic-recipe-educator-2026/);const posters=ctx.window.KMS_ACTIVITY_DATA.approved.filter(x=>x.category==='education');assert.equal(posters.length,2);for(const p of posters){assert.equal(p.event_confirmed,false);assert.match(p.image_url,/\.webp$/);assert.equal(p.approved,true);}});
