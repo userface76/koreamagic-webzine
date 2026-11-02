@@ -99,7 +99,49 @@
   <div class="bannerstrip"><div><div class="eyebrow">OPEN FOR EVERY MAGICIAN</div><h3>마술의 무대가 연결되는 곳, 한국마술학회 웹진</h3><p>공연 소식 제보 · 장터 판매글 등록 · 학회 홍보 문의</p></div><button data-view="submit">지금 소식 등록하기 ↗</button></div>`;}
  function articles(){const a=(state.data?.articles||[]).filter(x=>(!state.category||x.category===state.category)&&(!state.query||(`${x.title} ${x.summary}`).includes(state.query)));
  return `${titlebar('NEWS & RESEARCH','학회·연구 소식','마술 연구, 전문가 칼럼, 교육과 학회 소식을 모았습니다.')}<div class="tool-row"><div class="chip-row">${[['','전체'],['research','연구 동향'],['news','학회 소식'],['column','칼럼'],['education','교육']].map(([v,t])=>`<button class="filter-chip ${state.category===v?'active':''}" data-filter="${v}">${t}</button>`).join('')}</div><input aria-label="기사 검색" id="search" placeholder="기사 검색" value="${E(state.query)}"/></div><div class="list-articles">${a.map(articleCard).join('')||empty('검색 결과가 없습니다.')}</div>`;}
- function promotions(){const p=state.data?.promotions||[];return `${titlebar('MAGIC PERFORMANCE','공연 · 공연장 · 행사','국내 마술공연과 공연장 및 교육 프로그램을 공유합니다.')}<div class="tool-row"><strong>공연 · 행사 ${p.length}건</strong><button class="primary-btn" data-view="submit" data-form="promotion">+ 공연 정보 제보</button></div><div class="list-promotions">${p.map(promoCard).join('')||empty('등록된 공연소식이 없습니다.')}</div><div class="form-note">승인된 출처의 공연정보는 일정·장소 등 필수 정보를 확인한 후 자동 발행될 수 있습니다. 출처·일정이 미확인된 소식은 편집진 검토함으로 전달됩니다.</div>`;}
+ const promotionDetailId=()=>{
+    const hash=String(location.hash||'');
+    if(!hash.startsWith('#promotions/'))return '';
+    try{return decodeURIComponent(hash.slice('#promotions/'.length).split(/[?#]/)[0]);}catch{return '';}
+ };
+ const promotionBoardEntry=p=>{
+   const poster=safePromoImage(p.image_url);
+   const ended=p.event_status==='ended';
+   const tag=isDemo(p.id)?'샘플 공연':ended?'지난 공연·기록':'공연·행사';
+   const link='#promotions/'+encodeURIComponent(p.id);
+   return '<article class="promotion-board-row">'+
+     (poster?'<a class="promotion-board-thumb" href="'+E(link)+'" aria-label="'+E(p.title)+' 상세 보기"><img src="'+E(poster)+'" alt="" loading="lazy"/></a>':'<span class="promotion-board-placeholder">✦</span>')+
+     '<div class="promotion-board-info"><span class="promotion-board-type">'+E(tag)+'</span>'+
+     '<h2><a href="'+E(link)+'">'+E(p.title)+'</a></h2>'+
+     '<small>'+fmtDate(p.event_date)+(p.end_date&&p.end_date!==p.event_date?' ~ '+fmtDate(p.end_date):'')+' · '+E(p.venue||'장소 확인 중')+'</small></div>'+
+     '<a href="'+E(link)+'" class="promotion-board-read" aria-label="'+E(p.title)+' 자세히 보기">자세히 보기 ↗</a></article>';
+ };
+ const promotionEntry=p=>{
+   const back='<a href="#promotions" class="promotion-entry-back">← 공연·행사 목록으로</a>';
+   if(!p)return back+'<div class="empty">해당 공연 게시물을 찾을 수 없습니다.</div>';
+   const poster=safePromoImage(p.image_url);
+   const end=p.event_status==='ended'?' · 행사 종료':'';
+   return '<article class="promotion-entry">'+back+
+     '<div class="promotion-entry-header"><div class="eyebrow">MAGIC PERFORMANCE · 공연 상세</div>'+
+     '<h1>'+E(p.title)+'</h1><p>'+fmtDate(p.event_date)+(p.end_date&&p.end_date!==p.event_date?' ~ '+fmtDate(p.end_date):'')+
+     ' · '+E(p.venue||'장소 확인 중')+end+'</p></div>'+
+     '<div class="promotion-entry-layout">'+(poster?'<div class="promotion-entry-poster"><img src="'+E(poster)+'" alt="'+E(p.title)+' 공연 포스터"/></div>':'')+
+     '<div class="promotion-entry-body"><h2>공연 소개</h2><p>'+E(p.description||'')+'</p>'+
+     promoExtra(p)+
+     (safeLink(p.link_url)?'<p><a target="_blank" rel="noopener noreferrer" href="'+E(safeLink(p.link_url))+'">공연 안내 바로가기 ↗</a></p>':'')+
+     (safeYoutube(p.video_url)?'<p><a target="_blank" rel="noopener noreferrer" href="'+E(safeYoutube(p.video_url))+'">▶ 공연 영상 보기</a></p>':'')+
+     (isDemo(p.id)?'<p class="promotion-entry-example">예시 공연 자료입니다. 실제 공연 안내가 아닙니다.</p>':'')+
+     '</div></div><div class="promotion-entry-bottom">'+back+'</div></article>';
+ };
+ function promotions(){
+   const p=state.data?.promotions||[];
+   const selected=promotionDetailId();
+   if(selected)return promotionEntry(p.find(x=>String(x.id)===selected));
+   return titlebar('MAGIC PERFORMANCE','공연 · 공연장 · 행사','제목을 누르면 해당 공연만 볼 수 있습니다. 포스터와 행사정보를 상세 게시물로 기록합니다.')+
+     '<div class="tool-row"><strong>공연 · 행사 '+p.length+'건</strong><button class="primary-btn" data-view="submit" data-form="promotion">+ 공연 정보 제보</button></div>'+
+     '<div class="promotion-board-list">'+(p.map(promotionBoardEntry).join('')||empty('등록된 공연소식이 없습니다.'))+'</div>'+
+     '<div class="form-note">승인된 출처의 공연정보는 일정·장소 등 필수 정보를 확인한 후 자동 발행될 수 있습니다. 출처·일정이 미확인된 소식은 편집진 검토함으로 전달됩니다.</div>';
+ }
  function marketplace(){const m=(state.data?.marketplace||[]).filter(x=>(!state.category||x.category===state.category)&&(!state.query||(`${x.title} ${x.description}`).includes(state.query)));
  return `${titlebar('MAGIC MARKETPLACE','마술장터','마술 도구와 공연 장비, 소품과 서적을 안전하게 연결하는 마술 전문 장터입니다.')}<div class="tool-row"><div class="chip-row">${[['','전체'],['props','마술도구'],['stage','무대장비'],['costume','의상·소품'],['books','마술 서적'],['other','기타']].map(([v,t])=>`<button class="filter-chip ${state.category===v?'active':''}" data-filter="${v}">${t}</button>`).join('')}</div><input aria-label="장터 검색" id="search" placeholder="장터 상품 검색" value="${E(state.query)}"/></div><div class="tool-row"><span class="compact">표시 상품 ${m.length}개 (샘플 포함) · 관리자 승인제 · 거래대금 중개 없음</span><button class="primary-btn" data-view="submit" data-form="marketplace">+ 판매글 등록</button></div><div class="market-grid">${m.map(marketCard).join('')||empty('조건에 맞는 판매글이 없습니다.')}</div><div class="form-note">장터 운영 안내: 플랫폼은 거래 상대방을 보증하거나 결제를 중개하지 않습니다. 선입금 사기 주의, 구매 전 실물 확인 권장. 샘플 게시물로는 거래할 수 없습니다.</div>`;}
  function issues(){const items=state.data?.issues||[];if(state.archiveTab!=='monthly'&&!state.issue){const hub=window.KMS_ARCHIVE_HUB;return titlebar('MAGIC ARCHIVE','마술 지식 아카이브','월간 웹진 · 마술사 A–Z · 연구 · 공연 · 교육 · 창작')+(hub?.tabs(state.archiveTab)||'')+(hub?.panel(state.archiveTab,{data:state.data,articleCard,promoCard,empty,E})||empty('아카이브를 준비하고 있습니다.'));}if(state.issue){return `${titlebar('MONTHLY DIGEST',E(state.issue.issue.title),isDemo(state.issue.issue.id)?'실제 발행물이 아닌 월간 웹진 구성 예시입니다.':'해당 기간에 발행된 기사들을 모았습니다.')}<div class="tool-row"><button class="outline-btn" data-view="issues">← 목록으로</button><button class="outline-btn" id="printIssue">인쇄 / PDF 저장</button></div><div class="list-articles">${state.issue.items.map(articleCard).join('')||empty('이 호에는 수록 기사가 없습니다.')}</div>`;}
@@ -161,7 +203,7 @@
    catch(e){state.data=blendWithExamples({});state.preview=true;state.error='데이터 API에 연결하지 못해 미리보기 샘플을 표시하고 있습니다. D1 마이그레이션 및 배포 설정을 확인하세요.';}
   }
   updateExampleNotice();
-  state.view=['home','articles','promotions','marketplace','issues','study','activities','submit','admin','privacy'].includes(location.hash.slice(1))?location.hash.slice(1):'home';
+  state.view=['home','articles','promotions','marketplace','issues','study','activities','submit','admin','privacy'].includes(location.hash.slice(1).split('/')[0])?location.hash.slice(1).split('/')[0]:'home';
   render();
  }
  async function updateData(){if(state.preview)return;const r=await fetch('/api/home');if(r.ok){state.data=blendWithExamples(await r.json());updateExampleNotice();}}
@@ -218,5 +260,13 @@ const btn=$('#sendPost');btn.disabled=true;
  });
  async function adminPost(path,data){const res=await fetch(path,{method:'POST',headers:{authorization:'Bearer '+state.adminToken,'content-type':'application/json'},body:JSON.stringify(data)});const body=await res.json();if(!res.ok)throw Error(body.error||'요청 실패');return body;}
  async function refreshQueue(){try{const r=await fetch('/api/admin/queue',{headers:{authorization:'Bearer '+state.adminToken}});const body=await r.json();if(!r.ok)throw Error(body.error||'관리자 인증 실패');state.queue=body;try{const p=await fetch('/api/admin/promotions',{headers:{authorization:'Bearer '+state.adminToken},cache:'no-store'});state.adminPromotions=p.ok?(await p.json()).items:[];}catch{state.adminPromotions=[];}render();}catch(err){state.queue=null;const msg=$('#adminMsg');if(msg)msg.textContent=err.message;}}
+ window.addEventListener('hashchange',()=>{
+   const next=location.hash.slice(1).split('/')[0];
+   state.view=['home','articles','promotions','marketplace','issues','study','activities','submit','admin','privacy'].includes(next)?next:'home';
+   state.detail=null;
+   if(state.view!=='issues')state.issue=null;
+   render();
+   window.scrollTo({top:0,behavior:'instant'});
+ });
  load();
 })();

@@ -29,15 +29,54 @@
   };
   const categoryLabel = value => categories.find(([id])=>id===value)?.[1] || '학회 활동';
   const dateLabel = value => /^\d{4}-\d{2}-\d{2}$/.test(String(value||'')) ? value.replaceAll('-','.') : '';
+  const itemLink = item => '#activities/' + encodeURIComponent(item.id);
   const card = item => {
-    const src = imageUrl(item.image_url);
-    const subtitle = [dateLabel(item.date), item.location].filter(Boolean).join(' · ');
-    return `<button type="button" class="activity-card" data-activity-open="${esc(item.id)}" aria-label="${esc(item.title)} 상세 보기">
-      <span class="activity-card-image"><img src="${esc(src)}" alt="${esc(item.alt||item.title)}" loading="lazy" decoding="async"/>
-      ${item.sample ? '<span class="activity-sample">예시 이미지 · 실제 활동 사진 아님</span>' : ''}</span>
-      <span class="activity-card-body"><span class="activity-category">${esc(categoryLabel(item.category))}</span>
-      <strong>${esc(item.title)}</strong><small>${esc(subtitle || (item.sample ? '사진 등록 준비 중' : '학회 활동 기록'))}</small></span>
-    </button>`;
+    const src=imageUrl(item.image_url);
+    const subtitle=[dateLabel(item.date),item.location].filter(Boolean).join(' · ');
+    return '<a class="activity-card" href="'+esc(itemLink(item))+'" aria-label="'+esc(item.title)+' 상세 페이지 열기">'+
+      '<span class="activity-card-image"><img src="'+esc(src)+'" alt="'+esc(item.alt||item.title)+'" loading="lazy" decoding="async"/>'+
+      (item.sample?'<span class="activity-sample">예시 이미지 · 실제 활동 사진 아님</span>':'')+'</span>'+
+      '<span class="activity-card-body"><span class="activity-category">'+esc(categoryLabel(item.category))+'</span>'+
+      '<strong>'+esc(item.title)+'</strong><small>'+esc(subtitle||(item.sample?'사진 등록 준비 중':'학회 활동 기록'))+'</small></span></a>';
+  };
+  const list = category => {
+    const items=available().filter(x=>category==='all'||x.category===category);
+    if(!items.length)return '<div class="activity-empty">이 분야의 공개 승인된 사진이 아직 없습니다.</div>';
+    return '<div class="activity-board-list" role="list">'+items.map((item,index)=>{
+      const label=item.sample?'예시·자료 준비 중':'사진 기록';
+      const info=[dateLabel(item.date),item.location].filter(Boolean).join(' · ')||'날짜·장소 확인 중';
+      return '<article class="activity-board-row" role="listitem">'+
+        '<span class="activity-row-number">'+(items.length-index)+'</span>'+
+        '<a class="activity-row-thumbnail" href="'+esc(itemLink(item))+'" aria-label="'+esc(item.title)+' 상세 보기"><img src="'+esc(imageUrl(item.image_url))+'" alt="" loading="lazy"/></a>'+
+        '<div class="activity-row-main"><small>'+esc(categoryLabel(item.category))+' · '+esc(label)+'</small>'+
+        '<h3><a href="'+esc(itemLink(item))+'">'+esc(item.title)+'</a></h3>'+
+        '<p>'+esc(item.description||'')+'</p></div>'+
+        '<span class="activity-row-date">'+esc(info)+'</span>'+
+        '<a class="activity-row-arrow" href="'+esc(itemLink(item))+'" aria-label="'+esc(item.title)+' 상세 보기">보기 ↗</a>'+
+        '</article>';
+    }).join('')+'</div>';
+  };
+  const detailId = ()=>{
+    const hash=String(window.location?.hash||'');
+    if(!hash.startsWith('#activities/'))return '';
+    try{return decodeURIComponent(hash.slice('#activities/'.length).split(/[?#]/)[0]);}
+    catch{return '';}
+  };
+  const detailPage = id => {
+    const item=available().find(x=>x.id===id);
+    const back='<a class="activity-board-back" href="#activities">← 학회 활동 게시판 목록으로</a>';
+    if(!item)return '<section class="activity-board">'+back+'<div class="activity-empty">해당 활동 기록을 찾을 수 없습니다. 공개되지 않았거나 삭제된 게시물일 수 있습니다.</div></section>';
+    const src=imageUrl(item.image_url);
+    return '<article class="activity-entry">'+back+
+      '<div class="activity-entry-header"><span class="activity-category">'+esc(categoryLabel(item.category))+'</span>'+
+      '<h1>'+esc(item.title)+'</h1>'+
+      '<p>'+esc([dateLabel(item.date),item.location].filter(Boolean).join(' · ')||'행사 일시·장소 확인 중')+'</p></div>'+
+      '<div class="activity-entry-photo"><img src="'+esc(src)+'" alt="'+esc(item.alt||item.title)+'" decoding="async"/>'+
+      '<button type="button" data-activity-open="'+esc(item.id)+'" class="activity-photo-enlarge">사진 크게 보기 ⤢</button></div>'+
+      '<div class="activity-entry-body"><h2>활동 내용</h2><p>'+esc(item.description||'활동 설명을 준비 중입니다.')+'</p>'+
+      (item.sample?'<p class="activity-disclaimer">이 이미지는 화면 구성용 예시이며 실제 학회 활동 사진이 아닙니다.</p>':'')+
+      '<p class="activity-entry-credit">사진 자료: '+esc(item.credit||'출처 확인 중')+'</p></div>'+
+      '<nav class="activity-entry-bottom" aria-label="게시물 이동">'+back+'</nav></article>';
   };
   const grid = category => {
     const items = available().filter(x => category === 'all' || x.category === category);
@@ -54,15 +93,15 @@
     </section>`;
   }
   function page() {
-    return `<section class="activity-board" aria-labelledby="activity-board-title">
-      <div class="page-hero"><div class="eyebrow">SOCIETY ACTIVITY ARCHIVE</div><h1 id="activity-board-title">학회 활동 사진 게시판</h1>
-      <p>학술 발표, 공연 현장, 교육과 동료 교류를 기록합니다. 승인된 활동 사진과 출처를 차례로 소개합니다.</p></div>
-      <div class="activity-board-toolbar" role="group" aria-label="활동 사진 분야 선택">
-        ${categories.map(([id,label]) => `<button type="button" class="activity-filter ${id===currentCategory?'active':''}" data-activity-filter="${id}" aria-pressed="${id===currentCategory}">${label}</button>`).join('')}
-      </div>
-      <div id="activityGalleryBoard" aria-live="polite">${grid(currentCategory)}</div>
-      <div class="activity-guidance"><strong>학회 활동 사진 등록 안내</strong><p>활동명, 날짜, 사진 설명, 촬영자·출처와 게시 허가를 확인한 자료부터 게시합니다. 인물의 초상권 및 미성년자 보호도 검토합니다. 사진 접수·업로드 기능은 관리자 인증 구축 후 활성화할 예정입니다.</p></div>
-    </section>`;
+    const id=detailId();
+    if(id)return detailPage(id);
+    return '<section class="activity-board" aria-labelledby="activity-board-title">'+
+      '<div class="page-hero"><div class="eyebrow">SOCIETY ACTIVITY ARCHIVE</div><h1 id="activity-board-title">학회 활동 사진 게시판</h1>'+
+      '<p>게시물 제목을 누르면 해당 활동의 사진과 설명만 볼 수 있습니다.</p></div>'+
+      '<div class="activity-board-toolbar" role="group" aria-label="활동 사진 분야 선택">'+
+      categories.map(([cat,label])=>'<button type="button" class="activity-filter '+(cat===currentCategory?'active':'')+'" data-activity-filter="'+cat+'" aria-pressed="'+(cat===currentCategory)+'">'+label+'</button>').join('')+
+      '</div><div id="activityGalleryBoard" aria-live="polite">'+list(currentCategory)+'</div>'+
+      '<div class="activity-guidance"><strong>학회 활동 사진 등록 안내</strong><p>활동명, 날짜, 사진 설명, 촬영자·출처와 게시 허가를 확인한 자료부터 게시합니다. 인물의 초상권 및 미성년자 보호도 검토합니다. 사진 접수·업로드 기능은 관리자 인증 구축 후 활성화할 예정입니다.</p></div></section>';
   }
   function openDetails(id) {
     const item = available().find(x => x.id === id);
@@ -98,7 +137,7 @@
         button.setAttribute('aria-pressed',String(active));
       });
       const board=document.querySelector('#activityGalleryBoard');
-      if(board)board.innerHTML=grid(currentCategory);
+      if(board)board.innerHTML=list(currentCategory);
       return;
     }
     if (event.target.closest('[data-activity-close]')) {

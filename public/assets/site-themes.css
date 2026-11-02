@@ -239,3 +239,32 @@ html[data-site-theme="bright"] .study-promo-home{background:linear-gradient(100d
 /* 사용자 제공 포스터 비율 유지: 지난 공연 안내 사진이 잘리지 않도록 함. */
 .promo-card img.promo-cover[src*="ulsan-world-great-magic-show-2026"]{width:140px;max-width:100%;height:auto;aspect-ratio:140/187;object-fit:contain;flex:none;background:transparent}
 @media(max-width:480px){.promo-card img.promo-cover[src*="ulsan-world-great-magic-show-2026"]{max-width:140px;height:auto}}
+
+
+/* Independent performance board and detail pages: inherit every theme palette. */
+.promotion-board-list{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--paper)}
+.promotion-board-row{display:flex;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding:16px 19px;color:var(--ink)}
+.promotion-board-row:last-child{border-bottom:0}
+.promotion-board-thumb{display:block;flex:0 0 84px;width:84px;height:90px;overflow:hidden;border-radius:7px;background:var(--rose)}
+.promotion-board-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.promotion-board-placeholder{flex:0 0 84px;display:grid;place-items:center;height:90px;color:var(--gold);background:var(--rose);border-radius:7px}
+.promotion-board-info{flex:1;min-width:0}
+.promotion-board-info .promotion-board-type{font-size:11px;font-weight:800;color:var(--gold)}
+.promotion-board-info h2{font-size:17px;line-height:1.5;margin:7px 0}
+.promotion-board-info h2 a:hover{text-decoration:underline;text-underline-offset:4px}
+.promotion-board-info small{font-size:11px;color:var(--muted);line-height:1.6}
+.promotion-board-read{font-size:12px;white-space:nowrap;font-weight:800;color:var(--purple)}
+.promotion-entry{max-width:1020px;margin:0 auto 50px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:28px;color:var(--ink)}
+.promotion-entry-back{display:inline-block;padding:9px 0 14px;color:var(--purple);font-size:12px;font-weight:800}
+.promotion-entry-header{padding:24px 0;border-top:1px solid var(--line)}
+.promotion-entry-header h1{font-size:clamp(24px,3.2vw,38px);line-height:1.35;margin:7px 0 12px}
+.promotion-entry-header p{color:var(--muted);font-size:12px}
+.promotion-entry-layout{display:grid;grid-template-columns:minmax(200px,300px) minmax(0,1fr);gap:30px;align-items:start}
+.promotion-entry-poster img{display:block;width:100%;height:auto;border-radius:9px;border:1px solid var(--line);object-fit:contain}
+.promotion-entry-body{min-width:0}
+.promotion-entry-body h2{font-size:19px;margin:0 0 11px}
+.promotion-entry-body>p{font-size:14px;line-height:2;white-space:pre-line}
+.promotion-entry-body a{color:var(--purple);text-decoration:underline;text-underline-offset:3px}
+.promotion-entry-bottom{border-top:1px solid var(--line);margin-top:25px;padding-top:12px}
+.promotion-entry-example{font-size:11px!important;color:var(--muted)!important}
+@media(max-width:760px){.promotion-entry-layout{grid-template-columns:1fr}.promotion-entry-poster{max-width:370px;margin:auto}.promotion-entry{padding:16px}.promotion-board-row{padding:12px;gap:12px}.promotion-board-thumb,.promotion-board-placeholder{flex-basis:70px;width:70px;height:80px}.promotion-board-info h2{font-size:14px}.promotion-board-read{display:none}}
