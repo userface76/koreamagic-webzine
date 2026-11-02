@@ -235,3 +235,7 @@ html[data-site-theme="bright"] .study-promo-home{background:linear-gradient(100d
 @media(max-width:1200px){.promo-card:has(.promo-detail){flex-wrap:wrap}}
 @media(max-width:750px){.promo-card:has(.promo-detail){flex-wrap:nowrap}}
 @media(max-width:470px){.promo-card:has(.promo-detail){flex-wrap:wrap}.promo-card:has(.promo-detail) .promo-cover{width:100%;height:210px;max-width:165px}}
+
+/* 사용자 제공 포스터 비율 유지: 지난 공연 안내 사진이 잘리지 않도록 함. */
+.promo-card img.promo-cover[src*="ulsan-world-great-magic-show-2026"]{width:140px;max-width:100%;height:auto;aspect-ratio:140/187;object-fit:contain;flex:none;background:transparent}
+@media(max-width:480px){.promo-card img.promo-cover[src*="ulsan-world-great-magic-show-2026"]{max-width:140px;height:auto}}

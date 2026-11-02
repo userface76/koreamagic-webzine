@@ -19,16 +19,16 @@
    const d=p.detail;
    if(!d)return '';
    const li=arr=>'<ul>'+arr.map(x=>'<li>'+E(x)+'</li>').join('')+'</ul>';
-   return '<details class="promo-detail"><summary>공연 회차·출연진·티켓 안내 보기</summary><div class="promo-detail-body">'+
+   return '<details class="promo-detail"><summary>'+(p.event_status==='ended'?'지난 공연 기록 자세히 보기':'공연 회차·출연진·티켓 안내 보기')+'</summary><div class="promo-detail-body">'+
      '<strong>공연 일정</strong>'+li(d.dates||[])+
      '<p><b>공연시간</b> '+E(d.duration||'')+' · <b>관람등급</b> '+E(d.audience||'')+'</p>'+
-     '<p><b>출연진</b> '+E((d.cast||[]).join(' · '))+'</p>'+
-     '<strong>티켓가격</strong>'+li(d.prices||[])+
-     '<p class="promo-source">자료: '+E(d.source||'')+'</p>'+
+     ((d.cast||[]).length?'<p><b>출연진</b> '+E(d.cast.join(' · '))+'</p>':'')+
+     ((d.prices||[]).length?'<strong>티켓가격</strong>'+li(d.prices):'')+
+     (d.organizer?'<p><b>주최·주관</b> '+E(d.organizer)+'</p>':'')+(d.support?'<p><b>후원</b> '+E(d.support)+'</p>':'')+'<p class="promo-source">자료: '+E(d.source||'')+'</p>'+
      (safeLink(p.source_url)?'<p><a href="'+E(safeLink(p.source_url))+'" target="_blank" rel="noopener noreferrer">공연 정보 확인 ↗</a></p>':'')+
      '<p class="promo-source">'+E(d.image_notice||'')+'</p></div></details>';
  };
- const promoCard=p=>`<article class="promo-card">${safePromoImage(p.image_url)?`<img class="promo-cover" loading="lazy" src="${E(safePromoImage(p.image_url))}" alt="${E(p.title)} 행사 이미지"/>`:''}<div class="promo-date">${E((p.event_date||'').slice(5,7)||'—')}<b>${E((p.event_date||'').slice(8,10)||'--')}</b></div><div><div class="label-pill">${E(p.type==='education'?'MAGIC CLASS':p.type==='venue'?'VENUE':'SHOW & EVENT')} ${isDemo(p.id)?'· 샘플 행사':''}</div><h3>${E(p.title)}</h3><p>${E(p.description)}</p><small class="smallmeta">⌖ ${E(p.venue||'장소 미정')} · ${fmtDate(p.event_date)}</small>${safeLink(p.link_url)?`<p><a href="${E(safeLink(p.link_url))}" target="_blank" rel="noopener noreferrer">공연 안내 ↗</a></p>`:''}${safeYoutube(p.video_url)?`<p><a href="${E(safeYoutube(p.video_url))}" target="_blank" rel="noopener noreferrer">▶ 공연 영상 보기 (YouTube) ↗</a></p>`:''}${promoExtra(p)}</div></article>`;
+ const promoCard=p=>`<article class="promo-card">${safePromoImage(p.image_url)?`<img class="promo-cover" loading="lazy" src="${E(safePromoImage(p.image_url))}" alt="${E(p.title)} 행사 이미지"/>`:''}<div class="promo-date">${E((p.event_date||'').slice(5,7)||'—')}<b>${E((p.event_date||'').slice(8,10)||'--')}</b></div><div><div class="label-pill">${E(p.type==='education'?'MAGIC CLASS':p.type==='venue'?'VENUE':'SHOW & EVENT')} ${isDemo(p.id)?'· 샘플 행사':p.event_status==='ended'?'· 행사 종료 · 공연 기록':''}</div><h3>${E(p.title)}</h3><p>${E(p.description)}</p><small class="smallmeta">⌖ ${E(p.venue||'장소 미정')} · ${fmtDate(p.event_date)}</small>${safeLink(p.link_url)?`<p><a href="${E(safeLink(p.link_url))}" target="_blank" rel="noopener noreferrer">공연 안내 ↗</a></p>`:''}${safeYoutube(p.video_url)?`<p><a href="${E(safeYoutube(p.video_url))}" target="_blank" rel="noopener noreferrer">▶ 공연 영상 보기 (YouTube) ↗</a></p>`:''}${promoExtra(p)}</div></article>`;
  const titlebar=(tag,title,desc)=>`<div class="page-hero"><div class="eyebrow">${tag}</div><h1>${title}</h1><p>${desc}</p></div>`;
  const empty=msg=>`<div class="empty">✳<br>${msg}</div>`;
 
@@ -76,7 +76,7 @@
  }
  function study(){return window.KMS_STUDY_UI?.render()||'<div class="empty">스터디 교육자료를 준비하고 있습니다.</div>';}
  function activities(){return window.KMS_ACTIVITY_GALLERY?.page()||empty('활동 사진 게시판을 준비하고 있습니다.');}
- function home(){const d=state.data;const promo=d.promotions||[];const articles=d.articles||[];const market=d.marketplace||[];return `
+ function home(){const d=state.data;const promo=(d.promotions||[]).filter(x=>x.event_status!=='ended');const articles=d.articles||[];const market=d.marketplace||[];return `
   <section class="hero-grid"><div class="hero-main"><div class="hero-content"><div class="hero-label">THE FUTURE OF MAGIC · VOL. 01</div><h1 class="hero-title">마술의 오늘을 기록하고<br><em>내일의 무대</em>를 열다</h1><p class="hero-desc">학회 연구에서 공연 현장, 마술인의 이야기까지.<br>마술의 모든 순간을 하나의 웹진에서 만납니다.</p><button class="hero-button" data-view="articles">웹진 소식 살펴보기 &nbsp; ↗</button></div><div class="magic-scene-controls" role="group" aria-label="마술 테마 배경 설정"><button type="button" data-magic-change aria-label="다른 마술 배경 보기">✦ 다른 배경</button><button type="button" data-magic-pause aria-pressed="false">⏸ 자동 변경 멈춤</button><span class="magic-scene-counter" data-magic-counter aria-live="off">01 / 04 · 별빛 마술극장</span></div></div>
   <aside class="hero-side"><div class="sidebar-top"><span class="eyebrow">ON STAGE</span><span>공연 · 행사</span></div><h3>지금 주목할<br>마술 무대</h3>${promo.slice(0,2).map(p=>`<div class="side-show"><div class="date">${fmtDate(p.event_date)}</div><strong>${E(p.title)}${isDemo(p.id)?' · 샘플':''}</strong><small>⌖ ${E(p.venue||'장소 미정')}</small></div>`).join('')||'<p>현재 등록된 공연소식이 없습니다.</p>'}<button class="side-link" data-view="promotions">공연 소식 전체보기 &nbsp; ↗</button></aside></section>
   <div class="two-col"><section><div class="section-heading"><div><div class="eyebrow">LATEST STORIES</div><h2>새로운 마술 이야기</h2></div><button class="more" data-view="articles">모두 보기 ↗</button></div><div class="article-grid">${articles.slice(0,4).map(articleCard).join('')||empty('등록된 기사가 없습니다.')}</div></section><aside><div class="section-heading"><div><div class="eyebrow">PROMOTION</div><h2>홍보 & 광고</h2></div></div>${adSidebar()}<div class="mini-info"><h3>공연소식 제보</h3><p>새로운 마술공연과 공연장 소식, 강좌 정보를 알려주세요. 확인 후 웹진에 소개합니다.</p><button data-view="submit" data-form="promotion">공연 홍보 등록 ↗</button></div></aside></div>

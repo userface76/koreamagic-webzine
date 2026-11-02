@@ -34,5 +34,31 @@ window.KMS_CURATED_PROMOTIONS = [
     },
     "source_url": "https://public.ai.kr/ko/performances/%EC%A0%9C21%ED%9A%8C-%EB%B6%80%EC%82%B0%EA%B5%AD%EC%A0%9C%EB%A7%A4%EC%A7%81%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C-%EB%A7%A4%EC%A7%81-%ED%94%84%EB%A0%88%EC%A0%A0%ED%8A%B8-%EB%B6%80%EC%82%B0-PF304468",
     "origin": "editorial"
+  },
+  {
+    "id": "curated-ulsan-world-great-magic-show-2026",
+    "title": "제13회 울산국제매직컨벤션 — World Great Magic Show",
+    "type": "show",
+    "event_date": "2026-11-01",
+    "end_date": "2026-11-01",
+    "event_status": "ended",
+    "venue": "태화강국가정원 왕버들마당 (울산)",
+    "description": "2026년 11월 1일(일) 17:30~19:00 태화강국가정원 왕버들마당에서 열린 제13회 울산국제매직컨벤션의 매직쇼 공연 안내 기록입니다. 행사 포스터 원본 제공.",
+    "image_url": "./assets/ulsan-world-great-magic-show-2026.webp",
+    "poster_source": "user-supplied",
+    "detail": {
+      "dates": [
+        "2026년 11월 1일(일) 17:30~19:00"
+      ],
+      "duration": "90분 (포스터 표기 시간 기준)",
+      "audience": "별도 관람등급 표기 없음",
+      "cast": [],
+      "prices": [],
+      "organizer": "UMA 울산광역시 마술협회 (포스터 표기)",
+      "support": "울산광역시 (포스터 표기)",
+      "source": "사용자 제공 행사 공식 포스터",
+      "image_notice": "보내주신 포스터의 내용을 바꾸지 않고 웹진용 작은 이미지로 최적화했습니다. 홍보 당시 자료이므로 현재는 종료된 공연입니다."
+    },
+    "origin": "editorial"
   }
 ];
