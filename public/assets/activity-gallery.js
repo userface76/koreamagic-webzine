@@ -29,6 +29,10 @@
   };
   const categoryLabel = value => categories.find(([id])=>id===value)?.[1] || '학회 활동';
   const dateLabel = value => /^\d{4}-\d{2}-\d{2}$/.test(String(value||'')) ? value.replaceAll('-','.') : '';
+  const photosOf = item => {
+    const list=Array.isArray(item.images)&&item.images.length?item.images:[{image_url:item.image_url,alt:item.alt||item.title}];
+    return list.filter(p=>imageUrl(p.image_url)).map(p=>({url:imageUrl(p.image_url),alt:p.alt||item.title,caption:p.caption||''}));
+  };
   const itemLink = item => '#activities/' + encodeURIComponent(item.id);
   const card = item => {
     const src=imageUrl(item.image_url);
@@ -66,12 +70,18 @@
     const item=available().find(x=>x.id===id);
     const back='<a class="activity-board-back" href="#activities">← 학회 활동 게시판 목록으로</a>';
     if(!item)return '<section class="activity-board">'+back+'<div class="activity-empty">해당 활동 기록을 찾을 수 없습니다. 공개되지 않았거나 삭제된 게시물일 수 있습니다.</div></section>';
-    const src=imageUrl(item.image_url);
+    const photos=photosOf(item);
+    const gallery=photos.map((photo,index)=>'<figure class="activity-entry-photo">'+
+      '<button type="button" class="activity-entry-zoom" data-zoom-image="'+esc(photo.url)+'" data-zoom-title="'+esc(item.title+' · 사진 '+(index+1))+'" aria-label="'+esc(item.title+' 사진 '+(index+1)+' 크게 보기')+'">'+
+      '<img src="'+esc(photo.url)+'" alt="'+esc(photo.alt)+'" loading="'+(index?'lazy':'eager')+'" decoding="async"/>'+
+      '<span>사진을 누르면 확대됩니다 ⤢</span></button>'+
+      (photo.caption?'<figcaption>'+esc(photo.caption)+'</figcaption>':'')+
+      '</figure>').join('');
     return '<article class="activity-entry">'+back+
       '<div class="activity-entry-header"><span class="activity-category">'+esc(categoryLabel(item.category))+'</span>'+
       '<h1>'+esc(item.title)+'</h1>'+
       '<p>'+esc([dateLabel(item.date),item.location].filter(Boolean).join(' · ')||'행사 일시·장소 확인 중')+'</p></div>'+
-      '<div class="activity-entry-photo"><button type="button" class="activity-entry-zoom" data-zoom-image="'+esc(src)+'" data-zoom-title="'+esc(item.title)+'" aria-label="'+esc(item.title)+' 사진 크게 보기"><img src="'+esc(src)+'" alt="'+esc(item.alt||item.title)+'" decoding="async"/><span>사진을 누르면 확대됩니다 ⤢</span></button></div>'+
+      '<div class="activity-entry-photos">'+gallery+'</div>'+
       '<div class="activity-entry-body"><h2>활동 내용</h2><p>'+esc(item.description||'활동 설명을 준비 중입니다.')+'</p>'+
       (item.sample?'<p class="activity-disclaimer">이 이미지는 화면 구성용 예시이며 실제 학회 활동 사진이 아닙니다.</p>':'')+
       '<p class="activity-entry-credit">사진 자료: '+esc(item.credit||'출처 확인 중')+'</p></div>'+

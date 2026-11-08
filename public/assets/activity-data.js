@@ -5,6 +5,30 @@
 window.KMS_ACTIVITY_DATA = {
   "approved": [
     {
+      "id": "ulsan-magic-society-preparation-2026-11",
+      "title": "학회준비중",
+      "category": "education",
+      "description": "2026 울산국제매직컨벤션의 한국마술학회 세미나 및 한·중 마술 학술포럼을 준비하는 행사장 사진입니다. 첫 사진에는 '마법의 레시피' 학회 소개·세미나 안내 현수막이, 두 번째 사진에는 '한·중 마술 학술포럼' 안내 현수막이 보입니다. 배너에 적힌 행사 일정은 각각 2026년 11월 8일, 11월 7일이며 사진의 실제 촬영일은 확인되지 않았습니다.",
+      "location": "울산북구문화예술회관 (현수막 표기 기준)",
+      "image_url": "./assets/activity/ulsan-magic-recipe-seminar-prep-2026.webp",
+      "alt": "울산 국제매직컨벤션 학회 마법의 레시피 세미나 현수막 및 발표 준비 현장",
+      "images": [
+        {
+          "image_url": "./assets/activity/ulsan-magic-recipe-seminar-prep-2026.webp",
+          "alt": "학회 마법의 레시피 세미나 행사장, 안내 현수막과 발표 화면",
+          "caption": "마법의 레시피 학회 세미나 준비 현장"
+        },
+        {
+          "image_url": "./assets/activity/ulsan-korea-china-forum-prep-2026.webp",
+          "alt": "한·중 마술 학술포럼 현수막과 행사장의 음향 장비",
+          "caption": "한·중 마술 학술포럼 준비 현장"
+        }
+      ],
+      "credit": "사용자 제공 · 촬영자 미기재",
+      "approved": true,
+      "rights_confirmed": true
+    },
+    {
       "id": "provided-stage-props-01",
       "title": "무대 마술 공연 — 소품 연출",
       "category": "performance",

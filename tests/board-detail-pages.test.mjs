@@ -52,3 +52,11 @@ test('both independent board layouts preserve mobile breakpoints',()=>{
  assert.match(css,/promotion-board-row/);
  assert.match(css,/@media\(max-width:560px\)/);
 });
+
+test('education seminar entry has two clickable images and direct link',()=>{
+ const html=makeGallery('#activities/ulsan-magic-society-preparation-2026-11').page();
+ assert.match(html,/학회준비중/);
+ assert.match(html,/activity-entry-photos/);
+ assert.equal((html.match(/data-zoom-image=/g)||[]).length,2);
+ assert.match(html,/href="#activities"/);
+});

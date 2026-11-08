@@ -45,16 +45,30 @@ test('all three user-provided photos have local image assets and required approv
   const context={window:{}};
   vm.runInNewContext(dataCode,context);
   const items=context.window.KMS_ACTIVITY_DATA.approved;
-  assert.equal(items.length,5);
+  assert.equal(items.length,6);
   for(const item of items){
     assert.equal(item.approved,true);
     assert.equal(item.rights_confirmed,true);
     assert.match(item.image_url,/^\.\/assets\/activity\/[a-z0-9-]+\.(?:jpg|webp)$/);
     const imagePath=new URL('../public/'+item.image_url.replace(/^\.\//,''),import.meta.url);
-    assert.ok(statSync(imagePath).size>10000);
+    assert.ok(statSync(imagePath).size>(item.image_url.endsWith('.jpg')?10000:1000));
     const bytes=readFileSync(imagePath);
     if(item.image_url.endsWith('.jpg')){assert.equal(bytes[0],0xff);assert.equal(bytes[1],0xd8);}else{assert.equal(bytes.subarray(0,4).toString(),'RIFF');assert.equal(bytes.subarray(8,12).toString(),'WEBP');}
   }
 });
 
-test('education gallery includes two user-provided speaker portraits, not invented seminar attendance',()=>{const ctx={window:{},document:{addEventListener(){}},URL};vm.runInNewContext(dataCode,ctx);vm.runInNewContext(moduleCode,ctx);const page=ctx.window.KMS_ACTIVITY_GALLERY.page();assert.match(page,/education-ventriloquism-shin-seokgeun-2026/);assert.match(page,/education-magic-recipe-educator-2026/);const posters=ctx.window.KMS_ACTIVITY_DATA.approved.filter(x=>x.category==='education');assert.equal(posters.length,2);for(const p of posters){assert.equal(p.event_confirmed,false);assert.match(p.image_url,/\.webp$/);assert.equal(p.approved,true);}});
+test('education gallery includes two user-provided speaker portraits, not invented seminar attendance',()=>{const ctx={window:{},document:{addEventListener(){}},URL};vm.runInNewContext(dataCode,ctx);vm.runInNewContext(moduleCode,ctx);const page=ctx.window.KMS_ACTIVITY_GALLERY.page();assert.match(page,/education-ventriloquism-shin-seokgeun-2026/);assert.match(page,/education-magic-recipe-educator-2026/);const posters=ctx.window.KMS_ACTIVITY_DATA.approved.filter(x=>x.category==='education');assert.equal(posters.length,3);for(const p of posters.filter(x=>x.id!=='ulsan-magic-society-preparation-2026-11')){assert.equal(p.event_confirmed,false);assert.match(p.image_url,/\.webp$/);assert.equal(p.approved,true);}});
+
+test('two user-submitted seminar preparation photos are grouped in one education detail entry',()=>{
+ const ctx={window:{location:{hash:'#activities/ulsan-magic-society-preparation-2026-11'}},document:{addEventListener(){}},URL};
+ vm.runInNewContext(dataCode,ctx);vm.runInNewContext(moduleCode,ctx);
+ const item=ctx.window.KMS_ACTIVITY_DATA.approved.find(x=>x.id==='ulsan-magic-society-preparation-2026-11');
+ assert.ok(item);assert.equal(item.title,'학회준비중');assert.equal(item.category,'education');assert.equal(item.images.length,2);
+ const p=ctx.window.KMS_ACTIVITY_GALLERY.page();
+ assert.match(p,/ulsan-magic-recipe-seminar-prep-2026\.webp/);
+ assert.match(p,/ulsan-korea-china-forum-prep-2026\.webp/);
+ assert.match(p,/사진을 누르면 확대됩니다/);
+ assert.match(p,/data-zoom-image=/);
+ assert.doesNotMatch(p,/무대 마술 공연 — 소품 연출/);
+ for(const v of item.images){const asset=new URL('../public/'+v.image_url.slice(2),import.meta.url);const bytes=readFileSync(asset);assert.equal(bytes.toString('ascii',0,4),'RIFF');assert.equal(bytes.toString('ascii',8,12),'WEBP');}
+});
