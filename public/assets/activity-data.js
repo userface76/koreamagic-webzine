@@ -5,6 +5,30 @@
 window.KMS_ACTIVITY_DATA = {
   "approved": [
     {
+      "id": "magic-recipe-society-seminar-2026-11-08",
+      "title": "학회 마법의 레시피 세미나 성료",
+      "category": "education",
+      "date": "2026-11-08",
+      "event_time": "17:00~18:30",
+      "location": "울산북구문화예술회관 1층 세미나실 (행사 안내 현수막 기준)",
+      "description": "2026년 11월 8일 오후 5시부터 6시 30분까지 학회 ‘마법의 레시피’ 세미나를 성황리에 마쳤습니다. 보내주신 현장 사진에는 여러 참석자가 세미나실에 모여 발표를 듣는 모습이 담겨 있습니다.",
+      "image_url": "./assets/activity/magic-recipe-seminar-2026-11-08.webp",
+      "alt": "실내 세미나실에서 다수의 참가자가 책상에 앉아 발표를 듣고 앞쪽에 발표자와 진행자가 서 있는 교육 워크숍 현장",
+      "images": [
+        {
+          "image_url": "./assets/activity/magic-recipe-seminar-2026-11-08.webp",
+          "alt": "한국마술학회 마법의 레시피 세미나 참석자들과 발표 현장",
+          "caption": "2026년 11월 8일 17:00~18:30, 마법의 레시피 학회 세미나 현장"
+        }
+      ],
+      "credit": "사용자 제공 · 촬영자 미기재",
+      "approved": true,
+      "rights_confirmed": true,
+      "asset_kind": "event-photo",
+      "event_confirmed": true,
+      "source_note": "행사 종료와 시간은 사용자가 직접 제공한 설명을 기준으로 기록. 사진은 사용자 제공 원본 구도로 웹용 최적화."
+    },
+    {
       "id": "ulsan-magic-society-preparation-2026-11",
       "title": "학회준비중",
       "category": "education",
