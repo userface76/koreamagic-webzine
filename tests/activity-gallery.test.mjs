@@ -57,7 +57,7 @@ test('all three user-provided photos have local image assets and required approv
   }
 });
 
-test('education gallery includes two user-provided speaker portraits, not invented seminar attendance',()=>{const ctx={window:{},document:{addEventListener(){}},URL};vm.runInNewContext(dataCode,ctx);vm.runInNewContext(moduleCode,ctx);const page=ctx.window.KMS_ACTIVITY_GALLERY.page();assert.match(page,/education-ventriloquism-shin-seokgeun-2026/);assert.match(page,/education-magic-recipe-educator-2026/);const posters=ctx.window.KMS_ACTIVITY_DATA.approved.filter(x=>x.category==='education');assert.equal(posters.length,4);for(const p of posters.filter(x=>x.id!=='ulsan-magic-society-preparation-2026-11')){assert.equal(p.event_confirmed,false);assert.match(p.image_url,/\.webp$/);assert.equal(p.approved,true);}});
+test('education gallery includes two user-provided speaker portraits, not invented seminar attendance',()=>{const ctx={window:{},document:{addEventListener(){}},URL};vm.runInNewContext(dataCode,ctx);vm.runInNewContext(moduleCode,ctx);const page=ctx.window.KMS_ACTIVITY_GALLERY.page();assert.match(page,/education-ventriloquism-shin-seokgeun-2026/);assert.match(page,/education-magic-recipe-educator-2026/);const posters=ctx.window.KMS_ACTIVITY_DATA.approved.filter(x=>x.category==='education');assert.equal(posters.length,4);for(const p of posters.filter(x=>x.asset_kind==='speaker-poster')){assert.equal(p.event_confirmed,false);assert.match(p.image_url,/\.webp$/);assert.equal(p.approved,true);}});
 
 test('two user-submitted seminar preparation photos are grouped in one education detail entry',()=>{
  const ctx={window:{location:{hash:'#activities/ulsan-magic-society-preparation-2026-11'}},document:{addEventListener(){}},URL};
