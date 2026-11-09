@@ -2033,6 +2033,69 @@
       "coaching_lens": [],
       "profile_status": "indexed",
       "name_ko_status": "한글 음역 초안·검토 중"
+    },
+    {
+      "id": "adelaide-herrmann",
+      "display_name": "Adelaide Herrmann",
+      "name_ko": "애들레이드 헤르만",
+      "initial": "H",
+      "years": "1853–1932",
+      "specialties": [
+        "stage",
+        "illusion",
+        "storytelling"
+      ],
+      "profile_status": "editorial",
+      "summary": "‘마술의 여왕’으로 알려진 보드빌 마술사. 대표 일루전은 《노아의 방주》와 《칼리오스트로》입니다.",
+      "evidence": [
+        {
+          "title": "[1] 뉴욕공립도서관, 1899년 초상",
+          "url": "https://old-digitalcollections.nypl.org/items/d2190370-6018-013e-4482-0242ac110002"
+        },
+        {
+          "title": "[2] Magicana, Adelaide Herrmann",
+          "url": "https://magicana.ca/exhibition/adelaide-herrmann"
+        },
+        {
+          "title": "[3] 미국마술박물관, 소장품 2022.14.3",
+          "url": "https://hub.catalogit.app/american-museum-of-magic/folder/entry/adelaide-herrmann-3"
+        },
+        {
+          "title": "[4] 루이빌대학교 도서관, Macauley’s Theatre 컬렉션",
+          "url": "https://digital.library.louisville.edu/concern/images/ulpa_1980_020_0372?locale=en"
+        },
+        {
+          "title": "[5] Potter & Potter Auctions, 카탈로그 49",
+          "url": "https://potterauctions.com/pdf/Catalog_049_web_final.pdf"
+        },
+        {
+          "title": "[6] Potter & Potter Auctions, Sperber 컬렉션 카탈로그",
+          "url": "https://potterauctions.com/pdf/Catalog_023_Sperber_WEB.pdf"
+        }
+      ],
+      "coaching_lens": [],
+      "editorial": {
+        "title": "애들레이드 헤르만 — ‘마술의 여왕’이 만든 보드빌의 무대",
+        "intro": [
+          "1899년에 찍은 애들레이드 헤르만의 사진에는 ‘마술의 여왕(Queen of Magic)’이라는 이름이 붙어 있다. 애들레이드 헤르만(Adelaide Herrmann, 1853–1932)은 춤과 마술을 한 무대에 올린 공연자였다. 1875년 마술사 알렉산더 헤르만과 결혼한 뒤 그의 공연에서 주요 파트너로 활동했고, 알렉산더가 세상을 떠난 뒤에는 리언 헤르만과 순회공연을 이어갔다. 이후 자신의 이름을 내건 마술 공연으로 미국 보드빌 무대에 섰다. 보드빌은 한 무대에서 여러 공연자가 노래, 춤, 희극, 마술 등을 차례로 선보이는 형식이었다. [1][2][3]",
+          "대표 일루전인 《노아의 방주(Noah’s Ark)》에서는 방주에서 동물이 나타나는 장면을 펼쳤다. 마술사 연구기관 Magicana는 이 작품과 함께 《칼리오스트로(Cagliostro)》에서 사용한 화려한 무대 장치를 기록한다. 그가 관객에게 보여 준 것은 일루전의 결과만이 아니었다. 춤으로 익힌 몸짓과 의상, 무대 장치가 어우러지며 마술에 장면과 분위기를 더했다. [2][3][5]",
+          "그의 활동 무대는 미국 밖으로도 이어졌다. Magicana는 1902년 런던 히포드롬과 파리 폴리 베르제르 공연을 기록한다. 미국마술박물관과 Magicana는 모두 그의 공연 경력이 1928년까지 이어졌다고 전한다. 19세기 후반의 순회 마술단에서 출발해 20세기 보드빌에서 자신의 이름으로 공연한 이력은 무대 마술의 변화와 여성 공연자의 활동을 함께 살펴볼 수 있는 사례다. [2][3]"
+        ],
+        "timeline": [
+          "1853 · 영국 런던에서 출생 · [2][3][4]",
+          "1875 · 알렉산더 헤르만과 결혼. 이후 주요 무대 파트너로 순회공연 · [2][3]",
+          "1890년대 후반 · 알렉산더 사후 리언 헤르만과 순회공연. 이후 독자 공연으로 전환 · [2][3]",
+          "1899 · ‘Queen of Magic’으로 분류된 데이비드 배크랙 촬영 초상 제작 · [1]",
+          "1902 · 런던 히포드롬과 파리 폴리 베르제르 공연 · [2]. 공연일과 프로그램 원본은 미확인",
+          "1910~1911 · 《칼리오스트로》 연기 기록. 1911년 미국 우스터 폴리스 극장 프로그램의 경매 목록에서도 확인 · [2][6]",
+          "1928 · 공연 활동 마무리 · [2][3]",
+          "1932 · 2월 19일 뉴욕에서 사망 · [2][4]"
+        ],
+        "image": "https://images.nypl.org/index.php?id=59010028&t=w",
+        "credit": "1899년 애들레이드 헤르만 초상. 사진 데이비드 배크랙. 뉴욕공립도서관 Billy Rose Theatre Division 소장, 이미지 ID 59010028.",
+        "imageSource": "https://old-digitalcollections.nypl.org/items/d2190370-6018-013e-4482-0242ac110002",
+        "note": "자료 확인일 2026년 11월 9일. 출생 성씨 철자는 출처마다 다릅니다. 《노아의 방주》 초연일과 런던·파리 공연의 정확한 날짜는 확인되지 않았습니다."
+      }
     }
   ],
   "source_list": {
