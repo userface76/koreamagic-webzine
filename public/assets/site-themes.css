@@ -273,3 +273,8 @@ html[data-site-theme="bright"] .study-promo-home{background:linear-gradient(100d
 .promotion-entry-poster button{padding:0;background:none;color:var(--purple);border:0;width:100%;cursor:zoom-in}
 .promotion-entry-poster button span{display:block;text-align:center;font-size:12px;font-weight:800;margin-top:10px}
 .promotion-board-thumb:focus-visible,.promotion-entry-poster button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* Long-form editorial text on individual performance entry pages */
+.promotion-article-section{padding:16px 0;border-top:1px solid var(--line);margin-top:12px}
+.promotion-article-section h2{font-size:18px;margin:0 0 12px}
+.promotion-article-section p{font-size:14px;line-height:2;white-space:pre-line;color:var(--ink)}

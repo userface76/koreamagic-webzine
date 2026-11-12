@@ -1,6 +1,60 @@
 /* 편집부가 직접 검토하고 GitHub에 게시한 실제 공연 홍보 정보. 일반 제보 API 및 DB 승인과 별도. */
 window.KMS_CURATED_PROMOTIONS = [
   {
+    "id": "curated-lee-myung-joon-imagination-fragments-2026",
+    "title": "이명준의 상상조각 — MAGIC SHOW",
+    "subtitle": "ART MAGIC CONCERT SEASON 2 | 마술, 예술이 되다",
+    "type": "show",
+    "event_date": "2026-11-28",
+    "end_date": "2026-11-28",
+    "venue": "동탄 더퍼포머씨어터",
+    "venue_address": "경기도 화성시 동탄구 경기동로 468-5, 1층",
+    "description": "일상의 순간이 마술이 되는 시간. 마술사 이명준의 《상상조각》은 상상과 현실이 만나는 순간을 무대 위에서 표현하는 마술 공연입니다. ART MAGIC CONCERT 시즌 2의 공연으로, 각기 다른 개성과 스타일을 지닌 마술사들의 작품 세계를 관객들과 만납니다.",
+    "image_url": "",
+    "poster_source": "user-supplied",
+    "image_pending": true,
+    "expected_image_files": [
+      "./assets/lee-myung-joon-imagination-2026-poster.jpg",
+      "./assets/lee-myung-joon-imagination-2026-event-info.jpg",
+      "./assets/lee-myung-joon-imagination-2026-career.jpg"
+    ],
+    "editorial_sections": [
+      {
+        "heading": "공연 소개",
+        "text": "일상의 순간이 마술이 되는 시간.\n\n마술사 이명준의 《상상조각》이 2026년 11월 28일 동탄 더퍼포머씨어터에서 관객들을 만납니다.\n\n《상상조각》은 상상과 현실이 만나는 순간을 무대 위에서 표현하는 마술 공연입니다.\n\nART MAGIC CONCERT는 마술을 하나의 예술로 선보이는 공연 시리즈로, 각기 다른 개성과 스타일을 지닌 마술사들이 자신만의 작품 세계를 관객들에게 전달합니다."
+      },
+      {
+        "heading": "출연 마술사 — 이명준",
+        "text": "이명준 마술사는 무대 위에서 상상과 감동을 표현하는 공연예술가입니다.\n\n제공된 프로필에는 이탈리아 C.M.I. 대회 수상 경력, 국내외 마술 페스티벌 초청 공연 및 다양한 매직 콘서트 활동이 소개되어 있습니다.\n\n상세 경력과 수상 내용은 제공된 마술사 프로필에 기재된 자료를 기준으로 하며, 별도 검증 후 인명 아카이브에 보완할 예정입니다."
+      }
+    ],
+    "detail": {
+      "dates": [
+        "2026년 11월 28일(토) 1회 오후 1시 / 2회 오후 5시"
+      ],
+      "duration": "약 60분",
+      "audience": "관람등급은 예매처에서 확인",
+      "cast": [
+        "이명준"
+      ],
+      "prices": [
+        "성인 50,000원 / 얼리버드 40,000원 (20%)",
+        "초등학생 이하 25,000원 / 얼리버드 20,000원 (20%)",
+        "얼리버드: 공연일 2주 전까지 예매 시 적용 안내",
+        "10인 이상 단체 할인은 별도 문의"
+      ],
+      "booking": "네이버에서 ‘더퍼포머씨어터’ 검색 또는 티켓링크",
+      "phone": "010-8020-2072",
+      "instagram": "@artmagicconcert",
+      "organizer": "사회인마술클럽",
+      "production": "사회인마술클럽 · 엠제이 프로덕션 · 더퍼포머씨어터",
+      "venue_address": "경기도 화성시 동탄구 경기동로 468-5, 1층",
+      "source": "사용자 제공 공식 공연 포스터 · 공연안내 · 마술사 소개 자료",
+      "image_notice": "원본 이미지 3장을 공개하기 위한 파일 등록 작업이 남아 있습니다. 공연 정보는 제공된 홍보자료를 기준으로 합니다."
+    },
+    "origin": "editorial"
+  },
+  {
     "id": "curated-bimf-magic-present-2026",
     "title": "제21회 부산국제매직페스티벌 — 매직 프레젠트",
     "type": "show",

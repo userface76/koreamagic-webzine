@@ -15,6 +15,7 @@
  const safePromoImage=v=>{const a=String(v||'');return /^\.\/assets\/[a-zA-Z0-9/_-]+\.(?:svg|webp|png|jpe?g|avif)$/.test(a)?a:safeLink(a);};
  const articleCard=(a,i=0)=>`<article class="article-card" tabindex="0" role="button" data-detail-article="${E(a.id)}"><div class="art-visual art-${E(a.category||'news')}">${icons[a.category]||'✦'}${isDemo(a.id)?'<span class="sample-ribbon">샘플</span>':''}</div><div class="art-pad"><div class="label-pill">${E(artLabels[a.category]||'MAGIC NEWS')} ${isDemo(a.id)?'· 샘플':''}</div><h3>${E(a.title)}</h3><p>${E(a.summary)}</p><div class="smallmeta">${E(a.publisher||'편집부')} · ${fmtDate(a.published_at)}</div></div></article>`;
  const marketCard=(m,i=0)=>`<article class="market-card"><div class="market-art market-${E(m.category||'props')}">${icons[m.category]||'✦'}${isDemo(m.id)?'<span class="sample-ribbon">샘플</span>':''}</div><div class="market-pad"><div class="market-meta">${E(catLabels[m.category]||'마술장터')} · ${m.item_condition==='new'?'새상품':'중고'}${isDemo(m.id)?' · 거래 불가':''}</div><h3>${E(m.title)}</h3><div class="price">${fmtPrice(m.price_krw)}</div><div class="market-footer"><span>⌖ ${E(m.region||'지역 미표기')} · ${E(m.seller_alias||'판매자')}</span>${!isDemo(m.id)&&safeLink(m.contact_url)?`<a href="${E(safeLink(m.contact_url))}" target="_blank" rel="noopener noreferrer">판매자 문의 ↗</a>`:`<button data-detail-market="${E(m.id)}">${isDemo(m.id)?'샘플 보기':'자세히 보기'} ↗</button>`}</div></div></article>`;
+ const promotionEditorialSections=p=>Array.isArray(p.editorial_sections)?p.editorial_sections.map(s=>'<section class="promotion-article-section"><h2>'+E(s.heading||'')+'</h2><p>'+E(s.text||'').replace(/\\n/g,'<br/>').replace(/\n/g,'<br/>')+'</p></section>').join(''):'';
  const promoExtra=p=>{
    const d=p.detail;
    if(!d)return '';
@@ -24,7 +25,11 @@
      '<p><b>공연시간</b> '+E(d.duration||'')+' · <b>관람등급</b> '+E(d.audience||'')+'</p>'+
      ((d.cast||[]).length?'<p><b>출연진</b> '+E(d.cast.join(' · '))+'</p>':'')+
      ((d.prices||[]).length?'<strong>티켓가격</strong>'+li(d.prices):'')+
-     (d.organizer?'<p><b>주최·주관</b> '+E(d.organizer)+'</p>':'')+(d.support?'<p><b>후원</b> '+E(d.support)+'</p>':'')+'<p class="promo-source">자료: '+E(d.source||'')+'</p>'+
+     (d.venue_address?'<p><b>주소</b> '+E(d.venue_address)+'</p>':'')+
+     (d.booking?'<p><b>예매 안내</b> '+E(d.booking)+'</p>':'')+
+     (d.phone?'<p><b>공연 문의</b> '+E(d.phone)+'</p>':'')+
+     (d.instagram?'<p><b>인스타그램</b> '+E(d.instagram)+'</p>':'')+
+     (d.organizer?'<p><b>주최</b> '+E(d.organizer)+'</p>':'')+(d.production?'<p><b>주관</b> '+E(d.production)+'</p>':'')+(d.support?'<p><b>후원</b> '+E(d.support)+'</p>':'')+'<p class="promo-source">자료: '+E(d.source||'')+'</p>'+
      (safeLink(p.source_url)?'<p><a href="'+E(safeLink(p.source_url))+'" target="_blank" rel="noopener noreferrer">공연 정보 확인 ↗</a></p>':'')+
      '<p class="promo-source">'+E(d.image_notice||'')+'</p></div></details>';
  };
@@ -126,7 +131,7 @@
      '<h1>'+E(p.title)+'</h1><p>'+fmtDate(p.event_date)+(p.end_date&&p.end_date!==p.event_date?' ~ '+fmtDate(p.end_date):'')+
      ' · '+E(p.venue||'장소 확인 중')+end+'</p></div>'+
      '<div class="promotion-entry-layout">'+(poster?'<div class="promotion-entry-poster"><button type="button" data-zoom-image="'+E(poster)+'" data-zoom-title="'+E(p.title)+'" aria-label="'+E(p.title)+' 포스터 크게 보기"><img src="'+E(poster)+'" alt="'+E(p.title)+' 공연 포스터"/><span>포스터를 누르면 확대됩니다 ⤢</span></button></div>':'')+
-     '<div class="promotion-entry-body"><h2>공연 소개</h2><p>'+E(p.description||'')+'</p>'+
+     '<div class="promotion-entry-body">'+(p.subtitle?'<div class="label-pill">'+E(p.subtitle)+'</div>':'')+'<h2>공연 소개</h2><p>'+E(p.description||'')+'</p>'+promotionEditorialSections(p)+
      promoExtra(p)+
      (safeLink(p.link_url)?'<p><a target="_blank" rel="noopener noreferrer" href="'+E(safeLink(p.link_url))+'">공연 안내 바로가기 ↗</a></p>':'')+
      (safeYoutube(p.video_url)?'<p><a target="_blank" rel="noopener noreferrer" href="'+E(safeYoutube(p.video_url))+'">▶ 공연 영상 보기</a></p>':'')+
