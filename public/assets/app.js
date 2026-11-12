@@ -121,6 +121,19 @@
      '<small>'+fmtDate(p.event_date)+(p.end_date&&p.end_date!==p.event_date?' ~ '+fmtDate(p.end_date):'')+' · '+E(p.venue||'장소 확인 중')+'</small></div>'+
      '<a href="'+E(link)+'" class="promotion-board-read" aria-label="'+E(p.title)+' 자세히 보기">자세히 보기 ↗</a></article>';
  };
+ const promotionExtraImages=p=>{
+   const items=Array.isArray(p.gallery_images)?p.gallery_images.filter(x=>safePromoImage(x.url)):[];
+   if(!items.length)return '';
+   return '<section class="promotion-entry-gallery" aria-label="공연 안내 자료">'+
+     '<h2>공연 안내 및 마술사 소개 원본자료</h2>'+
+     '<p>공식 이미지 원본을 그대로 게시했습니다. 이미지를 선택하면 크게 볼 수 있습니다.</p>'+
+     '<div class="promotion-entry-gallery-grid">'+items.map(x=>{
+       const url=safePromoImage(x.url);
+       return '<figure><button type="button" data-zoom-image="'+E(url)+'" data-zoom-title="'+E(x.title||p.title)+'" aria-label="'+E(x.title||p.title)+' 사진 크게 보기">'+
+         '<img src="'+E(url)+'" loading="lazy" decoding="async" alt="'+E(x.title||p.title)+' 원본 이미지"/>'+
+         '<span>사진 확대 ⤢</span></button><figcaption><strong>'+E(x.title||'공연자료')+'</strong><small>'+E(x.caption||'')+'</small></figcaption></figure>';
+     }).join('')+'</div></section>';
+ };
  const promotionEntry=p=>{
    const back='<a href="#promotions" class="promotion-entry-back">← 공연·행사 목록으로</a>';
    if(!p)return back+'<div class="empty">해당 공연 게시물을 찾을 수 없습니다.</div>';
@@ -136,7 +149,7 @@
      (safeLink(p.link_url)?'<p><a target="_blank" rel="noopener noreferrer" href="'+E(safeLink(p.link_url))+'">공연 안내 바로가기 ↗</a></p>':'')+
      (safeYoutube(p.video_url)?'<p><a target="_blank" rel="noopener noreferrer" href="'+E(safeYoutube(p.video_url))+'">▶ 공연 영상 보기</a></p>':'')+
      (isDemo(p.id)?'<p class="promotion-entry-example">예시 공연 자료입니다. 실제 공연 안내가 아닙니다.</p>':'')+
-     '</div></div><div class="promotion-entry-bottom">'+back+'</div></article>';
+     '</div></div>'+promotionExtraImages(p)+'<div class="promotion-entry-bottom">'+back+'</div></article>';
  };
  function promotions(){
    const p=state.data?.promotions||[];

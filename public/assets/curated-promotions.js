@@ -10,14 +10,8 @@ window.KMS_CURATED_PROMOTIONS = [
     "venue": "동탄 더퍼포머씨어터",
     "venue_address": "경기도 화성시 동탄구 경기동로 468-5, 1층",
     "description": "일상의 순간이 마술이 되는 시간. 마술사 이명준의 《상상조각》은 상상과 현실이 만나는 순간을 무대 위에서 표현하는 마술 공연입니다. ART MAGIC CONCERT 시즌 2의 공연으로, 각기 다른 개성과 스타일을 지닌 마술사들의 작품 세계를 관객들과 만납니다.",
-    "image_url": "",
+    "image_url": "./assets/lee-myung-joon-imagination-2026-poster.jpg",
     "poster_source": "user-supplied",
-    "image_pending": true,
-    "expected_image_files": [
-      "./assets/lee-myung-joon-imagination-2026-poster.jpg",
-      "./assets/lee-myung-joon-imagination-2026-event-info.jpg",
-      "./assets/lee-myung-joon-imagination-2026-career.jpg"
-    ],
     "editorial_sections": [
       {
         "heading": "공연 소개",
@@ -50,9 +44,21 @@ window.KMS_CURATED_PROMOTIONS = [
       "production": "사회인마술클럽 · 엠제이 프로덕션 · 더퍼포머씨어터",
       "venue_address": "경기도 화성시 동탄구 경기동로 468-5, 1층",
       "source": "사용자 제공 공식 공연 포스터 · 공연안내 · 마술사 소개 자료",
-      "image_notice": "원본 이미지 3장을 공개하기 위한 파일 등록 작업이 남아 있습니다. 공연 정보는 제공된 홍보자료를 기준으로 합니다."
+      "image_notice": "보내주신 공식 포스터·공연안내·마술사 프로필 원본 JPEG 3장을 디자인 변경 없이 사용했습니다."
     },
-    "origin": "editorial"
+    "origin": "editorial",
+    "gallery_images": [
+      {
+        "url": "./assets/lee-myung-joon-imagination-2026-event-info.jpg",
+        "title": "공연 상세 안내",
+        "caption": "공연 회차, 관람료, 시즌 2 출연진, 예매 방법 및 찾아오시는 길"
+      },
+      {
+        "url": "./assets/lee-myung-joon-imagination-2026-career.jpg",
+        "title": "마술사 이명준 소개",
+        "caption": "제공된 공식 프로필의 수상·공연·국내외 활동 경력"
+      }
+    ]
   },
   {
     "id": "curated-bimf-magic-present-2026",
