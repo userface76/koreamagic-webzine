@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import {readFileSync} from 'node:fs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-test('Lee Myung Joon 2026 performance copies user's approved information',()=>{
+test('Lee Myung Joon 2026 performance copies user-approved information',()=>{
  const ctx={window:{}};vm.runInNewContext(read('public/assets/curated-promotions.js'),ctx);
  const p=ctx.window.KMS_CURATED_PROMOTIONS.find(x=>x.id==='curated-lee-myung-joon-imagination-fragments-2026');
  assert.ok(p);assert.equal(p.event_date,'2026-11-28');assert.match(p.title,/상상조각/);assert.equal(p.detail.duration,'약 60분');

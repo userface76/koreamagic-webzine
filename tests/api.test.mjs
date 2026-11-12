@@ -31,6 +31,8 @@ test('external submission requires Turnstile',async()=>{
 });
 test('monthly issue can show articles',async()=>{
  const {sqlite,DB}=db();const env=envFor(DB);
+ // Fix one seeded sample article to the month being tested. The other demo articles use datetime('now') and are deliberately time-relative.
+ sqlite.prepare("UPDATE articles SET published_at=? WHERE id='demo-news-1'").run('2026-10-15T12:00:00.000Z');
  await createMonthlyIssue(DB,new Date('2026-11-01T00:00:00Z'));
  const response=await worker.fetch(make('/api/issues/2026-10'),env);
  assert.equal(response.status,200);const data=await response.json();assert.equal(data.issue.id,'2026-10');assert.ok(data.items.length>0);sqlite.close();
